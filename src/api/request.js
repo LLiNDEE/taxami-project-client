@@ -1,4 +1,4 @@
-import SERVER_URL from '../utils/constants'
+import { SERVER_URL } from '../utils/constants'
 
 export const request = (...params) => fetch(...params).then(res => res.json()).then(data =>{
     console.log("Data from request.js --> ", data)
