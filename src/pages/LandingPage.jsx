@@ -7,7 +7,6 @@ const LandingPage = () => {
 
   return (
       <div>
-          <h2>LandingPage</h2>
           <LoginForm/>
       </div>
   );
