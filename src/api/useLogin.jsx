@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
-import useAsync from '../hooks/useAsync.jsx'
-import { post } from './request.js'
+import useAsync from '../hooks/useAsync'
+import { post } from './request'
 
 const login = params => post('/user/login', params)
 
