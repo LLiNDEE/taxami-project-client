@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 25rem;
     margin: auto;
+    margin-top: 5rem;
+    padding: 1rem;
     .input{
         margin-bottom: 0.5rem;
         width: 100%;
@@ -13,5 +15,8 @@
         width: 7rem;
         border: 1px solid lightgray;
         cursor: pointer;
+    }
+    .loginFormTitle{
+        margin-bottom: 0.5rem;
     }
 }
