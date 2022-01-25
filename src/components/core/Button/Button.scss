@@ -1,0 +1,55 @@
+@import '../../../styles/variables';
+
+.button{
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.button:disabled{
+    cursor: default;
+}
+
+.button--lg{
+    width: 8.125rem;
+    height: 2.5rem;
+}
+
+.button--sm{
+    width: 4rem;
+    height: 2.5rem;
+}
+
+
+.button--outline{
+    border: 2px solid;
+    background-color: white;
+}
+
+.button--primary.button--fill{
+    background-color: $primary;
+    color: white;
+}
+
+.button--primary.button--outline{
+    border-color: $primary;
+}
+
+.button--primary.button--fill:hover:not(:disabled), .button--primary.button--fill:focus {
+    background-color: $primary-dark;
+}
+
+.button--primary.button--outline:hover:not(:disabled), .button--primary.button--outline:focus {
+    background-color: $primary;
+    color: white;
+}
+
+.button--primary.button--fill:disabled {
+    background-color: $primary-light;
+}
+
+.button--primary.button--outline:disabled {
+    border-color: $primary-light;
+    color: $primary-light;
+}
