@@ -2,14 +2,15 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import './styles/style.scss'
 import Main from './components/Main.jsx'
+import GlobalProvider from './providers/GlobalProvider';
 
 function App() {
   return (
-    <div className="App">
       <Router>
-        <Main/>
+        <GlobalProvider>
+          <Main/>
+        </GlobalProvider>
       </Router>
-    </div>
   );
 }
 
