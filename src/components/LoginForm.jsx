@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Form from './Form/Form.jsx'
 import withForm from './Form/withForm'
@@ -7,7 +7,6 @@ import Flex from '../components/core/Flex/Flex.jsx'
 
 const LoginForm = () => {
 
-
   return (
       <div className="loginForm">
           <Flex justify="center">
@@ -15,8 +14,12 @@ const LoginForm = () => {
           </Flex>
 
           <Form.Input name="email" label="E-post"/>
-          <Form.Input type="password" name="password" label="Lösenord"/>
-          
+          <Form.PasswordInput
+            name="password"
+            label="Lösenord"
+            withEye
+          />
+
       </div>
   )
 };
