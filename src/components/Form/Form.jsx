@@ -1,8 +1,8 @@
 import React from 'react'
 
 import FormProvider, { useFormProvider } from './FormProvider';
-import Input from './Input.jsx'
-import PasswordInput from './PasswordInput'
+import Input from './Fields/Input.jsx'
+import PasswordInput from './Fields/PasswordInput'
 
 const connect = Comp => ({ name, isError, ...props }) => {
     

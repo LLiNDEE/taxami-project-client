@@ -25,7 +25,7 @@ const PasswordInput = ({ label, name, control, withEye, ...props }) => {
                                             InputProps:{
                                                 endAdornment: 
                                                     <InputAdornment position="end">
-                                                      {showPassword ? <VisibilityOffIcon onClick={() => setShowPassword(false)} /> : <VisibilityIcon onClick={() => setShowPassword(true)}/>}
+                                                      {showPassword ? <VisibilityOffIcon className="clickable" onClick={() => setShowPassword(false)} /> : <VisibilityIcon className="clickable" onClick={() => setShowPassword(true)}/>}
                                                     </InputAdornment>
                                             }
                                         } : null }
