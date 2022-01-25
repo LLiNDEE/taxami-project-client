@@ -2,9 +2,9 @@ import React from 'react'
 
 import Form from './Form'
 
-const withForm = Comp => ({schema, submitText, onSubmit, ...props}) => {
+const withForm = Comp => ({schema, submitText, onSubmit, status, feedback, ...props}) => {
     return(
-        <Form {...{schema, submitText, onSubmit}}>
+        <Form {...{schema, submitText, onSubmit, status, feedback}}>
             <Comp {...props} />
         </Form>
     )

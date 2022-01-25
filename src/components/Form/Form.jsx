@@ -2,7 +2,7 @@ import React from 'react'
 import FormProvider, { useFormProvider } from './FormProvider';
 import Input from './Input.jsx'
 
-const connect = Comp => ({ name, ...props }) => {
+const connect = Comp => ({ name, isError, ...props }) => {
     
     const { control, errors } = useFormProvider()
 
@@ -10,7 +10,7 @@ const connect = Comp => ({ name, ...props }) => {
         <Comp
             control={control}
             name={name}
-            error={!!errors[name]}
+            error={!!errors[name] || isError}
             {...props}
         />
     )
