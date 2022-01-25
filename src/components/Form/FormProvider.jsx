@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import Flex from '../core/Flex/Flex'
 import ErrorMessage from '../Alerts/ErrorMessage';
+import Submit from './Adornment/Submit'
 
 const contextForm = createContext({})
 
@@ -24,7 +25,7 @@ const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback
     useEffect(() => {
         if(status !== FORM_STATE.ERROR) return
 
-        reset()
+        // reset()
 
     },[status])
 
@@ -39,7 +40,8 @@ const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback
             {status === FORM_STATE.ERROR && <ErrorMessage message={feedback ?? "Någonting gick fel..."} />}
 
             <Flex justify="right">
-                <input type="submit" value={submitText}/>
+                {/* <input type="submit" value={submitText}/> */}
+                <Submit>{submitText}</Submit>
             </Flex>
           </form>
       </contextForm.Provider>
