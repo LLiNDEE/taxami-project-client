@@ -16,6 +16,7 @@ const LoginForm = () => {
 
           <Form.Input name="email" label="E-post"/>
           <Form.Input type="password" name="password" label="Lösenord"/>
+          
       </div>
   )
 };
