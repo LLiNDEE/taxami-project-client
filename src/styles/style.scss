@@ -10,5 +10,23 @@ body{
     font-size: 16px;
 }
 
+.clickable{
+    cursor: pointer
+}
+
+.loadingSpinner{
+    position: absolute;
+    width: 4rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -2rem;
+    margin-top: -2rem;
+    z-index: 10;
+}
+
+.lowerOpacity{
+    opacity: 0.4;
+}
+
 @import './partials/LoginForm.scss';
 @import './partials//LandingPage.scss';
