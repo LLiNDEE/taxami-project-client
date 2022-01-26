@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import useUserData from '../api/useUserData'
+import useBoolean from '../hooks/useBoolean'
 import { AUTH_STATUSES } from '../utils/constants'
 
 const contextGlobal = createContext({})
@@ -10,6 +11,7 @@ const GlobalProvider = ({ children }) => {
     const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
 
     const [authStatus, setAuthStatus] = useState(AUTH_STATUSES.idle)
+    const [isPageLoading, { set: setPageLoading }] = useBoolean()
 
     const [userID, setUserID] = useState(undefined)
     const [buildings, setBuildings] = useState(undefined)
@@ -30,8 +32,9 @@ const GlobalProvider = ({ children }) => {
     },[tasksDATA])
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, setUserID, userID, buildings, setBuildings, setTasks, tasks }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, setUserID, userID, buildings, setBuildings, setTasks, tasks, isPageLoading, setPageLoading }}>
             <div className="page">
+                {isPageLoading && <div className="pageCoverDiv"></div>}
                 {children}
             </div>
         </contextGlobal.Provider>

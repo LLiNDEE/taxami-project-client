@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Flex from '../core/Flex/Flex'
 import ErrorMessage from '../Alerts/ErrorMessage';
 import Submit from './Adornment/Submit'
+import { useGlobal } from '../../providers/GlobalProvider';
 import { STATUS } from '../../hooks/useAsync'
 import { clsx } from '../../utils/utils'
 
@@ -32,6 +33,8 @@ const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback
         resolver: yupResolver(schema)
     })
 
+    const { setPageLoading } = useGlobal()
+
     const formState = useMemo(() => resolveFormState(status), [status])  
 
     useEffect(() => {
@@ -40,6 +43,10 @@ const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback
         // reset()
 
     },[status])
+
+    useEffect(() => {
+        setPageLoading(formState === FORM_STATE.LOADING)
+    },[formState])
 
     const onSubmitTest = data => onSubmit(data)
 
