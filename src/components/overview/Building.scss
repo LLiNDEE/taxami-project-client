@@ -1,0 +1,35 @@
+.building{
+    background-color: rgb(255, 249, 249);
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    margin-top: 0.2rem;
+    border-radius: 5px;
+    &:hover{
+        background-color: rgba(204, 204, 204, 0.3);
+        cursor: default;
+    }
+}
+
+.title{
+    flex: 1;
+    margin-left: 2rem;
+}
+
+.availableTasks{
+    flex: 1;
+}
+
+.memberCount{
+    flex: 1;
+}
+
+.button{
+    flex: 1;
+    margin-right: 2rem;
+}
