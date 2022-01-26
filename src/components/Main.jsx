@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-import LandingPage from '../pages/LandingPage.jsx';
+import LoggedInPage from '../pages/LoggedInPage.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
 import { useGlobal } from '../providers/GlobalProvider.jsx';
 import { AUTH_STATUSES } from '../utils/constants.js';
@@ -15,23 +15,23 @@ const Main = () => {
             {authStatus === AUTH_STATUSES.idle ? 
             <Routes>
                 <Route
-                    path="/login"
+                    path="/loggain"
                     element={<LoginPage/>}
                 />
                 <Route
                     path="*"
-                    element={<Navigate to="/login" />}
+                    element={<Navigate to="/loggain" />}
                 />
             </Routes>
             : authStatus === AUTH_STATUSES.loggedIn ? 
             <Routes>
                 <Route
-                    path="/"
-                    element={<LandingPage/>}
+                    path="/oversikt"
+                    element={<LoggedInPage/>}
                 />
                 <Route
                     path="*"
-                    element={<Navigate to="/"/>}
+                    element={<Navigate to="/oversikt"/>}
                 />
             </Routes>
             : null
