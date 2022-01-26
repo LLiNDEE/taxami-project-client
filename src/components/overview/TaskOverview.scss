@@ -1,0 +1,48 @@
+.task{
+    background-color: rgb(255, 249, 249);
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+    margin-top: 0.2rem;
+    border-radius: 5px;
+    &:hover{
+        background-color: rgba(204, 204, 204, 0.3);
+        cursor: default;
+    }
+    .taskTitle{
+        margin-left: 2rem;
+        min-width: 10rem;
+        flex: 1;
+    }
+    .completeButton{
+        height: 2rem;
+        padding: 0.2rem;
+        border: 1.5px solid darkgreen;
+        border-radius: 5px;
+        background-color: lightgreen;
+        color: darkgreen;
+        cursor: pointer;
+        min-width: 5rem;
+        flex: 1;
+        margin-right: 2rem;
+    }
+
+    .removeCompleteButton{
+        background-color: lightcoral;
+        color: darkred;
+        border: 1.5px solid darkred;
+    }
+
+    .taskStatus{
+        flex: 1;
+    }
+    .taskPriority{
+        flex: 1;
+    }
+
+}
