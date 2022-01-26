@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+.overview{
+    width: 60rem;
+    margin: auto;
+    margin-top: 2rem;
+    // background-color: yellow;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .overviewTitle{
+        background-color: lightgray;
+        color: black;
+        border-radius: 5px;
+        text-align: center;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+    }
+    .overviewItem{
+        flex: 1;
+    }
+    .title{
+        text-align: center;
+    }
+}
