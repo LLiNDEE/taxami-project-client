@@ -1,0 +1,46 @@
+@import '../../styles/variables';
+
+.statsItem{
+    background-color: whitesmoke;
+    width: 10rem;
+    min-height: 10rem;
+    border-radius: 5px;
+    min-width: 15rem;
+    .statsItemTitle{
+        background-color: $primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        height: 2rem;
+    }
+    .statsValue{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 8rem;
+        border: 5px solid $primary-light;
+        border-radius: 100%;
+        width: 5rem;
+        height: 5rem;
+        margin: auto;
+        margin-top: 1rem;
+        .value{
+            color: black;
+            font-size: 1.5rem;
+        }
+    }
+    .viewMoreButton{
+        background-color: $primary-light;
+        width: 100%;
+        height: 2rem;
+        margin-top: 1rem;
+        border: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        color: white;
+        cursor: pointer;
+    }
+}
