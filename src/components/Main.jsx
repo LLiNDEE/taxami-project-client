@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 import LoggedInPage from '../pages/LoggedInPage.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
+import Buildings from '../pages/Buildings.jsx';
 import { useGlobal } from '../providers/GlobalProvider.jsx';
 import { AUTH_STATUSES } from '../utils/constants.js';
 
@@ -28,6 +29,10 @@ const Main = () => {
                 <Route
                     path="/oversikt"
                     element={<LoggedInPage/>}
+                />
+                <Route
+                    path="/byggnader"
+                    element={<Buildings/>}
                 />
                 <Route
                     path="*"
