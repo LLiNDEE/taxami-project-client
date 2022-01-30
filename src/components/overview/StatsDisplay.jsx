@@ -12,8 +12,17 @@ const StatsDisplay = ({ title, value, buttonText, onClick, useLink  }) => {
             <div className="statsValue">
                 <p className="value">{value}</p>
             </div>
-            {!useLink && <button className="viewMoreButton" onClick={onClick ?? ""}>{buttonText}</button>}
-            {useLink && <Link to={useLink} ><button className="viewMoreButton" onClick={onClick ?? ""}>{buttonText}</button></Link>}
+            {!useLink && <button className="viewMoreButton" {...onClick ? { onClick: {onClick}} : null}>{buttonText}</button>}
+            {useLink && 
+                <Link to={useLink} >
+                    <button 
+                        className="viewMoreButton" 
+                        {...onClick ? { onClick: {onClick}} : null}
+                    >
+                        {buttonText}
+                    </button>
+                </Link>
+            }
       </div>
     )
 
