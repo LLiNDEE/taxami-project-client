@@ -1,0 +1,22 @@
+@import '../variables';
+
+.buildingPage{
+    width: 50rem;
+    margin: auto;
+    .buildingName{
+        background-color: $primary;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .stats{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+    }
+}
