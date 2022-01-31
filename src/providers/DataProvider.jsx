@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+import Header from '../components/header/Header'
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useBoolean from '../hooks/useBoolean'
@@ -42,6 +43,7 @@ const DataProvider = ({ children }) => {
 
   return (
       <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading }}>
+          <Header/>
           {children}
       </contextData.Provider>
   );
