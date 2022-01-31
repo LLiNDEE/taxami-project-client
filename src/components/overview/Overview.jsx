@@ -41,7 +41,10 @@ const Overview = () => {
                 />
               </div>
 
+              <h2 className="overviewSubTitle">Byggnader</h2>
               <BuildingsList buildings={buildings} />
+
+              <h2 className="overviewSubTitle">Uppgifter</h2>
               <TasksList myTasks={myTasks} />
 
           </>
