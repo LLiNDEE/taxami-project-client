@@ -1,4 +1,5 @@
 import React from 'react';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 import List from './List';
 
@@ -34,6 +35,7 @@ const TasksList = ({ myTasks }) => {
             <p className="dataItem">{task.title}</p>
             <p className="dataItem">{resolvePriority(task.priority)}</p>
             <p className="dataItem">{resolveStatus(task.status)}</p>
+            <p className="viewButton"><RemoveRedEyeIcon/></p>
           </div>
         ))}
       </List>

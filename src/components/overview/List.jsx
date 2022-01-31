@@ -9,6 +9,7 @@ const List = ({ keys, children }) => {
         {keys.map(key => (
             <p className="keyTitle" key={key} >{key}</p>
         ))}
+        <p className="buttonKey">Button</p>
         </div>
         {children}
     </div>

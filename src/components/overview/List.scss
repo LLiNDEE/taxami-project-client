@@ -13,10 +13,15 @@
         padding-left: 0.5rem;
         display: flex;
         flex-direction: row;
+        gap: 1rem;
         .keyTitle{
             flex: 1;
             color: white;
             padding: 1rem;
+        }
+        .buttonKey{
+            padding-right: 1rem;
+            color: transparent;
         }
     }
     .data{
@@ -25,7 +30,7 @@
         align-items: center;
         background-color: $primary-light;
         min-height: 2rem;
-        gap: 2rem;
+        gap: 1rem;
         &:nth-last-child(1){
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
@@ -42,5 +47,23 @@
             color: $primary-darkest;
             padding: 1rem;
         }
+        .center{
+            padding-left: 4rem;
+        }
+    }
+}
+
+.viewButton{
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    width: 4rem;
+    padding: 0.5rem;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    a{
+        text-decoration: none;
+        color: black;
     }
 }
