@@ -1,8 +1,8 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-import LoggedInPage from '../pages/LoggedInPage.jsx';
 import LoginPage from '../pages/LoginPage.jsx';
+import OverviewPage from '../pages/OverviewPage'
 import Buildings from '../pages/Buildings.jsx';
 import DataProvider from '../providers/DataProvider.jsx';
 import { useGlobal } from '../providers/GlobalProvider.jsx';
@@ -30,10 +30,10 @@ const Main = () => {
                 <Routes>
                     <Route
                         path="/oversikt"
-                        element={<LoggedInPage/>}
+                        element={<OverviewPage/>}
                     />
                     <Route
-                        path="/byggnader"
+                        path="/byggnad/:id"
                         element={<Buildings/>}
                     />
                     <Route
