@@ -11,6 +11,12 @@ export const clsx = (...args) =>
     ).join(" ").trim()
 
 
+export const convertMicroToMilli = micro => {
+    const last3digits = micro % 1000
+    const milli = (micro - last3digits) / 1000
+    return milli
+}
+
 
 export const isNumber = v => typeof v === 'number' && !isNaN(v)
 export const isNull = v => v === null
