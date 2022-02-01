@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
-import List from './List';
+import List from '../Lists/List';
 
 const BuildingsList = ({ buildings }) => {
     
