@@ -37,7 +37,7 @@ const useAuth = () => {
             setUserID(user_id)
         },
         logoutUser: () => {
-            setAuthStatus(AUTH_STATUSES.loggedOut)
+            setAuthStatus(AUTH_STATUSES.idle)
             setUserID(undefined)
             removeToken()
         },
