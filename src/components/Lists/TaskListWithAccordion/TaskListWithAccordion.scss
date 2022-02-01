@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+
+.dataAccordion{
+    display: flex;
+    width: 100%;
+    .dataItem{
+        flex: 1;
+    }
+}
+
+.taskDetails{
+    border-top: 1px solid $primary-light;
+    display: flex;
+    flex-direction: row;
+    min-height: 2rem;
+    justify-content: center;
+    align-items: center;
+    .detailsItem{
+        flex: 1;
+    }
+}
+
+.optionalComment{
+    display: flex;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    .iconText{
+        display: flex;
+        align-items: center;
+        border: 1px solid $primary-light;
+        border-radius: 5px;
+        padding: 0.2rem;
+    }
+}
