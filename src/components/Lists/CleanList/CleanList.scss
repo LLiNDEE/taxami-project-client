@@ -1,0 +1,69 @@
+@import '../../../styles/variables';
+
+.cleanList{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    .keys{
+        background-color:$primary;
+        height: 2.5rem;
+        align-items: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding-left: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        .keyTitle{
+            flex: 1;
+            color: white;
+            padding: 1rem;
+        }
+        .buttonKey{
+            padding-right: 1rem;
+            color: transparent;
+        }
+    }
+    .data{
+        display: flex;
+        padding-left: 0.5rem;
+        align-items: center;
+        background-color: $primary-light;
+        min-height: 2rem;
+        gap: 1rem;
+        &:nth-last-child(1){
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        &:nth-child(odd){
+            background-color: $primary-lightest;
+        }
+        &:hover{
+            cursor: default;
+            border-left: 1px solid $primary-darkest;
+        }
+        .dataItem{
+            flex: 1;
+            color: $primary-darkest;
+            padding: 1rem;
+        }
+        .center{
+            padding-left: 4rem;
+        }
+    }
+}
+
+.viewButton{
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    width: 4rem;
+    padding: 0.5rem;
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    a{
+        text-decoration: none;
+        color: black;
+    }
+}
