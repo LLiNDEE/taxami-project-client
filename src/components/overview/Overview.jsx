@@ -5,7 +5,7 @@ import './Overview.scss'
 
 import StatsDisplay from './StatsDisplay';
 import BuildingsList from './BuildingsList';
-import TasksList from './TasksList';
+import TasksList from '../Lists/TasksList/TasksList';
 import { useData } from '../../providers/DataProvider';
 
 
@@ -41,11 +41,11 @@ const Overview = () => {
                 />
               </div>
 
-              <h2 className="overviewSubTitle">Byggnader</h2>
+              <h2 className="overviewSubTitle">Dina byggnader</h2>
               <BuildingsList buildings={buildings} />
 
-              <h2 className="overviewSubTitle">Uppgifter</h2>
-              <TasksList myTasks={myTasks} />
+              <h2 className="overviewSubTitle">Dina uppgifter</h2>
+              <TasksList myTasks={myTasks} withEye variant="list--clean"/>
 
           </>
           }  
