@@ -2,9 +2,15 @@ import React from 'react';
 
 import './List.scss'
 
-const List = ({ keys, children }) => {
+import { clsx } from '../../utils/utils';
+
+const List = ({ keys, children, variant = "list" }) => {
   return (
-    <div className="list">
+    <div className={clsx(
+      {
+        [variant]: true
+      }
+    )}>
         <div className="keys">
         {keys.map(key => (
             <p className="keyTitle" key={key} >{key}</p>
