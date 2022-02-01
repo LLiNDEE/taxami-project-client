@@ -6,7 +6,8 @@ import Tab from '@mui/material/Tab';
 
 import StatsDisplay from '../components/overview/StatsDisplay';
 import useBuildingTasks from '../api/useBuildingTasks';
-import TasksList from '../components/overview/TasksList'
+import TasksList from '../components/Lists/TasksList/TasksList'
+import TaskListWithAccordion from '../components/Lists/TaskListWithAccordion/TaskListWithAccordion';
 import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
 import { clsx } from '../utils/utils'
@@ -17,11 +18,12 @@ const Buildings = () => {
 
   const { execute, isSuccess, isError, data } = useBuildingTasks()
 
-  const { buildings } = useData()
+  const { buildings, myTasks } = useData()
   const { userID } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
   const [tasks, setTasks] = useState(undefined)
+  const [filteredTasks, setFilteredTasks] = useState(undefined)
 
   const [tabIndex, setTabIndex] = useState("one")
 
@@ -35,13 +37,14 @@ const Buildings = () => {
     if(!data) return
 
     setTasks(data.data.tasks)
+    setFilteredTasks(myTasks.filter(t => t.building_id === building._id))
 
   },[data])
 
   return (
     <div className="buildingPage">
       Lista av byggnader....
-      {tasks ? 
+      {(!isError && tasks && filteredTasks) ? 
       <>
         <p>{JSON.stringify(building)}</p>
         <h2 className="buildingName">{building.building_name}</h2>
@@ -53,7 +56,7 @@ const Buildings = () => {
           />
           <StatsDisplay
           title="Antal avklarade uppgifter"
-          value={tasks.filter(t => t.status !== 'completed').length}
+          value={tasks.filter(t => t.status === 'completed').length}
           />
           <StatsDisplay
           title="Antal medlemmar"
@@ -72,11 +75,15 @@ const Buildings = () => {
           </Tabs>
         </div>
 
-        {tabIndex === "one" ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TasksList myTasks={tasks.filter(t => t.status === 'idle')} /> : ""}
-        {tabIndex === "two" ? tasks.filter(t => t.status === 'inProgress').length < 1 ? "Det finns inga pågående uppgifter" : <TasksList myTasks={tasks.filter(t => t.status === 'inProgress')} /> : ""}
-        {tabIndex === "three" ? tasks.filter(t => t.status === 'completed').length < 1 ? "Det finns inga avklarade uppgifter" : <TasksList myTasks={tasks.filter(t => t.status === 'completed')} /> : ""}
+        {tabIndex === "one" ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TasksList myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon  /> : ""}
+        {tabIndex === "two" ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? "Det finns inga pågående uppgifter" : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
+        {tabIndex === "three" ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? "Det finns inga avklarade uppgifter" : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
         
-      </> : "Loading??"}
+
+      </> : null}
+
+        {isError && <p>Byggnaden finns inte!</p>}
+
     </div>
   )
 };
