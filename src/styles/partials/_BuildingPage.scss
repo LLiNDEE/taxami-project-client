@@ -3,6 +3,7 @@
 .buildingPage{
     width: 50rem;
     margin: auto;
+    margin-bottom: 5rem;
     .buildingName{
         background-color: $primary;
         height: 3rem;
@@ -18,5 +19,16 @@
         flex-direction: row;
         gap: 1rem;
         justify-content: center;
+    }
+    .tabs{
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    .noTasksText{
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        color: $primary-dark;
     }
 }
