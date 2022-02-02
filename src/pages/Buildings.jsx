@@ -18,7 +18,7 @@ const Buildings = () => {
 
   const { execute, isSuccess, isError, data } = useBuildingTasks()
 
-  const { buildings, myTasks, setSelectedBuildingID } = useData()
+  const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage } = useData()
   const { userID } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
@@ -27,11 +27,22 @@ const Buildings = () => {
 
   const [tabIndex, setTabIndex] = useState("one")
 
+
   useEffect(() => {
     if(!building) return
     const data = {user_id: userID, building_id: building._id}
     execute(data)
   },[])
+
+  useEffect(() => {
+    if(!refreshPage || !building) return
+
+    const data = {user_id: userID, building_id: building._id}
+    execute(data)
+
+    setRefreshPage(false)
+
+  },[refreshPage])
 
   useEffect(() => {
     if(!data) return

@@ -41,6 +41,8 @@ const DataProvider = ({ children }) => {
 
     const [takeTaskDetails, setTakeTaskDetails] = useState(initialTakeTaskDetails)
 
+    const [refreshPage, setRefreshPage] = useState(false)
+
     useEffect(() => {
         if(!tasksDATA || !buildingsData) return
 
@@ -78,15 +80,15 @@ const DataProvider = ({ children }) => {
     },[leaveTaskSuccess])
 
     useEffect(() => {
-        if(!takeTaskSuccess) return
+        if(!takeTaskData) return
 
         getTasks({user_id: userID})
         hideTakeTaskModal()
-
-    },[takeTaskSuccess])
+        setRefreshPage(true)
+    },[takeTaskData])
 
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, leaveTask, showTakeTaskModal, setSelectedTaskID, setSelectedBuildingID }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, leaveTask, showTakeTaskModal, setSelectedTaskID, setSelectedBuildingID, setRefreshPage, refreshPage }}>
           <Header/>
           {isTakeTaskModalVisible && <div className="dataProviderPageCover" onClick={hideTakeTaskModal} ></div>}
           {isTakeTaskModalVisible && 
