@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Form from './Form/Form.jsx'
 import withForm from './Form/withForm'
@@ -19,6 +20,7 @@ const LoginForm = () => {
             label="Lösenord"
             withEye
           />
+          <Link to="/registrera">Registrera konto</Link>
 
       </div>
   )
