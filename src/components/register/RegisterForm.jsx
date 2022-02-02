@@ -14,7 +14,7 @@ const RegisterForm = () => {
           <Form.Input name="last_name" label="Efternamn"/>
           <Form.Input name="username" label="Användarnamn"/>
           <Form.Input name="email" label="E-post"/>
-          <Form.Input name="password" label="Lösenord" />
+          <Form.PasswordInput name="password" label="Lösenord" withEye />
           <Form.Input name="code" value={code} style={{ display: "none" }} />
       </div>
   )
