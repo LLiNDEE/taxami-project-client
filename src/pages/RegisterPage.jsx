@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import * as yup from 'yup'
 
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+
 import PromoCodeForm from '../components/register/PromoCodeForm';
 import RegisterForm from '../components/register/RegisterForm';
 import { useRegisterProvider } from '../providers/RegisterProvider'
@@ -19,13 +23,23 @@ const registerFormSchema = yup.object().shape({
     code: yup.string().required(),
 })
 
+const steps = ['Verifiera kod', 'Registrera uppgifter', 'Registrering klar']
+
 const RegisterPage = () => {
 
-    const { isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus } = useRegisterProvider()
+    const { isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus, activeStep, isRegistered } = useRegisterProvider()
 
     return (
         <div className="registerPage">
-            <h2>Register page??</h2>
+            <h2 className="registerTitle">Registrera dig</h2>
+            <Stepper activeStep={activeStep} alternativeLabel>
+                {steps.map((label) => (
+                <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                </Step>
+                ))}
+            </Stepper>
+
             {!isCodeValid && 
                 <PromoCodeForm
                     schema={verifyCodeSchema}
@@ -37,7 +51,7 @@ const RegisterPage = () => {
                 />
             }
 
-            {isCodeValid && 
+            {isCodeValid && !isRegistered && 
                 <RegisterForm
                     schema={registerFormSchema}
                     isError={registerError}
@@ -46,6 +60,13 @@ const RegisterPage = () => {
                     onSubmit={register}
                     feedback={SERVER_ERROR_MESSAGES['error']}
                 />
+            }
+
+            {isRegistered && 
+                <div>
+                    <h2>Registreringen är klar!</h2>
+                    <p>Logga in</p>
+                </div>
             }
 
         </div>

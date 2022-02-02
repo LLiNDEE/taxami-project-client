@@ -13,12 +13,16 @@ const RegisterProvider = ({ children }) => {
 
     const [code, setCode] = useState(undefined)
     const [isCodeValid, { on: codeIsValid, off: codeNotValid }] = useBoolean(undefined)
+    const [isRegistered, { set: setIsRegistered }] = useBoolean(undefined)
+
+    const [activeStep, setActiveStep] = useState(0)
 
     useEffect(() => {
         if(!isCodeSuccess) return
 
         codeIsValid()
         setCode(codeData.data.code)
+        setActiveStep(1)
 
     },[isCodeSuccess])
 
@@ -29,8 +33,16 @@ const RegisterProvider = ({ children }) => {
 
     },[verifyCodeError])
 
+    useEffect(() => {
+        if(!registerSuccess) return
+
+        setIsRegistered(true)
+        setActiveStep(3)
+
+    },[registerSuccess])
+
   return (
-      <contextRegister.Provider value={{ setCode, code, isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus }}>
+      <contextRegister.Provider value={{ setCode, code, isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus, isRegistered, activeStep }}>
           {children}
       </contextRegister.Provider>
   );
