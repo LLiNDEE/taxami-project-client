@@ -83,6 +83,7 @@ const DataProvider = ({ children }) => {
         if(!takeTaskData) return
 
         getTasks({user_id: userID})
+        setTakeTaskDetails(initialTakeTaskDetails)
         hideTakeTaskModal()
         setRefreshPage(true)
     },[takeTaskData])
