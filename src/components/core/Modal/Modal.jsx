@@ -4,7 +4,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 import './Modal.scss'
 
-import { clsx } from '../../utils/utils'
+import { clsx } from '../../../utils/utils'
 
 const VARIANTS = {
     yesNO: 'yesNO',
@@ -19,8 +19,8 @@ const Modal = ({ modalTitle, yesText, noText, cancelFunc, acceptFunc, content, v
             {content && content}
             {variant === VARIANTS.yesNO && 
                 <div className="buttons">
-                    <p className="iconWithText cancelIcon" onClick={cancelFunc}><CancelIcon/> Avbryt</p>
-                    <p className="iconWithText acceptIcon" onClick={acceptFunc} ><CheckCircleIcon/> Antag</p>
+                    <p className="iconWithText cancelIcon" onClick={cancelFunc}><CancelIcon/>{noText ?? "Avbryt"}</p>
+                    <p className="iconWithText acceptIcon" onClick={acceptFunc} ><CheckCircleIcon/> {yesText ?? "Antag"}</p>
                 </div>
             }
         </div>
