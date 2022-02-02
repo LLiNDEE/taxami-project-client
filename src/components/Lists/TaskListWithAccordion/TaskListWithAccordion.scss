@@ -24,6 +24,13 @@
     display: flex;
 }
 
+.description{
+    margin-bottom: 0.5rem;
+    .descriptionText{
+        font-style: italic;
+    }
+}
+
 .buttons{
     display: flex;
     justify-content: center;
