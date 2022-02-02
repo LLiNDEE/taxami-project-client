@@ -43,16 +43,14 @@ const Buildings = () => {
 
   return (
     <div className="buildingPage">
-      Lista av byggnader....
       {(!isError && tasks && filteredTasks) ? 
       <>
-        <p>{JSON.stringify(building)}</p>
         <h2 className="buildingName">{building.building_name}</h2>
 
         <div className="stats">
           <StatsDisplay
-          title="Antal uppgifter"
-          value={tasks.length}
+          title="Antal tillgängliga uppgifter"
+          value={tasks.filter(t => t.status === 'idle').length}
           />
           <StatsDisplay
           title="Antal avklarade uppgifter"
@@ -70,8 +68,8 @@ const Buildings = () => {
             onChange={(event, newValue) => setTabIndex(newValue)} 
           >
             <Tab value="one" label="Tillgängliga uppgifter" />
-            <Tab value="two" label="Pågående uppgifter" />
-            <Tab value="three" label="Avklarade uppgifter"/>
+            <Tab value="two" label="Dina pågående uppgifter" />
+            <Tab value="three" label="Dina avklarade uppgifter"/>
           </Tabs>
         </div>
 
