@@ -18,7 +18,7 @@ const Buildings = () => {
 
   const { execute, isSuccess, isError, data } = useBuildingTasks()
 
-  const { buildings, myTasks } = useData()
+  const { buildings, myTasks, setSelectedBuildingID } = useData()
   const { userID } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
@@ -40,6 +40,13 @@ const Buildings = () => {
     setFilteredTasks(myTasks.filter(t => t.building_id === building._id))
 
   },[data])
+
+  useEffect(() => {
+    if(!building) return
+
+    setSelectedBuildingID(building._id)
+
+  }, [building])
 
   return (
     <div className="buildingPage">
@@ -74,8 +81,8 @@ const Buildings = () => {
         </div>
 
         {tabIndex === "one" ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TasksList myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon  /> : ""}
-        {tabIndex === "two" ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? "Det finns inga pågående uppgifter" : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
-        {tabIndex === "three" ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? "Det finns inga avklarade uppgifter" : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
+        {tabIndex === "two" ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
+        {tabIndex === "three" ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
         
 
       </> : null}
