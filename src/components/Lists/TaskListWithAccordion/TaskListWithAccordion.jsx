@@ -49,7 +49,7 @@ const TaskListWithAccordion = ({
   }) => {
 
     const { userID } = useGlobal()
-    const { markTaskAsComplete, leaveTask } = useData()
+    const { markTaskAsComplete, hideModal, showModalVariant } = useData()
 
 
     return (
@@ -89,8 +89,8 @@ const TaskListWithAccordion = ({
                 <div className="buttons">
                     {(withAcceptDenyIcons || task.status === 'inProgress') && 
                         <>
-                            <p className="iconText denyIcon" onClick={() => leaveTask({user_id: userID, task_id: task._id})} ><CancelIcon/> Lämna uppgift</p>
-                            <p className="iconText acceptIcon" onClick={() => markTaskAsComplete({user_id: userID, task_id: task._id})}><CheckCircleIcon/> Markera som klar</p>
+                            <p className="iconText denyIcon" onClick={() => showModalVariant('leaveTask')} ><CancelIcon/> Lämna uppgift</p>
+                            <p className="iconText acceptIcon" onClick={() => showModalVariant('completeTask')}><CheckCircleIcon/> Markera som klar</p>
                         </>
                     }
                     {(withDenyIcon || task.status === 'completed') && <p className="denyIcon iconText"><CancelIcon/> Ta bort klar markering</p>}

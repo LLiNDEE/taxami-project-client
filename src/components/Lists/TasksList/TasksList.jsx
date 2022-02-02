@@ -46,7 +46,7 @@ const TasksList = ({
   }) => {
 
 
-    const { showTakeTaskModal, setSelectedTaskID } = useData()
+    const { showModalVariant, setSelectedTaskID } = useData()
 
     return (
         <List
@@ -75,7 +75,7 @@ const TasksList = ({
               </div>
             }
             {withDenyIcon && <div className="acceptDenyButtons"><p className="denyIcon"><CancelIcon/></p></div>}
-            {withAssignIcon && <div className="viewButton"><p className="assignIcon" onClick={() => (showTakeTaskModal(), setSelectedTaskID(task._id))} ><AssignmentIcon/></p></div>}
+            {withAssignIcon && <div className="viewButton"><p className="assignIcon" onClick={() => (showModalVariant("takeTask"), setSelectedTaskID(task._id))} ><AssignmentIcon/></p></div>}
           </div>
         ))}
       </List>
