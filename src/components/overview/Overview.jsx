@@ -5,6 +5,7 @@ import './Overview.scss'
 
 import StatsDisplay from './StatsDisplay';
 import BuildingsList from './BuildingsList';
+import TaskListWithAccordion from '../Lists/TaskListWithAccordion/TaskListWithAccordion';
 import TasksList from '../Lists/TasksList/TasksList';
 import { useData } from '../../providers/DataProvider';
 
@@ -45,7 +46,8 @@ const Overview = () => {
               <BuildingsList buildings={buildings} />
 
               <h2 className="overviewSubTitle">Dina uppgifter</h2>
-              <TasksList myTasks={myTasks} withEye variant="list--clean"/>
+              {/* <TasksList myTasks={myTasks} withEye variant="list--clean"/> */}
+              <TaskListWithAccordion myTasks={myTasks} variant="list--clean" />
 
           </>
           }  
