@@ -1,23 +1,19 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import Header from '../components/header/Header'
-import Modal from '../components/Modal/Modal'
-import TakeTaskForm from '../components/TakeTaskForm/TakeTaskForm';
+import LeaveTaskModal from '../components/Modals/leaveTask/LeaveTaskModal';
+import TakeTaskModal from '../components/Modals/takeTask/TakeTaskModal';
+import CompleteTaskModal from '../components/Modals/completeTask/CompleteTaskModal'
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useTaskComplete from '../api/useTaskComplete';
-import useUserTakeTask from '../api/useUserTakeTask'
+import useUserTakeTask from '../api/useUserTakeTask';
+import useModal from '../hooks/useModal'
 import useUserLeaveTask from '../api/useUserLeaveTask';
 import useBoolean from '../hooks/useBoolean'
 import { useGlobal } from './GlobalProvider';
 
 const contextData = createContext({})
-
-const initialTakeTaskDetails = {
-    estimated_cost: "",
-    estimated_time: "",
-    optional_comment: "",
-}
 
 const DataProvider = ({ children }) => {
 
@@ -29,17 +25,18 @@ const DataProvider = ({ children }) => {
     const { execute: leaveTask, isSuccess: leaveTaskSuccess, data: leaveTaskData, isError: leaveTaskError } = useUserLeaveTask()
     const { execute: takeTask, iSuccess: takeTaskSuccess, data: takeTaskData, isError: takeTaskError } = useUserTakeTask()
 
+    const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
+
     const [buildings, setBuildings] = useState(undefined)
     const [myTasks, setMyTasks] = useState(undefined)
 
     const [isTakeTaskModalVisible, { on: showTakeTaskModal, off: hideTakeTaskModal }] = useBoolean(false)
+    const [isRemoveTaskModalVisible, { on: showRemoveTaskModal, off: hideRemoveTaskModal }] = useBoolean(false)
 
     const [isDataLoading, { set: setIsDataLoading }] = useBoolean(false)
 
     const [selectedTaskID, setSelectedTaskID] = useState(undefined)
     const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
-
-    const [takeTaskDetails, setTakeTaskDetails] = useState(initialTakeTaskDetails)
 
     const [refreshPage, setRefreshPage] = useState(false)
 
@@ -76,6 +73,8 @@ const DataProvider = ({ children }) => {
         if(!leaveTaskSuccess) return
 
         getTasks({user_id: userID})
+        hideModal()
+        setRefreshPage(true)
 
     },[leaveTaskSuccess])
 
@@ -83,24 +82,17 @@ const DataProvider = ({ children }) => {
         if(!takeTaskData) return
 
         getTasks({user_id: userID})
-        setTakeTaskDetails(initialTakeTaskDetails)
-        hideTakeTaskModal()
+        hideModal()
         setRefreshPage(true)
     },[takeTaskData])
 
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, leaveTask, showTakeTaskModal, setSelectedTaskID, setSelectedBuildingID, setRefreshPage, refreshPage }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask }}>
           <Header/>
-          {isTakeTaskModalVisible && <div className="dataProviderPageCover" onClick={hideTakeTaskModal} ></div>}
-          {isTakeTaskModalVisible && 
-            <Modal
-                variant="yesNO"
-                modalTitle="Antag uppgift"
-                content={<TakeTaskForm takeTaskDetails={takeTaskDetails} setTakeTaskDetails={setTakeTaskDetails}/>}
-                acceptFunc={() => takeTask({user_id: userID, building_id: selectedBuildingID, task_id: selectedTaskID, ...takeTaskDetails})}
-                cancelFunc={() => hideTakeTaskModal()}
-            />   
-          }
+            { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
+            { modalVariant === 'takeTask' && <TakeTaskModal/>}
+            { modalVariant === 'leaveTask' && <LeaveTaskModal/>}
+            { modalVariant === 'completeTask' && <CompleteTaskModal/>}
 
           {children}
       </contextData.Provider>
