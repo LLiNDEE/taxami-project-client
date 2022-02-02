@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: whitesmoke;
+    width: 20rem;
+    border-radius: 5px;
+    z-index: 5;
+    .modalTitle{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .iconWithText{
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+    .buttons{
+        display: flex;
+        margin-bottom: 0.4rem;
+    }
+
+    .acceptIcon{
+        &:hover{
+            color: lightgreen;
+        }
+    }
+    .cancelIcon{
+        color: lightcoral;
+        cursor: pointer;
+        &:hover{
+            color: darkred;
+        }
+    }
+}
+
