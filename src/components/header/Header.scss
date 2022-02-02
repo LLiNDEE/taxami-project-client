@@ -2,5 +2,42 @@
 
 header{
     background-color: $primary;
-    min-height: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    .logoutButtonContainer{
+        flex: 1;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        height: 100%;
+        .logOutbutton{
+            height: 2rem;
+            width: 8rem;
+            display: flex;
+            line-height: 4rem;
+            align-items: center;
+            justify-content: center;
+            margin-right: 2rem;
+            border-radius: 5px;
+            border: 1px solid #DB9E0F;
+            background-color: $primary-logout;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            &:hover{
+                border: 2px solid #755508;
+            }
+        }
+    }
+}
+
+.headerTitle{
+    padding-left: 1rem;
+    color: white;
+}
+
+.logoutIcon{
+    padding-left: 0.5rem;
 }
