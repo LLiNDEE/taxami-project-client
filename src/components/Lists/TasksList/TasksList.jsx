@@ -6,6 +6,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
+import { useData } from '../../../providers/DataProvider'
+
 
 import List from '../List';
 
@@ -44,6 +46,8 @@ const TasksList = ({
   }) => {
 
 
+    const { showTakeTaskModal, setSelectedTaskID } = useData()
+
     return (
         <List
         keys={['Titel', 'Prioritet', 'Status']}
@@ -71,7 +75,7 @@ const TasksList = ({
               </div>
             }
             {withDenyIcon && <div className="acceptDenyButtons"><p className="denyIcon"><CancelIcon/></p></div>}
-            {withAssignIcon && <div className="viewButton"><p className="assignIcon"><AssignmentIcon/></p></div>}
+            {withAssignIcon && <div className="viewButton"><p className="assignIcon" onClick={() => (showTakeTaskModal(), setSelectedTaskID(task._id))} ><AssignmentIcon/></p></div>}
           </div>
         ))}
       </List>
