@@ -36,4 +36,19 @@
     .membersList{
         margin-top: 2rem;
     }
+    .addTaskButton{
+        margin-top: 0.2rem;
+        background-color: white;
+        border: none;
+        padding: 0.4rem;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        color: rgb(94, 189, 94);
+        cursor: pointer;
+        font-weight: bold;
+        &:hover{
+            color: lightgreen;
+        }
+    }
 }
