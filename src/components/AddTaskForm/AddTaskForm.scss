@@ -1,0 +1,23 @@
+.addTaskForm{
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    .input{
+        width: 100%;
+    }
+    .formButtons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        .submitButton{
+            border: none;
+            background-color: white;
+            color: lightgreen;
+            cursor: pointer;
+            &:hover{
+                color: rgb(87, 170, 87);
+            }
+        }
+    }
+}
