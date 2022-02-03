@@ -3,12 +3,14 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import Header from '../components/header/Header'
 import LeaveTaskModal from '../components/Modals/leaveTask/LeaveTaskModal';
 import TakeTaskModal from '../components/Modals/takeTask/TakeTaskModal';
+import TaskRemoveCompletedModal from '../components/Modals/taskRemoveCompleted/TaskRemoveCompletedModal';
 import CompleteTaskModal from '../components/Modals/completeTask/CompleteTaskModal'
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useTaskComplete from '../api/useTaskComplete';
 import useUserTakeTask from '../api/useUserTakeTask';
 import useModal from '../hooks/useModal'
+import useTaskUpdate from '../api/useTaskUpdate';
 import useUserLeaveTask from '../api/useUserLeaveTask';
 import useBoolean from '../hooks/useBoolean'
 import { useGlobal } from './GlobalProvider';
@@ -24,14 +26,12 @@ const DataProvider = ({ children }) => {
     const { execute: markTaskAsComplete, isSuccess: isTaskCompleted, data: taskCompleted, isError: errorMarkingTaskComplete } = useTaskComplete()
     const { execute: leaveTask, isSuccess: leaveTaskSuccess, data: leaveTaskData, isError: leaveTaskError } = useUserLeaveTask()
     const { execute: takeTask, iSuccess: takeTaskSuccess, data: takeTaskData, isError: takeTaskError } = useUserTakeTask()
+    const { execute: updateTask, isSuccess: updateTaskSuccess, data: updateTaskData, isError: updateTaskError } = useTaskUpdate()
 
     const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
     const [buildings, setBuildings] = useState(undefined)
     const [myTasks, setMyTasks] = useState(undefined)
-
-    const [isTakeTaskModalVisible, { on: showTakeTaskModal, off: hideTakeTaskModal }] = useBoolean(false)
-    const [isRemoveTaskModalVisible, { on: showRemoveTaskModal, off: hideRemoveTaskModal }] = useBoolean(false)
 
     const [isDataLoading, { set: setIsDataLoading }] = useBoolean(false)
 
@@ -66,6 +66,8 @@ const DataProvider = ({ children }) => {
 
         getTasks({user_id: userID})
         getBuildings({user_id: userID})
+        hideModal()
+        setRefreshPage(true)
         
     },[isTaskCompleted])
 
@@ -86,13 +88,23 @@ const DataProvider = ({ children }) => {
         setRefreshPage(true)
     },[takeTaskData])
 
+    useEffect(() => {
+        if(!updateTaskData) return
+
+        getTasks({user_id: userID})
+        hideModal()
+        setRefreshPage(true)
+
+    },[updateTaskData])
+
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask }}>
           <Header/>
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
             { modalVariant === 'takeTask' && <TakeTaskModal/>}
             { modalVariant === 'leaveTask' && <LeaveTaskModal/>}
             { modalVariant === 'completeTask' && <CompleteTaskModal/>}
+            { modalVariant === 'removeCompletedTask' && <TaskRemoveCompletedModal/> }
 
           {children}
       </contextData.Provider>
