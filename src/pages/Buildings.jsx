@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import StatsDisplay from '../components/overview/StatsDisplay';
 import useBuildingTasks from '../api/useBuildingTasks';
 import TasksList from '../components/Lists/TasksList/TasksList'
 import TaskListWithAccordion from '../components/Lists/TaskListWithAccordion/TaskListWithAccordion';
 import MemberList from '../components/Lists/members/MemberList';
+import Flex from '../components/core/Flex/Flex'
 import useGetMembers from '../api/useGetMembers';
 import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
@@ -21,7 +22,7 @@ const Buildings = () => {
   const { execute, isSuccess, isError, data } = useBuildingTasks()
   const { execute: getMembers, isSuccess: membersSuccess, data: membersData, isError: membersError } = useGetMembers()
 
-  const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage } = useData()
+  const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage, showModalVariant } = useData()
   const { userID } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
@@ -123,6 +124,8 @@ const Buildings = () => {
         {tabIndex === "two" ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
         {tabIndex === "three" ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
         
+        {isOwner && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
+
         {isOwner && members && 
           <div className="membersList">
           <h2>Medlemmar</h2>
