@@ -47,6 +47,12 @@ const Buildings = () => {
   useEffect(() => {
     if(!data) return
 
+    if(userID === building.user_id){
+      setTasks(data.data.tasks)
+      setFilteredTasks(data.data.tasks)
+      return
+    }
+
     setTasks(data.data.tasks)
     setFilteredTasks(myTasks.filter(t => t.building_id === building._id))
 
@@ -86,8 +92,8 @@ const Buildings = () => {
             onChange={(event, newValue) => setTabIndex(newValue)} 
           >
             <Tab value="one" label="Tillgängliga uppgifter" />
-            <Tab value="two" label="Dina pågående uppgifter" />
-            <Tab value="three" label="Dina avklarade uppgifter"/>
+            <Tab value="two" label={userID === building.user_id ? "Pågående uppgifter" : "Dina pågående uppgifter"} />
+            <Tab value="three" label={userID === building.user_id ? "Avklarade uppgifter" : "Dina avklarade uppgifter"}/>
           </Tabs>
         </div>
 
