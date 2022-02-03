@@ -9,6 +9,7 @@ const VARIANTS = {
     leaveTask: 'leaveTask',
     takeTask: 'takeTask',
     completeTask: 'completeTask',
+    removeCompletedTask: 'removeCompletedTask',
 }
 
 const useModal = () => {
