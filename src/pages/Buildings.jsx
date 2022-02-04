@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import Chip from '@mui/material/Chip';
 
 import StatsDisplay from '../components/overview/StatsDisplay';
 import useBuildingTasks from '../api/useBuildingTasks';
@@ -10,7 +13,9 @@ import TasksList from '../components/Lists/TasksList/TasksList'
 import TaskListWithAccordion from '../components/Lists/TaskListWithAccordion/TaskListWithAccordion';
 import MemberList from '../components/Lists/members/MemberList';
 import Flex from '../components/core/Flex/Flex'
+import Input from '../components/core/Input/Input'
 import useGetMembers from '../api/useGetMembers';
+import useBuildingGenerateInvite from '../api/useBuildingGenerateInvite';
 import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
 import { clsx } from '../utils/utils'
@@ -21,6 +26,7 @@ const Buildings = () => {
 
   const { execute, isSuccess, isError, data } = useBuildingTasks()
   const { execute: getMembers, isSuccess: membersSuccess, data: membersData, isError: membersError } = useGetMembers()
+  const { execute: generateInvite, isSuccess: inviteSuccess, data: inviteCodeData, isError: inviteError } = useBuildingGenerateInvite()
 
   const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage, showModalVariant } = useData()
   const { userID } = useGlobal()
@@ -31,6 +37,8 @@ const Buildings = () => {
   const [members, setMembers] = useState(undefined)
 
   const [isOwner, setIsOwner ] = useState(undefined)
+  const [isInviteValid, setInviteValid] = useState(undefined)
+  const [isInviteCopied, setInviteCopied] = useState(undefined)
 
   const [tabIndex, setTabIndex] = useState("one")
 
@@ -88,6 +96,22 @@ const Buildings = () => {
 
   },[membersSuccess])
 
+  useEffect(() => {
+    if(!inviteSuccess) return
+
+    setInviteValid(true)
+
+  },[inviteSuccess])
+
+  useEffect(() => {
+    if(!isInviteCopied) return
+
+    setTimeout(() => {
+        setInviteCopied(false)
+    }, 1000)
+
+  },[isInviteCopied])
+
   return (
     <div className="buildingPage">
       {(!isError && tasks && filteredTasks) ? 
@@ -131,6 +155,19 @@ const Buildings = () => {
           <h2>Medlemmar</h2>
           <MemberList members={members} tasks={tasks} />
           </div>
+        }
+
+        {isOwner &&
+        <>
+          <div className="generateInviteContainer">
+            <Input label="Inbjudningskod" id="outlined-read-only-input" value={isInviteValid ? inviteCodeData?.data.invite_code : "Inbjudningskod"} readOnly/>
+            { !isInviteValid && <p className="generateCodeButton" onClick={() => generateInvite({user_id: userID, building_id: building._id}) } ><AutorenewIcon/></p>}
+            {isInviteValid && <p className="copyCodeButton" onClick={() => (navigator.clipboard.writeText(inviteCodeData.data.invite_code), setInviteCopied(true))}><ContentCopyIcon/></p>}
+          </div> 
+          <div className="copiedChipContainer">
+            {isInviteCopied && <Chip label="Kopierad" color="success"/>}
+          </div>
+          </>
         }
 
       </> : null}

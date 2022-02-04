@@ -51,4 +51,35 @@
             color: lightgreen;
         }
     }
+    .generateInviteContainer{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.2rem;
+        align-items: center;
+        justify-content: center;
+        .input{
+            height: 100%;
+            width: 41%;
+        }
+        .generateCodeButton{
+            display: flex;
+            align-items: center;
+            // border: 1px solid $primary-light;
+            height: 100%;
+            padding: 0.4rem;
+            // border-radius: 10px;
+            cursor: pointer;
+        }
+        .copyCodeButton{
+            padding: 0.4rem;
+            cursor: pointer;
+        }
+    }
+    .copiedChipContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.4rem;
+    }
 }
