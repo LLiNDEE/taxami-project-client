@@ -163,6 +163,7 @@ const Buildings = () => {
             <Input label="Inbjudningskod" id="outlined-read-only-input" value={isInviteValid ? inviteCodeData?.data.invite_code : "Inbjudningskod"} readOnly/>
             { !isInviteValid && <p className="generateCodeButton" onClick={() => generateInvite({user_id: userID, building_id: building._id}) } ><AutorenewIcon/></p>}
             {isInviteValid && <p className="copyCodeButton" onClick={() => (navigator.clipboard.writeText(inviteCodeData.data.invite_code), setInviteCopied(true))}><ContentCopyIcon/></p>}
+            {isInviteValid &&  <p className="generateCodeButton" onClick={() => generateInvite({user_id: userID, building_id: building._id}) } ><AutorenewIcon/></p>}
           </div> 
           <div className="copiedChipContainer">
             {isInviteCopied && <Chip label="Kopierad" color="success"/>}
