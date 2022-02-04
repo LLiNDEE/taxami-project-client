@@ -38,12 +38,12 @@ const Main = () => {
                     element={<LoginPage/>}
                 />
                 <Route
-                    path="*"
-                    element={<Navigate to="/loggain" />}
-                />
-                <Route
                     path="/registrera"
                     element={<RegisterProvider><RegisterPage/></RegisterProvider>}
+                />
+                <Route
+                    path="*"
+                    element={<Navigate to="/loggain" />}
                 />
             </Routes>
             : authStatus === AUTH_STATUSES.loggedIn ?
