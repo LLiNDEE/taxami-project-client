@@ -5,6 +5,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { useGlobal } from '../../../providers/GlobalProvider'
 import { useData } from '../../../providers/DataProvider';
@@ -80,12 +82,17 @@ const TaskListWithAccordion = ({
                 </div>
             </AccordionSummary>
             <AccordionDetails>
-                <div className="taskDetails">
-                    <p className="detailsItem">Förväntad tid: {task.details.estimated_time} minuter</p>
-                    <p className="detailsItem">Förväntad kostnad: {task.details.estimated_cost} kr</p>
-                </div>
-                <p className="description">Beskrivning: <span className="descriptionText" >{task.description}</span></p>
-                <p className="optionalComment">Övrig kommentar: {task.details.optional_comment}</p>
+                {task.status !== 'idle' && 
+                    <>
+                        <div className="taskDetails">
+                            <p className="detailsItem">Förväntad tid: {task.details.estimated_time} minuter</p>
+                            <p className="detailsItem">Förväntad kostnad: {task.details.estimated_cost} kr</p>
+                        </div>
+                        <p className="description">Beskrivning: <span className="descriptionText" >{task.description}</span></p>
+                        <p className="optionalComment">Övrig kommentar: {task.details.optional_comment}</p>
+                    </>
+                }
+                
                 <div className="buttons">
                     {(withAcceptDenyIcons || task.status === 'inProgress') && 
                         <>
@@ -93,6 +100,8 @@ const TaskListWithAccordion = ({
                             <p className="iconText acceptIcon" onClick={() => (showModalVariant('completeTask'), setSelectedTaskID(task._id))}><CheckCircleIcon/> Markera som klar</p>
                         </>
                     }
+                    {(userID === task.user_id && task.status === 'idle') && <p className="iconText removeTaskIcon" onClick={() => (showModalVariant('removeTask'), setSelectedTaskID(task._id))} ><DeleteForeverIcon/> Ta bort uppgift</p>}
+                    {(withAssignIcon || task.status === 'idle') && <p className="iconText assignIcon" onClick={() => (showModalVariant("takeTask"), setSelectedTaskID(task._id))}><AssignmentIcon/> Antag uppgift </p> }
                     { userID === task.user_id && (withDenyIcon || task.status === 'completed') && <p className="denyIcon iconText" onClick={() => (showModalVariant('removeCompletedTask'), setSelectedTaskID(task._id))} ><CancelIcon/> Ta bort klar markering</p>}
                 </div>
             </AccordionDetails>

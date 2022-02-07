@@ -45,3 +45,16 @@
         padding: 0.2rem;
     }
 }
+
+.assignIcon{
+    cursor: pointer;
+    color: $primary;
+    &:hover{
+        color: $primary-dark;
+    }
+}
+
+.removeTaskIcon{
+    cursor: pointer;
+    color: lightcoral;
+}
