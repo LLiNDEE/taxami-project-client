@@ -6,12 +6,14 @@ import TakeTaskModal from '../components/Modals/takeTask/TakeTaskModal';
 import TaskRemoveCompletedModal from '../components/Modals/taskRemoveCompleted/TaskRemoveCompletedModal';
 import CompleteTaskModal from '../components/Modals/completeTask/CompleteTaskModal'
 import AddTaskModal from '../components/Modals/addTask/AddTaskModal';
+import RemoveTaskModal from '../components/Modals/removeTask/RemoveTaskModal';
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useTaskComplete from '../api/useTaskComplete';
 import useUserTakeTask from '../api/useUserTakeTask';
 import useModal from '../hooks/useModal'
 import useTaskUpdate from '../api/useTaskUpdate';
+import useRemoveTask from '../api/useRemoveTask'
 import useUserLeaveTask from '../api/useUserLeaveTask';
 import useAddTask from '../api/useAddTask'
 import useBoolean from '../hooks/useBoolean'
@@ -30,6 +32,7 @@ const DataProvider = ({ children }) => {
     const { execute: takeTask, iSuccess: takeTaskSuccess, data: takeTaskData, isError: takeTaskError } = useUserTakeTask()
     const { execute: updateTask, isSuccess: updateTaskSuccess, data: updateTaskData, isError: updateTaskError } = useTaskUpdate()
     const { execute: addTask, isSuccess: addTaskSuccess } = useAddTask()
+    const { execute: removeTask, isSuccess: removeTaskSuccess } = useRemoveTask()
 
     const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
@@ -108,8 +111,16 @@ const DataProvider = ({ children }) => {
 
     },[addTaskSuccess])
 
+    useEffect(() => {
+        if(!removeTaskSuccess) return
+
+        hideModal()
+        setRefreshPage(true)
+
+    },[removeTaskSuccess])
+
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask }}>
           <Header/>
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
             { modalVariant === 'takeTask' && <TakeTaskModal/>}
@@ -117,6 +128,7 @@ const DataProvider = ({ children }) => {
             { modalVariant === 'completeTask' && <CompleteTaskModal/>}
             { modalVariant === 'removeCompletedTask' && <TaskRemoveCompletedModal/> }
             { modalVariant === 'addTask' && <AddTaskModal/> }
+            { modalVariant === 'removeTask' && <RemoveTaskModal/> }
 
           {children}
       </contextData.Provider>
