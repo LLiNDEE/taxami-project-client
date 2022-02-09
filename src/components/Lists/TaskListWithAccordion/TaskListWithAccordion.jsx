@@ -47,6 +47,7 @@ const TaskListWithAccordion = ({
     withAcceptIcon,
     withDenyIcon,
     withAssignIcon,
+    members,
     ...props 
   }) => {
 
@@ -59,7 +60,8 @@ const TaskListWithAccordion = ({
         keys={['Titel', 'Prioritet', 'Status']}
         {...props}
         >
-        {myTasks.map(task => (
+        {myTasks < 1 && <p className="noTasksText">Det finns inga uppgifter</p>}
+        {myTasks.length > 0 && myTasks.map(task => (
         <Accordion key={task._id}>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -92,11 +94,18 @@ const TaskListWithAccordion = ({
                         <p className="optionalComment">Övrig kommentar: {task.details.optional_comment}</p>
                     </>
                 }
+                {task.status === 'idle' && 
+                    <>
+                        <div className="taskDetails">
+                            <p className="description">Beskrivning: <span className="descriptionText">{task.description}</span></p>
+                        </div>
+                    </>
+                }
                 
                 <div className="buttons">
                     {(withAcceptDenyIcons || task.status === 'inProgress') && 
                         <>
-                            <p className="iconText denyIcon" onClick={() => (showModalVariant('leaveTask'), setSelectedTaskID(task._id))} ><CancelIcon/> Lämna uppgift</p>
+                            <p className="iconText denyIcon" onClick={() => (showModalVariant('leaveTask'), setSelectedTaskID(task._id))} ><CancelIcon/> { userID === task.user_id ? "Ta bort pågående status" : "Lämna uppgift"}</p>
                             <p className="iconText acceptIcon" onClick={() => (showModalVariant('completeTask'), setSelectedTaskID(task._id))}><CheckCircleIcon/> Markera som klar</p>
                         </>
                     }

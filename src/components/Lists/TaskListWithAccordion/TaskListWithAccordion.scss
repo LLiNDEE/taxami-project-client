@@ -58,3 +58,10 @@
     cursor: pointer;
     color: lightcoral;
 }
+
+.noTasksText{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    color: $primary-dark;
+}
