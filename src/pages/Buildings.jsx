@@ -117,6 +117,11 @@ const Buildings = () => {
       {(!isError && tasks && filteredTasks) ? 
       <>
         <h2 className="buildingName">{building.building_name}</h2>  
+        {!isOwner && 
+          <Flex justify="right">
+            <button className="leaveBuildingButton" onClick={() => showModalVariant('leaveBuilding')}>Lämna byggnad</button>
+          </Flex>
+        }
 
         <div className="stats">
           <StatsDisplay
