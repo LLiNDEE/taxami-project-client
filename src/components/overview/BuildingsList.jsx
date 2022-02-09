@@ -4,11 +4,12 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 import List from '../Lists/List';
 
-const BuildingsList = ({ buildings }) => {
+const BuildingsList = ({ buildings, ...props }) => {
     
     return (
         <List
             keys={['Namn', 'Uppgifter', 'Medlemmar']}
+            {...props}
         >
             {buildings.map(building => (
             <div className="data" key={building._id}>
