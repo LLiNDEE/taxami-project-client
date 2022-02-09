@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './Overview.scss'
 
 import StatsDisplay from './StatsDisplay';
+import JoinBuildingForm from '../joinBuildingForm/JoinBuildingForm';
 import BuildingsList from './BuildingsList';
 import TaskListWithAccordion from '../Lists/TaskListWithAccordion/TaskListWithAccordion';
 import TasksList from '../Lists/TasksList/TasksList';
@@ -43,7 +44,9 @@ const Overview = () => {
               </div>
 
               <h2 className="overviewSubTitle">Dina byggnader</h2>
-              <BuildingsList buildings={buildings} />
+              <BuildingsList buildings={buildings} variant="list--clean" />
+
+              <JoinBuildingForm/>
 
               <h2 className="overviewSubTitle">Dina uppgifter</h2>
               {/* <TasksList myTasks={myTasks} withEye variant="list--clean"/> */}

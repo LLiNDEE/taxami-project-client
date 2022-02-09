@@ -1,0 +1,22 @@
+.joinBuildingForm{
+    width: 25rem;
+    margin: auto;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form{
+        width: 100%;
+        display: flex;
+        gap: 0.2rem;
+        flex-direction: column;
+    }
+    .input{
+        width: 100%;
+    }
+    .joinButton{
+        margin-top: 0.3rem;
+        width: 5rem;
+        height: 2rem;
+    }
+}
