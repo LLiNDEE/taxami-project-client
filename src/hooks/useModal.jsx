@@ -11,7 +11,8 @@ const VARIANTS = {
     completeTask: 'completeTask',
     removeCompletedTask: 'removeCompletedTask',
     addTask: 'addTask',
-    removeTask: 'removeTask'
+    removeTask: 'removeTask',
+    leaveBuilding: 'leaveBuilding',
 }
 
 const useModal = () => {
