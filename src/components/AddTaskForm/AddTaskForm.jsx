@@ -29,7 +29,7 @@ const AddTaskForm = ({ control, errors, onSubmitFunc, cancelFunc }) => {
           defaultValue=""
           error={errors.priority}
           render={({ field }) => 
-          <Select label="Prioritet" value={priorities} onChange={e => setPriorities(e.target.value)} {...field} >
+          <Select label="Prioritet" value={priorities} onChange={e => setPriorities(e.target.value)} {...field} ref={null} >
             <MenuItem value="low" >Låg</MenuItem>
             <MenuItem value="high" >Hög</MenuItem>
           </Select>}
