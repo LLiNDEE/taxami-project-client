@@ -7,7 +7,7 @@ import { useData } from '../../../providers/DataProvider';
 const LeaveBuildingModal = () => {
 
     const { userID } = useGlobal()
-    const {selectedTaskID, hideModal } = useData()
+    const {selectedBuildingID, hideModal, leaveBuilding } = useData()
     
 
   return (
@@ -17,6 +17,7 @@ const LeaveBuildingModal = () => {
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
+        acceptFunc={() => leaveBuilding({user_id: userID, building_id: selectedBuildingID, member_id: userID})}
     /> 
   );
 };
