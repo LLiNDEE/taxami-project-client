@@ -10,6 +10,7 @@ import RemoveTaskModal from '../components/Modals/removeTask/RemoveTaskModal';
 import LeaveBuildingModal from '../components/Modals/leaveBuilding/LeaveBuildingModal'
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
+import useLeaveBuilding from '../api/useLeaveBuilding'
 import useTaskComplete from '../api/useTaskComplete';
 import useUserTakeTask from '../api/useUserTakeTask';
 import useModal from '../hooks/useModal'
@@ -35,7 +36,8 @@ const DataProvider = ({ children }) => {
     const { execute: updateTask, isSuccess: updateTaskSuccess, data: updateTaskData, isError: updateTaskError } = useTaskUpdate()
     const { execute: addTask, isSuccess: addTaskSuccess } = useAddTask()
     const { execute: removeTask, isSuccess: removeTaskSuccess } = useRemoveTask()
-    const { execute: joinBuilding, isSuccess: joinBuildingSuccess} = useJoinBuilding()
+    const { execute: joinBuilding, isSuccess: joinBuildingSuccess, isError: joinBuildingError} = useJoinBuilding()
+    const { execute: leaveBuilding, isSuccess: leaveBuildingSuccess } = useLeaveBuilding()
 
     const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
@@ -129,8 +131,15 @@ const DataProvider = ({ children }) => {
 
     },[joinBuildingSuccess])
 
+    useEffect(() => {
+        if(!leaveBuildingSuccess) return
+
+        getBuildings({user_id: userID})
+
+    },[leaveBuildingSuccess])
+
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError }}>
           <Header/>
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
             { modalVariant === 'takeTask' && <TakeTaskModal/>}
