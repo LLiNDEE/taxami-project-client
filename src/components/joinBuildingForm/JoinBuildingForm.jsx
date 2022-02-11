@@ -20,7 +20,7 @@ const schema = yup.object().shape({
 
 const JoinBuildingForm = () => {
 
-    const { joinBuilding, joinBuildingSuccess } = useData()
+    const { joinBuilding, joinBuildingSuccess, joinBuildingError } = useData()
     const { userID } = useGlobal()
 
     const { handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -39,7 +39,7 @@ const JoinBuildingForm = () => {
                 error={errors?.invite_code}
                 render={({ field }) => <Input label="Inbjudningskod" error={!!errors?.invite_code} {...field} ref={null} /> }
             />
-            {errors?.invite_code && <ErrorMessage message="Ogiltig inbjudningskod" />}
+            {(errors?.invite_code || !!joinBuildingError) && <ErrorMessage message="Ogiltig inbjudningskod" />}
             {!!joinBuildingSuccess && <SuccessMessage message="Du gick med i byggnaden!" />}
             <Flex justify="right">
                 <Button className="joinButton">Gå med</Button>
