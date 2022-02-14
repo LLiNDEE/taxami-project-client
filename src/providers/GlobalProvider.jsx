@@ -11,9 +11,10 @@ const GlobalProvider = ({ children }) => {
     const [isPageLoading, { set: setPageLoading }] = useBoolean()
 
     const [userID, setUserID] = useState(undefined)
+    const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
                 {children}

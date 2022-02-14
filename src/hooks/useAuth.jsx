@@ -27,13 +27,14 @@ export const validateToken = () => {
 
 const useAuth = () => {
 
-    const { setAuthStatus, setUserID } = useGlobal()
+    const { setAuthStatus, setUserID, setUserRole } = useGlobal()
 
     const methods = useMemo(() => ({
         logInUser: data => {
-            const { token, user_id } = data
+            const { token, user_id, role } = data
             setToken(token)
             setAuthStatus(AUTH_STATUSES.loggedIn)
+            setUserRole(role)
             setUserID(user_id)
         },
         logoutUser: () => {
