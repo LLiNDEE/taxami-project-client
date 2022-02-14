@@ -9,7 +9,6 @@ import Chip from '@mui/material/Chip';
 
 import StatsDisplay from '../components/overview/StatsDisplay';
 import useBuildingTasks from '../api/useBuildingTasks';
-import TasksList from '../components/Lists/TasksList/TasksList'
 import TaskListWithAccordion from '../components/Lists/TaskListWithAccordion/TaskListWithAccordion';
 import MemberList from '../components/Lists/members/MemberList';
 import Flex from '../components/core/Flex/Flex'
