@@ -1,5 +1,6 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import './Overview.scss'
 
@@ -14,7 +15,7 @@ import { useData } from '../../providers/DataProvider';
 
 const Overview = () => {
 
-    const { buildings, myTasks, isDataLoading } = useData()
+    const { buildings, myTasks, isDataLoading, showModalVariant } = useData()
 
   return (
     <div className="overview">
@@ -45,11 +46,11 @@ const Overview = () => {
 
               <h2 className="overviewSubTitle">Dina byggnader</h2>
               <BuildingsList buildings={buildings} variant="list--clean" />
+              <button className="createBuildingButton" onClick={() => showModalVariant('createBuilding')} > <AddCircleIcon/> Skapa ny byggnad</button>
 
               <JoinBuildingForm/>
 
               <h2 className="overviewSubTitle">Dina uppgifter</h2>
-              {/* <TasksList myTasks={myTasks} withEye variant="list--clean"/> */}
               <TaskListWithAccordion myTasks={myTasks} variant="list--clean" />
 
           </>
