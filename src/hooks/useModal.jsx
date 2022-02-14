@@ -13,6 +13,7 @@ const VARIANTS = {
     addTask: 'addTask',
     removeTask: 'removeTask',
     leaveBuilding: 'leaveBuilding',
+    createBuilding: 'createBuilding',
 }
 
 const useModal = () => {
