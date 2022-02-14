@@ -10,11 +10,13 @@ import BuildingsList from './BuildingsList';
 import TaskListWithAccordion from '../Lists/TaskListWithAccordion/TaskListWithAccordion';
 import TasksList from '../Lists/TasksList/TasksList';
 import { useData } from '../../providers/DataProvider';
+import { useGlobal } from '../../providers/GlobalProvider';
 
 
 
 const Overview = () => {
 
+    const { userRole } = useGlobal()
     const { buildings, myTasks, isDataLoading, showModalVariant } = useData()
 
   return (
@@ -46,7 +48,7 @@ const Overview = () => {
 
               <h2 className="overviewSubTitle">Dina byggnader</h2>
               <BuildingsList buildings={buildings} variant="list--clean" />
-              <button className="createBuildingButton" onClick={() => showModalVariant('createBuilding')} > <AddCircleIcon/> Skapa ny byggnad</button>
+              { userRole === 'customer' && <button className="createBuildingButton" onClick={() => showModalVariant('createBuilding')} > <AddCircleIcon/> Skapa ny byggnad</button>}
 
               <JoinBuildingForm/>
 
