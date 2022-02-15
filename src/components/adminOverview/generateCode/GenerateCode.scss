@@ -1,0 +1,46 @@
+@import '../../../styles/variables';
+
+
+.generateCodeContainer{
+    width: 50rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid $primary;
+    padding-top: 2rem;
+    .prefixInput{
+        width: 15%;
+    }
+    .codeInputContainer{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .codeInput{
+        width: 23rem;
+    }
+    .button{
+        border: none;
+        background: none;
+        cursor: pointer;
+        &:hover{
+            color: lightgray;
+        }
+    }
+    .container{
+        display: flex;
+        box-shadow: 2px 2px 5px $primary-dark;
+        padding: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        flex-direction: column;
+        h4{
+            padding: 0.5rem;
+        }
+    }
+    .copiedChipContainer{
+        padding-top: 0.5rem;
+    }
+}
