@@ -32,23 +32,27 @@ const RegisterPage = () => {
     return (
         <div className="registerPage">
             <h2 className="registerTitle">Registrera dig</h2>
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                </Step>
-                ))}
-            </Stepper>
+            <div className="stepper">
+                <Stepper sx={{ width: '100%' }} activeStep={activeStep} alternativeLabel>
+                    {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                    </Step>
+                    ))}
+                </Stepper>
+            </div>
 
             {!isCodeValid && 
-                <PromoCodeForm
-                    schema={verifyCodeSchema}
-                    isError={verifyCodeError}
-                    status={verifyCodeStatus}
-                    submitText="Verifiera kod"
-                    onSubmit={verifyCode}
-                    feedback={SERVER_ERROR_MESSAGES['noCode']}
-                />
+                <>
+                    <PromoCodeForm
+                        schema={verifyCodeSchema}
+                        isError={verifyCodeError}
+                        status={verifyCodeStatus}
+                        submitText="Verifiera kod"
+                        onSubmit={verifyCode}
+                        feedback={SERVER_ERROR_MESSAGES['noCode']}
+                    />
+                </>
             }
 
             {isCodeValid && !isRegistered && 
