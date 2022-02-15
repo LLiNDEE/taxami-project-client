@@ -20,7 +20,7 @@ const LoginForm = () => {
             label="Lösenord"
             withEye
           />
-          <Link to="/registrera">Registrera konto</Link>
+          <p className="textWithLink">Har du inget konto? <Link className="link" to="/registrera">Registrera konto</Link></p>
 
       </div>
   )
