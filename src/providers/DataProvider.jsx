@@ -28,7 +28,7 @@ const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
 
-    const { userID } = useGlobal()
+    const { userID, userRole } = useGlobal()
 
     const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
     const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData } = useUserBuildings()
@@ -55,6 +55,17 @@ const DataProvider = ({ children }) => {
     const [refreshPage, setRefreshPage] = useState(false)
 
     useEffect(() => {
+
+        if(!userID && userRole === 'admin') return
+
+        setIsDataLoading(true)
+
+        getTasks({user_id: userID})
+        getBuildings({user_id: userID})
+
+    },[])
+
+    useEffect(() => {
         if(!tasksDATA || !buildingsData) return
 
         setMyTasks(tasksDATA.data.tasks)
@@ -63,17 +74,6 @@ const DataProvider = ({ children }) => {
         setIsDataLoading(false)
 
     },[tasksDATA, buildingsData])
-
-    useEffect(() => {
-
-        if(!userID) return
-
-        setIsDataLoading(true)
-
-        getTasks({user_id: userID})
-        getBuildings({user_id: userID})
-
-    },[])
 
     useEffect(() => {
         if(!isTaskCompleted) return
