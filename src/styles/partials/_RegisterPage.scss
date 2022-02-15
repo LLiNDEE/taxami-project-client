@@ -15,4 +15,22 @@
         border-bottom: 1px solid $primary-dark;
         padding-bottom: 1rem;
     }
+    .textWithLink{
+        color: $primary-dark;
+        .link{
+            color: $primary-dark;
+            text-decoration: none;
+            font-weight: bold;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+    .promoCodeFormTitle{
+        color: $primary-darkest;
+        padding: 0.5rem;
+    }
+    .stepper{
+        width: 25rem;
+    }
 }
