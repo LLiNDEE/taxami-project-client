@@ -7,10 +7,11 @@ import { useAdmin } from '../../providers/AdminProvider'
 
 import StatsDisplay from '../overview/StatsDisplay'
 import GenerateCode from './generateCode/GenerateCode'
+import CustomerList from '../Lists/CustomerList/CustomerList'
 
 const AdminOverview = () => {
 
-    const { isDataLoading, stats } = useAdmin()
+    const { isDataLoading, stats, customers } = useAdmin()
 
   return (
     <div className="overview">
@@ -32,6 +33,7 @@ const AdminOverview = () => {
                     />
                 </div>
                 <GenerateCode/>
+                {customers && <CustomerList customers={customers} />}
             </div>
         : null}
     </div>

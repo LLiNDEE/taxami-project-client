@@ -1,0 +1,57 @@
+@import '../../../styles/variables';
+
+.dataAccordion{
+    display: flex;
+    width: 100%;
+    .dataItem{
+        flex: 1;
+    }
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+    .iconText{
+        display: flex;
+        align-items: center;
+        border: 1px solid $primary-light;
+        border-radius: 5px;
+        padding: 0.2rem;
+    }
+}
+
+.assignIcon{
+    cursor: pointer;
+    color: $primary;
+    &:hover{
+        color: $primary-dark;
+    }
+}
+
+.removeTaskIcon{
+    cursor: pointer;
+    color: lightcoral;
+}
+
+.noTasksText{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    color: $primary-dark;
+}
+
+.lockAccount{
+    color: $primary-dark;
+    cursor: pointer;
+}
+
+.customer-status--active{
+    background-color: yellowgreen;
+}
+
+.customer-status--locked{
+    background-color: lightgray;
+}
