@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import useAdminGenerateCode from '../api/useAdminGenerateCode'
 
 import useAdminGetStats from '../api/useAdminGetStats'
+import useAdminGetCustomers from '../api/useAdminGetCustomers'
 import { useGlobal } from './GlobalProvider'
 
 const adminContext = createContext({})
@@ -12,13 +13,16 @@ const AdminProvider = ({ children }) => {
 
     const { execute: getStats, isSuccess: getStatsSuccess, data: statsData } = useAdminGetStats()
     const { execute: generateCode, isSuccess: generateCodeSuccess, data: generateCodeData } = useAdminGenerateCode()
+    const { execute: getCustomers, isSuccess: customersSuccess, data: customersData } = useAdminGetCustomers()
     
     const [isDataLoading, setIsDataLoading] = useState(undefined)
     const [stats, setStats] = useState(undefined)
     const [subscriptionCode, setSubscriptionCode] = useState(undefined)
+    const [customers, setCustomers] = useState(undefined)
 
     useEffect(() => {
         getStats({user_id: userID})
+        getCustomers({user_id: userID})
         setIsDataLoading(true)
     }, [])
 
@@ -38,8 +42,16 @@ const AdminProvider = ({ children }) => {
 
     },[generateCodeSuccess])
 
+    useEffect(() => {
+
+      if(!customersSuccess) return
+
+      setCustomers(customersData.data.customers)
+
+    }, [customersSuccess])
+
   return (
-    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode }}>
+    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers }}>
         {children}
     </adminContext.Provider>
   )
