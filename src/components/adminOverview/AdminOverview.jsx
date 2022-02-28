@@ -8,6 +8,7 @@ import { useAdmin } from '../../providers/AdminProvider'
 import StatsDisplay from '../overview/StatsDisplay'
 import GenerateCode from './generateCode/GenerateCode'
 import CustomerList from '../Lists/CustomerList/CustomerList'
+import CustomerSearch from './customerSearch/CustomerSearch'
 
 const AdminOverview = () => {
 
@@ -32,7 +33,11 @@ const AdminOverview = () => {
                         value=""
                     />
                 </div>
+
                 <GenerateCode/>
+
+                <CustomerSearch/>
+                
                 {customers && <CustomerList customers={customers} />}
             </div>
         : null}
