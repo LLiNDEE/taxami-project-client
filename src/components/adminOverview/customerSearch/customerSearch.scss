@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+
+.customerSearchContainer{
+    width: 50rem;
+    box-shadow: 2px 2px 5px $primary-dark;
+    margin: auto;
+    margin-top: 2rem;
+    border-radius: 5px;
+    .searchContainer{
+        display: flex;
+        padding: 0.5rem;
+        align-items: center;
+        gap: 0.5rem;
+        .input{
+            width: 100%;
+        }
+        .searchIcon{
+            height: 2rem;
+            width: 2rem;
+            color: gray;
+            cursor: pointer;
+        }
+    }
+    .filterText{
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        padding-left: 1rem;
+        font-size: 14px;
+        cursor: pointer;
+        .filterIcon{
+            height: 0.8rem;
+            width: 0.8rem;
+        }
+    }
+}
