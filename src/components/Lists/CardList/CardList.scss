@@ -1,0 +1,56 @@
+@import '../../../styles/variables';
+
+.cardList{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+    overflow-x: auto;
+    .card{
+        background-color: $primary-lightest;
+        flex: 1;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        min-width: 12rem;
+        min-height: fit-content;
+    }
+}
+
+.cardTitle{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: $primary;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    justify-content: center;
+}
+
+.cardData{
+    font-size: 14px;
+    padding: 0.2rem;
+}
+
+.cardButton{
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    width: 100%;
+    background-color: $primary;
+    margin-top: 2rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    gap: 5%;
+    cursor: pointer;
+    height: 2rem;
+}
+
+
+.taskCardStatus{
+    padding: 0.2rem;
+    border-radius: 5px;
+}
