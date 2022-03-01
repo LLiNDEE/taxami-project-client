@@ -1,5 +1,10 @@
 @import '../variables';
 
+.loginPage{
+    width: 25rem;
+    margin: auto;
+}
+
 .loginForm{
     display: flex;
     flex-direction: column;
@@ -38,5 +43,11 @@
                 text-decoration: underline;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .loginPage{
+        width: 50vh;
     }
 }
