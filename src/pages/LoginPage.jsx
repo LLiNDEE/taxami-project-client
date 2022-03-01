@@ -15,7 +15,7 @@ const LoginPage = () => {
     const { execute, isError, isSuccess, status } = useLogin()
 
     return (
-        <div className="landingPage">
+        <div className="loginPage">
             <LoginForm
               schema={loginSchema}
               isError={isError}
