@@ -35,7 +35,7 @@ const AdminOverview = () => {
                     />
                     <StatsDisplay
                         title="Totalt antal kunder"
-                        value=""
+                        value={allCustomers.length}
                     />
                     <StatsDisplay
                         title="Totalt antal arbetare"
