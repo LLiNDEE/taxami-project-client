@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import '../overview/Overview.scss'
 import './AdminOverview.scss'
@@ -13,6 +13,13 @@ import CustomerSearch from './customerSearch/CustomerSearch'
 const AdminOverview = () => {
 
     const { isDataLoading, stats, customers } = useAdmin()
+
+    const [filteredCustomers, setFilteredCustomers] = useState(undefined)
+
+    useEffect(() => {
+        if(customers)
+        setFilteredCustomers(customers)
+    },[customers])
 
   return (
     <div className="overview">
@@ -36,9 +43,9 @@ const AdminOverview = () => {
 
                 <GenerateCode/>
 
-                <CustomerSearch/>
+                <CustomerSearch setFilteredCustomers={setFilteredCustomers} filteredCustomers={filteredCustomers}/>
                 
-                {customers && <CustomerList customers={customers} />}
+                {filteredCustomers && <CustomerList customers={filteredCustomers} />}
             </div>
         : null}
     </div>

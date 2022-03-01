@@ -6,18 +6,37 @@ import './customerSearch.scss'
 import useDebounce from '../../../hooks/useDebounce'
 import Input from '../../core/Input/Input'
 
-const CustomerSearch = () => {
+const CustomerSearch = ({ setFilteredCustomers, filteredCustomers }) => {
 
     const [searchTerm, setSearchTerm] = useState("")
     const [isSearching, setIsSearching] = useState(undefined)
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-    useEffect(() => {
-        if(debouncedSearchTerm){
-            console.log(debouncedSearchTerm)
-        }
-    }, [debouncedSearchTerm])
+    // const [allCustomers, setAllCustomers] = useState(undefined)
+
+    // useEffect(() => {
+    //     if(!filteredCustomers) return
+
+    //     setAllCustomers(filteredCustomers)
+
+    // },[filteredCustomers])
+
+    // useEffect(() => {
+    //     if(debouncedSearchTerm && filteredCustomers){
+    //         console.log(debouncedSearchTerm)
+           
+    //         if(debouncedSearchTerm.length < 3) return setFilteredCustomers(allCustomers)
+
+    //         const foundCustomers = []
+    //         filteredCustomers.forEach(c => {
+    //             const firstName = c.first_name
+    //             console.log("CUSTOMER ---> ", c)
+    //             if(firstName && firstName.startsWith(debouncedSearchTerm)) foundCustomers.push(c)
+    //         })
+    //         setFilteredCustomers(foundCustomers)
+    //     }
+    // }, [debouncedSearchTerm])
 
   return (
     <div className="customerSearchContainer">
