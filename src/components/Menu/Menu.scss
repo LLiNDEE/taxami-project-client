@@ -1,0 +1,54 @@
+@import '../../styles/variables';
+
+.menu{
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.innerMenu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    height: 5rem;
+}
+
+.leftButton{
+    background-color: $primary-light;
+    transform: translateY(40%);
+    margin-right: 2rem;
+    border-top: 5px solid $primary;
+}
+
+.rightButton{
+    background-color: $primary-light;
+    transform: translateY(40%);
+    margin-left: 2rem;
+    border-top: 5px solid $primary;
+}
+
+.mainButton{
+    background-color: $primary-light;
+    border: 5px solid $primary-dark;
+    border-radius: 90%;
+    height: 7rem;
+    width: 7rem;
+    z-index: 2;
+    display: flex;
+    line-height: 5rem;
+    justify-content: center;
+}
+
+.testMenu{
+    background-color: $primary-light;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 5rem;
+    transform: translateY(40%);
+    border-top: 5px solid $primary;
+}
