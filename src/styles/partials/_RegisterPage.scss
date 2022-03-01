@@ -6,17 +6,22 @@
     margin-top: 5rem;
     .input{
         width: 100%;
+        margin-top: 0.7rem;
         margin-bottom: 0.5rem;
     }
     .registerTitle{
         display: flex;
         justify-content: center;
         margin-bottom: 1rem;
-        border-bottom: 1px solid $primary-dark;
-        padding-bottom: 1rem;
+        // border-bottom: 1px solid $primary-dark;
+        background-color: $primary;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        color: white;
     }
     .textWithLink{
         color: $primary-dark;
+        font-size: 14px;
         .link{
             color: $primary-dark;
             text-decoration: none;
