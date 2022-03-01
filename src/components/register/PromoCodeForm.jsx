@@ -9,9 +9,9 @@ const PromoCodeForm = () => {
   return (
       <div>
         <Flex justify="center" align="center">
-          <p className="promoCodeFormTitle">Ange din prenumerations- eller inbjudningskod</p>
+          {/* <p className="promoCodeFormTitle">Ange din prenumerations- eller inbjudningskod</p> */}
         </Flex>
-          <Form.Input name="code" label="Kod" placeholder="Hej" />
+          <Form.Input name="code" label="Ange din prenumerations- eller inbjudningskod"/>
           <p className="textWithLink">Har du redan ett konto? <Link className="link" to="/loggain" >Logga in</Link></p>
       </div>
   )
