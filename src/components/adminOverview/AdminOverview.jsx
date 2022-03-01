@@ -14,11 +14,13 @@ const AdminOverview = () => {
 
     const { isDataLoading, stats, customers } = useAdmin()
 
+    const [allCustomers, setAllCustomers] = useState(undefined)
+
     const [filteredCustomers, setFilteredCustomers] = useState(undefined)
 
     useEffect(() => {
         if(customers)
-        setFilteredCustomers(customers)
+        setAllCustomers(customers)
     },[customers])
 
   return (
@@ -43,9 +45,9 @@ const AdminOverview = () => {
 
                 <GenerateCode/>
 
-                <CustomerSearch setFilteredCustomers={setFilteredCustomers} filteredCustomers={filteredCustomers}/>
+                <CustomerSearch allCustomers={allCustomers} filteredCustomers={filteredCustomers} setFilteredCustomers={setFilteredCustomers} />
                 
-                {filteredCustomers && <CustomerList customers={filteredCustomers} />}
+                {allCustomers && <CustomerList customers={filteredCustomers ?? allCustomers} />}
             </div>
         : null}
     </div>
