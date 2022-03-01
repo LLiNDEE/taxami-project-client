@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
+import Menu from '../components/Menu/Menu'
 import useBoolean from '../hooks/useBoolean'
 import { AUTH_STATUSES } from '../utils/constants'
 
@@ -19,6 +20,7 @@ const GlobalProvider = ({ children }) => {
                 {isPageLoading && <div className="pageCoverDiv"></div>}
                 {children}
             </div>
+            <Menu/>
         </contextGlobal.Provider>
     )
 }
