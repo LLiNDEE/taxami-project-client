@@ -69,6 +69,7 @@ const Overview = () => {
               <h2 className={clsx("overviewSubTitle", {['overviewSubTitle--sm']: sm})}>Dina uppgifter</h2>
 
               {!sm && <TaskListWithAccordion myTasks={myTasks} variant="list--clean" />}
+              {myTasks.length < 1 && <p className="noTasksText">Du har inga uppgifter!</p>}
               {sm && <TaskCardList tasks={myTasks} />}
 
           </>

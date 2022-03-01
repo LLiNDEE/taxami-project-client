@@ -4,7 +4,6 @@
     width: 50rem;
     margin: auto;
     margin-top: 5rem;
-    margin-bottom: 5rem;
     .overviewTitle{
         margin-bottom: 2rem;
         background-color: $primary;
@@ -78,4 +77,11 @@
     color: white !important;
     margin-bottom: 0.5rem;
     height: 2rem;
+}
+
+.noTasksText{
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    color: $primary-dark;
 }
