@@ -35,7 +35,7 @@ const AdminOverview = () => {
                     />
                     <StatsDisplay
                         title="Totalt antal kunder"
-                        value={allCustomers.length}
+                        value={allCustomers && allCustomers.length}
                     />
                     <StatsDisplay
                         title="Totalt antal arbetare"
@@ -45,7 +45,7 @@ const AdminOverview = () => {
 
                 <GenerateCode/>
 
-                <CustomerSearch allCustomers={allCustomers} filteredCustomers={filteredCustomers} setFilteredCustomers={setFilteredCustomers} />
+                {allCustomers && <CustomerSearch allCustomers={allCustomers} filteredCustomers={filteredCustomers} setFilteredCustomers={setFilteredCustomers} />}
                 
                 {allCustomers && <CustomerList customers={filteredCustomers ?? allCustomers} />}
             </div>
