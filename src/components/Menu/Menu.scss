@@ -6,6 +6,7 @@
     right: 0;
     bottom: 0;
     width: 100%;
+    z-index: 4;
 }
 
 .innerMenu{
@@ -17,17 +18,25 @@
 }
 
 .leftButton{
-    background-color: $primary-light;
+    // background-color: $primary-light;
+    background-color: $primary;
     transform: translateY(40%);
+    margin-top: 1.2rem;
+    color: white;
+    font-weight: bold;
     margin-right: 2rem;
-    border-top: 5px solid $primary;
+    // border-top: 5px solid $primary-dark;
 }
 
 .rightButton{
-    background-color: $primary-light;
+    // background-color: $primary-light;
+    background-color: $primary;
     transform: translateY(40%);
     margin-left: 2rem;
-    border-top: 5px solid $primary;
+    margin-top: 1.2rem;
+    color: white;
+    font-weight: bold;
+    // border-top: 5px solid $primary-dark;
 }
 
 .mainButton{
@@ -40,15 +49,45 @@
     display: flex;
     line-height: 5rem;
     justify-content: center;
+    color: white;
 }
 
 .testMenu{
-    background-color: $primary-light;
+    // background-color: $primary-light;
+    background-color: $primary;
     width: 100%;
     position: absolute;
     bottom: 0;
     right: 0;
     height: 5rem;
     transform: translateY(40%);
-    border-top: 5px solid $primary;
+    border-top: 5px solid $primary-dark;
+}
+
+
+.options{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.optionItem{
+    background-color: $primary-light;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: white;
+}
+
+.menuAddIcon{
+    height: 5rem;
+    width: 5rem;
+    margin-top: 0.7rem;
+    transition: transform 0.5s;
+    font-size: 20px;
+}
+
+.menuAddIconRotate{
+    transition: transform 0.5s;
+    transform: rotate(205deg);
 }
