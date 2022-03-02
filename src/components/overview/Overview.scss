@@ -86,3 +86,14 @@
     color: $primary-dark;
     margin-bottom: 5rem;
 }
+
+.divider{
+    color: $primary-lightest;
+    margin-top: 1rem;
+    border: 2px solid $primary-lightest;
+    border-radius: 5px;
+}
+
+.space{
+    margin-bottom: 7rem;
+}

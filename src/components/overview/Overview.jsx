@@ -65,12 +65,15 @@ const Overview = () => {
               { userRole === 'customer' && !sm && <button className="createBuildingButton" onClick={() => showModalVariant('createBuilding')} > <AddCircleIcon/> Skapa ny byggnad</button>}
 
               {!sm && <JoinBuildingForm/>}
+              {sm && <hr className="divider"/>}
 
               <h2 className={clsx("overviewSubTitle", {['overviewSubTitle--sm']: sm})}>Dina uppgifter</h2>
 
               {!sm && <TaskListWithAccordion myTasks={myTasks} variant="list--clean" />}
               {sm && myTasks.length < 1 && <p className="noTasksText">Du har inga uppgifter!</p>}
               {sm && <TaskCardList tasks={myTasks} />}
+
+              <p className="space"></p>
 
           </>
           }  
