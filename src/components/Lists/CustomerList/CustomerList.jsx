@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LockIcon from '@mui/icons-material/Lock';
-
-import List from '../List';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import './CustomerList.scss'
 
+import List from '../List';
+import { useAdmin } from '../../../providers/AdminProvider' 
+import { useGlobal } from '../../../providers/GlobalProvider'
 import { clsx } from '../../../utils/utils'
 
 const resolveStatus = status => 
@@ -17,6 +19,12 @@ status === 'active' ? "Aktiv"
 
 const CustomerList = ({ customers, ...props }) => {
 
+    const { lockAccount, unlockAccount } = useAdmin()
+    const { userID } = useGlobal()
+
+    useEffect(() => {
+        console.log("CUSTOMERS UPDATED FROM CUSTOMERLIST")
+    },[customers])
 
     return (
         <List
@@ -51,7 +59,8 @@ const CustomerList = ({ customers, ...props }) => {
             </AccordionSummary>
             <AccordionDetails>
                 <div className="buttons">
-                    <p className="iconText lockAccount"><LockIcon/> Lås konto</p>
+                    { customer.status === 'active' && <p className="iconText lockAccount" onClick={() => lockAccount({user_id: userID, customer_id: customer._id})} ><LockIcon/> Lås konto</p>}
+                    { customer.status === 'locked' && <p className="iconText lockAccount" onClick={() => unlockAccount({user_id: userID, customer_id: customer._id})}> <LockOpenIcon/> Lås upp konto</p> }
                 </div>
             </AccordionDetails>
         </Accordion>

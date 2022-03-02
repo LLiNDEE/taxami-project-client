@@ -3,6 +3,8 @@ import useAdminGenerateCode from '../api/useAdminGenerateCode'
 
 import useAdminGetStats from '../api/useAdminGetStats'
 import useAdminGetCustomers from '../api/useAdminGetCustomers'
+import useAdminLockAccount from '../api/useAdminLockAccount'
+import useAdminUnlockAccount from '../api/useAdminUnlockAccount'
 import { useGlobal } from './GlobalProvider'
 
 const adminContext = createContext({})
@@ -14,6 +16,9 @@ const AdminProvider = ({ children }) => {
     const { execute: getStats, isSuccess: getStatsSuccess, data: statsData } = useAdminGetStats()
     const { execute: generateCode, isSuccess: generateCodeSuccess, data: generateCodeData } = useAdminGenerateCode()
     const { execute: getCustomers, isSuccess: customersSuccess, data: customersData } = useAdminGetCustomers()
+
+    const { execute: lockAccount, isSuccess: lockAccountSuccess, data: lockAccountData } = useAdminLockAccount()
+    const { execute: unlockAccount, isSuccess: unlockAccountSuccess, data: unlockAccountData } = useAdminUnlockAccount()
     
     const [isDataLoading, setIsDataLoading] = useState(undefined)
     const [stats, setStats] = useState(undefined)
@@ -50,8 +55,16 @@ const AdminProvider = ({ children }) => {
 
     }, [customersSuccess])
 
+    useEffect(() => {
+
+      if(!lockAccountSuccess && !unlockAccountSuccess) return
+
+      getCustomers({user_id: userID})
+
+    },[lockAccountSuccess, unlockAccountSuccess])
+
   return (
-    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers }}>
+    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers, lockAccount, unlockAccount }}>
         {children}
     </adminContext.Provider>
   )

@@ -19,8 +19,9 @@ const AdminOverview = () => {
     const [filteredCustomers, setFilteredCustomers] = useState(undefined)
 
     useEffect(() => {
-        if(customers)
+        if(!customers) return
         setAllCustomers(customers)
+        setFilteredCustomers(customers)
     },[customers])
 
   return (
@@ -46,7 +47,7 @@ const AdminOverview = () => {
                 <GenerateCode/>
 
                 {allCustomers && <CustomerSearch allCustomers={allCustomers} filteredCustomers={filteredCustomers} setFilteredCustomers={setFilteredCustomers} />}
-                
+
                 {allCustomers && <CustomerList customers={filteredCustomers ?? allCustomers} />}
             </div>
         : null}
