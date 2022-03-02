@@ -28,7 +28,7 @@ const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
 
-    const { userID, userRole } = useGlobal()
+    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus } = useGlobal()
 
     const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
     const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData } = useUserBuildings()
@@ -42,7 +42,7 @@ const DataProvider = ({ children }) => {
     const { execute: leaveBuilding, isSuccess: leaveBuildingSuccess } = useLeaveBuilding()
     const { execute: createBuilding, isSuccess: createBuildingSuccess, isError: createBuildingError } = useCreateBuilding()
 
-    const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
+    // const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
     const [buildings, setBuildings] = useState(undefined)
     const [myTasks, setMyTasks] = useState(undefined)
@@ -152,17 +152,10 @@ const DataProvider = ({ children }) => {
   return (
       <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, createBuilding }}>
           <Header/>
-            { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
-            { modalVariant === 'takeTask' && <TakeTaskModal/>}
-            { modalVariant === 'leaveTask' && <LeaveTaskModal/>}
-            { modalVariant === 'completeTask' && <CompleteTaskModal/>}
-            { modalVariant === 'removeCompletedTask' && <TaskRemoveCompletedModal/> }
-            { modalVariant === 'addTask' && <AddTaskModal/> }
-            { modalVariant === 'removeTask' && <RemoveTaskModal/> }
-            { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
-            { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
 
-          {children}
+
+            {children}
+
       </contextData.Provider>
   );
 };
