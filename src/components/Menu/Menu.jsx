@@ -28,11 +28,8 @@ const Menu = ({  }) => {
                   <p>Byggnader</p>
               </div>
               <div className="menuButton mainButton" onClick={() => toggleOptions(isOptionsVisible)}>
-                    <p>
-                        <AddIcon 
-                            className={clsx("menuAddIcon", {menuAddIconRotate: isOptionsVisible})}
-                        />
-                        {/* Verktyg */}
+                    <p className={clsx("menuAddIcon", {menuAddIconRotate: isOptionsVisible})}>
+                        <AddIcon />
                     </p>
               </div>
               <div className="menuButton rightButton">

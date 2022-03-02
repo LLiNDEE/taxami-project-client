@@ -80,14 +80,17 @@
 }
 
 .menuAddIcon{
+    transition: all 0.5s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 5rem;
-    width: 5rem;
-    margin-top: 0.7rem;
-    transition: transform 0.5s;
-    font-size: 20px;
+    svg{
+        height: 100%;
+        width: 100%;
+    }
 }
 
 .menuAddIconRotate{
-    transition: transform 0.5s;
     transform: rotate(205deg);
 }
