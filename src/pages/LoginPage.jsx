@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as yup from 'yup'
 
 import LoginForm from '../components/LoginForm';
@@ -12,7 +12,12 @@ const loginSchema = yup.object().shape({
 
 const LoginPage = () => {
 
-    const { execute, isError, isSuccess, status } = useLogin()
+    const { execute, isError, isSuccess, status, error } = useLogin()
+
+    useEffect(() => {
+      if(!error) return
+      console.log("ERROR --->", error)
+    },[error])
 
     return (
         <div className="loginPage">
@@ -22,7 +27,7 @@ const LoginPage = () => {
               status={status}
               submitText="Logga in"
               onSubmit={execute}
-              feedback={SERVER_ERROR_MESSAGES['invalidCredentials']}
+              feedback={SERVER_ERROR_MESSAGES[error && error.message]}
             />
         </div>
     )
