@@ -32,7 +32,7 @@ const Buildings = () => {
   const { execute: generateInvite, isSuccess: inviteSuccess, data: inviteCodeData, isError: inviteError } = useBuildingGenerateInvite()
 
   const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage, showModalVariant } = useData()
-  const { userID } = useGlobal()
+  const { userID, userRole } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
   const [tasks, setTasks] = useState(undefined)
@@ -57,7 +57,7 @@ const Buildings = () => {
 
     const data = {user_id: userID, building_id: building._id}
     execute(data)
-    getMembers({user_id: userID, building_id: building._id})
+    if(userRole === 'customer') getMembers({user_id: userID, building_id: building._id})
 
     setRefreshPage(false)
 
