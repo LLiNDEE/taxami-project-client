@@ -22,11 +22,13 @@ const useModal = () => {
 
     const [variant, setVariant] = useState(undefined)
     const [status, setStatus] = useState(undefined)
+    const [data, setData] = useState(undefined)
 
-    const showVariant = useCallback(params => {
+    const showVariant = useCallback((params, data) => {
         if(!VARIANTS[params]) return
         setVariant(params)
         setStatus(STATUS.SHOWN)
+        if(data) setData(data)
     }, [])
 
     const hideVariant = useCallback(() => {
@@ -34,7 +36,7 @@ const useModal = () => {
         setStatus(STATUS.HIDDEN)
     }, [])
 
-  return {showVariant, hideVariant, variant, status};
+  return {showVariant, hideVariant, variant, status, data, setData};
 };
 
 export default useModal;
