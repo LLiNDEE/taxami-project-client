@@ -15,6 +15,7 @@ const VARIANTS = {
     leaveBuilding: 'leaveBuilding',
     createBuilding: 'createBuilding',
     joinBuilding: 'joinBuilding',
+    viewTask: 'viewTask',
 }
 
 const useModal = () => {
