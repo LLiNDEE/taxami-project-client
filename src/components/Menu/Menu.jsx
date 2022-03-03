@@ -14,9 +14,9 @@ const Menu = ({  }) => {
     const location = useLocation()
     const path = location.pathname
     
-    const {  } = useMenu()
+    const { executeTakeTask } = useMenu()
 
-    const { showModalVariant, modalStatus, modalVariant, hideModal } = useGlobal()
+    const { showModalVariant, modalStatus, modalVariant, hideModal, userRole, userID, takeTaskDetails, setTakeTaskDetails } = useGlobal()
 
     const [isBuildingPage, setIsBuildingPage] = useState(undefined)
 
@@ -25,8 +25,9 @@ const Menu = ({  }) => {
     useEffect(() => {
         if(!path) return
 
-        if(path.includes("byggnad")) setIsBuildingPage(true)
-
+        if(path.includes("byggnad")) {
+            setIsBuildingPage(true)
+        }
     }, [path])
 
   return (
@@ -35,7 +36,7 @@ const Menu = ({  }) => {
             {isOptionsVisible && 
                 <div className="options">
                      <p className="optionItem" onClick={() => (showModalVariant('joinBuilding'), hideOptions())}>Gå med i byggnad</p>
-                     <p className="optionItem" onClick={() => (showModalVariant('createBuilding'), hideOptions())}>Skapa byggnad</p>
+                     {userRole === 'customer' && <p className="optionItem" onClick={() => (showModalVariant('createBuilding'), hideOptions())}>Skapa byggnad</p>}
                  </div>
             }
           <div className="innerMenu">
@@ -50,7 +51,7 @@ const Menu = ({  }) => {
                     </p>
               </div>
               <div className={clsx("menuButton rightButton", {acceptButton: modalVariant === 'viewTask'})}>
-                  {modalVariant === 'viewTask' && <p>Antag</p>}
+                  {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
                   {modalStatus !== 'SHOWN' && !isBuildingPage && <p>Uppgifter</p>}
                   {isBuildingPage && modalStatus !== 'SHOWN' && <p>Knapp 2</p>}
               </div>
