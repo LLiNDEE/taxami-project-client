@@ -14,6 +14,7 @@ import useBoolean from '../hooks/useBoolean'
 import useModal from '../hooks/useModal'
 import useBreakpoint from '../hooks/useBreakpoint'
 import { AUTH_STATUSES } from '../utils/constants'
+import ViewTaskModal from '../components/Modals/ViewTask/ViewTaskModal'
 
 const contextGlobal = createContext({})
 
@@ -44,6 +45,7 @@ const GlobalProvider = ({ children }) => {
                 { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
                 { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
                 { modalVariant === 'joinBuilding' && <JoinBuildingModal/> }
+                { modalVariant === 'viewTask' && <ViewTaskModal/>}
 
                 {children}
             </div>
