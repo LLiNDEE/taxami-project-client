@@ -16,6 +16,8 @@ import useBreakpoint from '../hooks/useBreakpoint'
 import { AUTH_STATUSES } from '../utils/constants'
 import ViewTaskModal from '../components/Modals/ViewTask/ViewTaskModal'
 
+import MenuProvider from './MenuProvider'
+
 const contextGlobal = createContext({})
 
 const GlobalProvider = ({ children }) => {
@@ -25,13 +27,13 @@ const GlobalProvider = ({ children }) => {
     const [authStatus, setAuthStatus] = useState(AUTH_STATUSES.idle)
     const [isPageLoading, { set: setPageLoading }] = useBoolean()
 
-    const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
+    const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus, data: modalData, setData: setModalData } = useModal()
 
     const [userID, setUserID] = useState(undefined)
     const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
 
@@ -48,8 +50,11 @@ const GlobalProvider = ({ children }) => {
                 { modalVariant === 'viewTask' && <ViewTaskModal/>}
 
                 {children}
+                
             </div>
-            {sm && <Menu/>}
+            <MenuProvider>
+                {sm && <Menu/>}
+            </MenuProvider>
         </contextGlobal.Provider>
     )
 }
