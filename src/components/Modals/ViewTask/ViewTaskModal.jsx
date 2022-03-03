@@ -1,33 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Modal from '../../core/Modal/Modal'
 import TakeTaskForm from '../../TakeTaskForm/TakeTaskForm';
 import { useGlobal } from '../../../providers/GlobalProvider';
-import { useData } from '../../../providers/DataProvider';
-import { useEffect } from 'react';
-
-const initialTakeTaskDetails = {
-  estimated_cost: "",
-  estimated_time: "",
-  optional_comment: "",
-}
-
 
 const ViewTaskModal = () => {
 
-  const { modalData } = useGlobal()
-
-  const [data, setData] = useState(initialTakeTaskDetails)
+  const { modalData, takeTaskDetails, setTakeTaskDetails } = useGlobal()
 
   useEffect(() => {
-    console.log("modal data--->", modalData)
-  },[modalData])
+    if(!modalData) return
+
+    setTakeTaskDetails(v => ({...v, building_id: modalData.building_id, task_id: modalData._id}))
+
+  },[])
 
   return (
     <Modal
         variant="default"
         modalTitle={modalData.title}
-        content={<TakeTaskForm {...{data, setData}}/>}
+        content={<TakeTaskForm data={takeTaskDetails} setData={setTakeTaskDetails}/>}
     /> 
   );
 };
