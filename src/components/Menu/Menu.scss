@@ -19,28 +19,29 @@
 }
 
 .leftButton{
-    // background-color: $primary-light;
     background-color: $primary;
     transform: translateY(40%);
     margin-top: 1.2rem;
     color: white;
     font-weight: bold;
-    margin-right: 2rem;
-    text-align: right;
     flex: 1;
-    // border-top: 5px solid $primary-dark;
+    display: flex;
+    justify-content: center;
+    border-top: 5px solid $primary-dark;
+    box-shadow: 2px 5px 0px 4px $primary;
 }
 
 .rightButton{
-    // background-color: $primary-light;
     background-color: $primary;
     transform: translateY(40%);
-    margin-left: 2rem;
     margin-top: 1.2rem;
     color: white;
     font-weight: bold;
     flex: 1;
-    // border-top: 5px solid $primary-dark;
+    display: flex;
+    justify-content: center;
+    border-top: 5px solid $primary-dark;
+    box-shadow: 0px 5px 0px 5px $primary;
 }
 
 .mainButton{
@@ -55,10 +56,10 @@
     justify-content: center;
     color: white;
     box-shadow: 0px 2px 5px 2px $primary-dark;
-    flex: 1;
+    // flex: 1;
 }
 
-.testMenu{
+.background-container{
     // background-color: $primary-light;
     background-color: $primary;
     width: 100%;
@@ -68,6 +69,7 @@
     height: 5rem;
     transform: translateY(40%);
     border-top: 5px solid $primary-dark;
+
 }
 
 
@@ -99,4 +101,19 @@
 
 .menuAddIconRotate{
     transform: rotate(225deg);
+}
+
+.cancelButton{
+    background-color: rgb(201, 80, 80);
+    box-shadow: 2px 5px 0px 4px rgb(201, 80, 80);
+}
+
+.acceptButton{
+    background-color: yellowgreen;
+    box-shadow: 0px 5px 0px 5px yellowgreen;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
 }
