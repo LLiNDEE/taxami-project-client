@@ -13,15 +13,19 @@ import TaskListWithAccordion from '../components/Lists/TaskListWithAccordion/Tas
 import MemberList from '../components/Lists/members/MemberList';
 import Flex from '../components/core/Flex/Flex'
 import Input from '../components/core/Input/Input'
+import TaskCardList from '../components/TaskCardList/TaskCardList';
 import useGetMembers from '../api/useGetMembers';
 import useBuildingGenerateInvite from '../api/useBuildingGenerateInvite';
 import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
+import useBreakpoint from '../hooks/useBreakpoint';
 import { clsx } from '../utils/utils'
 
 const Buildings = () => {
 
   const { id } = useParams()
+
+  const { sm } = useBreakpoint()
 
   const { execute, isSuccess, isError, data } = useBuildingTasks()
   const { execute: getMembers, isSuccess: membersSuccess, data: membersData, isError: membersError } = useGetMembers()
@@ -148,10 +152,15 @@ const Buildings = () => {
           </Tabs>
         </div>
 
-        {tabIndex === "one" ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon /> : ""}
-        {tabIndex === "two" ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskListWithAccordion members={members} myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
-        {tabIndex === "three" ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
+        {tabIndex === "one" && !sm ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon /> : ""}
+        {tabIndex === "two" && !sm ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskListWithAccordion members={members} myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
+        {tabIndex === "three" && !sm ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
         
+        {tabIndex === "one" && sm ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TaskCardList tasks={tasks.filter(t => t.status === 'idle')} /> : ""}
+        {tabIndex === "two" && sm ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskCardList tasks={tasks.filter(t => t.status === 'inProgress')} /> : ""}
+        {tabIndex === "three" && sm ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskCardList tasks={tasks.filter(t => t.status === 'completed')} /> : ""}
+
+
         {isOwner && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
 
         {isOwner && members && 
