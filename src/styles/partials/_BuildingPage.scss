@@ -82,7 +82,7 @@
         margin-top: 0.4rem;
     }
     .leaveBuildingButton{
-        width: 7rem;
+        // width: 7rem;
         height: 2rem;
         margin-top: 0.2rem;
         border-radius: 5px;
@@ -92,6 +92,43 @@
         cursor: pointer;
         &:hover{
             background-color: rgb(160, 71, 71);
+        }
+    }
+}
+
+
+@media only screen and (max-width: 600px){
+    .buildingPage{
+        width: 100%;
+        .buildingName{
+            width: 90%;
+            margin: auto;
+            color: white;
+        }
+    }
+    .stats{
+        width: 90% !important;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 2%;
+        font-size: 10px;
+        .statsItem{
+            flex: 1 !important;
+        }
+        .statsItemTitle{
+            padding-left: 0.2rem;
+        }
+        .viewMoreButton{
+            font-size: 10px;
+        }
+    }
+    .tabs{
+        width: 100% !important;
+        display: flex;
+        button{
+            flex: 1;
         }
     }
 }
