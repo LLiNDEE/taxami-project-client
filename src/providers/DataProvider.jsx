@@ -153,6 +153,15 @@ const DataProvider = ({ children }) => {
       <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, createBuilding }}>
           <Header/>
 
+            { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
+            { modalVariant === 'takeTask' && <TakeTaskModal/>}
+            { modalVariant === 'leaveTask' && <LeaveTaskModal/>}
+            { modalVariant === 'completeTask' && <CompleteTaskModal/>}
+            { modalVariant === 'removeCompletedTask' && <TaskRemoveCompletedModal/> }
+            { modalVariant === 'addTask' && <AddTaskModal/> }
+            { modalVariant === 'removeTask' && <RemoveTaskModal/> }
+            { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
+            { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
 
             {children}
 
