@@ -18,6 +18,14 @@ import ViewTaskModal from '../components/Modals/ViewTask/ViewTaskModal'
 
 import MenuProvider from './MenuProvider'
 
+const initialTakeTaskDetails = {
+    building_id: "",
+    task_id: "",
+    estimated_cost: "",
+    estimated_time: "",
+    optional_comment: "",
+}
+
 const contextGlobal = createContext({})
 
 const GlobalProvider = ({ children }) => {
@@ -29,23 +37,16 @@ const GlobalProvider = ({ children }) => {
 
     const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus, data: modalData, setData: setModalData } = useModal()
 
+    const [takeTaskDetails, setTakeTaskDetails] = useState(initialTakeTaskDetails)
+
     const [userID, setUserID] = useState(undefined)
     const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
-
-                { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
-                { modalVariant === 'takeTask' && <TakeTaskModal/>}
-                { modalVariant === 'leaveTask' && <LeaveTaskModal/>}
-                { modalVariant === 'completeTask' && <CompleteTaskModal/>}
-                { modalVariant === 'removeCompletedTask' && <TaskRemoveCompletedModal/> }
-                { modalVariant === 'addTask' && <AddTaskModal/> }
-                { modalVariant === 'removeTask' && <RemoveTaskModal/> }
-                { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
-                { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
+                
                 { modalVariant === 'joinBuilding' && <JoinBuildingModal/> }
                 { modalVariant === 'viewTask' && <ViewTaskModal/>}
 
@@ -53,7 +54,7 @@ const GlobalProvider = ({ children }) => {
                 
             </div>
             <MenuProvider>
-                {sm && <Menu/>}
+                {authStatus !== AUTH_STATUSES.idle && sm && <Menu/>}
             </MenuProvider>
         </contextGlobal.Provider>
     )
