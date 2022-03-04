@@ -73,8 +73,11 @@ const Buildings = () => {
       return
     }
 
+    console.log("Taaaasks ---->", data.data.tasks)
+
     setTasks(data.data.tasks)
-    setFilteredTasks(myTasks.filter(t => t.building_id === building._id))
+    // setFilteredTasks(myTasks.filter(t => t.building_id === building._id))
+    setFilteredTasks(data.data.tasks.filter(t => t.building_id === building._id))
 
   },[data])
 
