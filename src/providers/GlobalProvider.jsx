@@ -17,6 +17,7 @@ import { AUTH_STATUSES } from '../utils/constants'
 import ViewTaskModal from '../components/Modals/ViewTask/ViewTaskModal'
 
 import MenuProvider from './MenuProvider'
+import ViewInProgressTask from '../components/Modals/ViewInProgressTask/ViewInProgressTask'
 
 const initialTakeTaskDetails = {
     building_id: "",
@@ -34,6 +35,7 @@ const GlobalProvider = ({ children }) => {
 
     const [authStatus, setAuthStatus] = useState(AUTH_STATUSES.idle)
     const [isPageLoading, { set: setPageLoading }] = useBoolean()
+    const [refreshPage, setRefreshPage] = useState(false)
 
     const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus, data: modalData, setData: setModalData } = useModal()
 
@@ -43,12 +45,13 @@ const GlobalProvider = ({ children }) => {
     const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, refreshPage, setRefreshPage, setPageLoading, setUserID, userID, setUserRole, userRole, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
                 
                 { modalVariant === 'joinBuilding' && <JoinBuildingModal/> }
                 { modalVariant === 'viewTask' && <ViewTaskModal/>}
+                { modalVariant === 'viewInProgressTask' && <ViewInProgressTask/>}
 
                 {children}
                 

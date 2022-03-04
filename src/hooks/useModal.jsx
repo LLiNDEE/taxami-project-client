@@ -16,6 +16,7 @@ const VARIANTS = {
     createBuilding: 'createBuilding',
     joinBuilding: 'joinBuilding',
     viewTask: 'viewTask',
+    viewInProgressTask: 'viewInProgressTask'
 }
 
 const useModal = () => {
