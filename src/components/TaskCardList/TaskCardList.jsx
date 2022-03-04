@@ -39,7 +39,8 @@ const TaskCardList = ({ tasks }) => {
                 <p className="cardTitle">{task.title}</p>
                 <p className="cardData">Prioritet: {resolvePriority(task.priority)}</p>
                 <p className="cardData">Status: <span className={`taskCardStatus status--${task.status}`}>{resolveStatus(task.status)}</span></p>
-                <button className="cardButton" onClick={() => showModalVariant('viewTask', task)}><RemoveRedEyeIcon/>Välj</button>
+                {task.status === 'idle' && <button className="cardButton" onClick={() => showModalVariant('viewTask', task)}><RemoveRedEyeIcon/>Välj</button>}
+                {task.status === 'inProgress' && <button className="cardButton" onClick={() => showModalVariant('viewInProgressTask', task)} ><RemoveRedEyeIcon/>Välj</button>}
             </div>
         ))}
     </CardList>
