@@ -2,10 +2,14 @@ import React, { useState, useEffect, useContext, createContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import useUserTakeTask from '../api/useUserTakeTask'
+import { useGlobal } from './GlobalProvider'
 
 const contextMenu = createContext({})
 
 const MenuProvider = ({ children }) => {
+
+
+    const { setRefreshPage } = useGlobal()
 
     /**
      * Lägg till api-hooks här
@@ -18,6 +22,7 @@ const MenuProvider = ({ children }) => {
         if(!takeTaskSuccess) return
 
         console.log("Take task success", takeTaskSuccess)
+        setRefreshPage(true)
 
     },[takeTaskSuccess])
 
