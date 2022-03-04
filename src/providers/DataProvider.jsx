@@ -28,7 +28,7 @@ const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
 
-    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus } = useGlobal()
+    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage } = useGlobal()
 
     const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
     const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData } = useUserBuildings()
@@ -52,7 +52,7 @@ const DataProvider = ({ children }) => {
     const [selectedTaskID, setSelectedTaskID] = useState(undefined)
     const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
 
-    const [refreshPage, setRefreshPage] = useState(false)
+    
 
     useEffect(() => {
 
