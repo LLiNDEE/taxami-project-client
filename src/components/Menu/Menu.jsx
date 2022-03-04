@@ -40,20 +40,22 @@ const Menu = ({  }) => {
                  </div>
             }
           <div className="innerMenu">
-              <div className={clsx("menuButton leftButton", {cancelButton: modalVariant === 'viewTask'})}>
+              <div className={clsx("menuButton leftButton", {cancelButton: modalVariant === 'viewTask' || modalVariant === 'viewInProgressTask'})}>
                   
                   {isBuildingPage && modalStatus !== 'SHOWN' && <Link to="/oversikt" className="link">Tillbaka</Link>}
                   {modalVariant === 'viewTask' && <p onClick={hideModal}>Avbryt</p>}
+                  {modalVariant === 'viewInProgressTask' && <p onClick={() => showModalVariant('leaveTask')}>Lämna uppgift</p>}
               </div>
               <div className="menuButton mainButton" onClick={() => toggleOptions(isOptionsVisible)}>
                     <p className={clsx("menuAddIcon", {menuAddIconRotate: isOptionsVisible})}>
                         <AddIcon />
                     </p>
               </div>
-              <div className={clsx("menuButton rightButton", {acceptButton: modalVariant === 'viewTask'})}>
-                  {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
-                  {modalStatus !== 'SHOWN' && !isBuildingPage && <p>Uppgifter</p>}
-                  {isBuildingPage && modalStatus !== 'SHOWN' && <p>Knapp 2</p>}
+              <div className={clsx("menuButton rightButton", {acceptButton: modalVariant === 'viewTask' || modalVariant === 'viewInProgressTask'})}>
+                    {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
+                    {modalVariant === 'viewInProgressTask' && <p>Klarmarkera</p>}
+                    {modalStatus !== 'SHOWN' && !isBuildingPage && <p>Uppgifter</p>}
+                    {isBuildingPage && modalStatus !== 'SHOWN' && <p>Knapp 2</p>}
               </div>
           </div>
         </div>
