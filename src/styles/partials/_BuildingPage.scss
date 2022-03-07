@@ -90,8 +90,13 @@
         background-color: lightcoral;
         color: white;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem;
+        font-weight: bold;
         &:hover{
-            background-color: rgb(160, 71, 71);
+            background-color: rgb(211, 112, 112);
         }
     }
 }
