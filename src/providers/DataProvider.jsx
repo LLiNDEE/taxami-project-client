@@ -38,7 +38,7 @@ const DataProvider = ({ children }) => {
     const { execute: updateTask, isSuccess: updateTaskSuccess, data: updateTaskData, isError: updateTaskError } = useTaskUpdate()
     const { execute: addTask, isSuccess: addTaskSuccess } = useAddTask()
     const { execute: removeTask, isSuccess: removeTaskSuccess } = useRemoveTask()
-    const { execute: joinBuilding, isSuccess: joinBuildingSuccess, isError: joinBuildingError} = useJoinBuilding()
+    const { execute: joinBuilding, isSuccess: joinBuildingSuccess, isError: joinBuildingError, error: joinBuildingErrorType} = useJoinBuilding()
     const { execute: leaveBuilding, isSuccess: leaveBuildingSuccess } = useLeaveBuilding()
     const { execute: createBuilding, isSuccess: createBuildingSuccess, isError: createBuildingError } = useCreateBuilding()
 
@@ -150,7 +150,7 @@ const DataProvider = ({ children }) => {
     },[createBuildingSuccess])
 
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, createBuilding }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding }}>
           <Header/>
 
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
