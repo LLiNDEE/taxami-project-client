@@ -14,7 +14,8 @@ const LeaveTaskModal = () => {
   return (
     <Modal
         variant="yesNO"
-        modalTitle="Är du säker på att du vill lämna den här uppgiften?"
+        modalTitle="Lämna"
+        content={<p>Är du säker på att du vill lämna den här uppgiften?</p>}
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
