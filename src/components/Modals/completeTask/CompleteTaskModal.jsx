@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Modal from '../../core/Modal/Modal'
+import Flex from '../../core/Flex/Flex'
 import { useGlobal } from '../../../providers/GlobalProvider';
 import { useData } from '../../../providers/DataProvider';
 
@@ -14,7 +15,8 @@ const LeaveTaskModal = () => {
   return (
     <Modal
         variant="yesNO"
-        modalTitle="Är du säker på att du vill klarmarkera den här uppgiften?"
+        modalTitle="Klarmarkera"
+        content={<Flex justify="left">Är du säker på att du vill klarmarkera uppgiften?</Flex>}
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
