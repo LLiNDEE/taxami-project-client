@@ -10,6 +10,7 @@ const Flex = ({ justify, align, direction, gap, inline, ...props }) => {
             alignItems: align ?? props.style?.align,
             flexDirection: direction ?? props.style?.flexDirection,
             gap: gap ?? props.style?.gap,
+            width: "100%",
             display: inline ? "inline-flex" : "flex"
         }}
         />
