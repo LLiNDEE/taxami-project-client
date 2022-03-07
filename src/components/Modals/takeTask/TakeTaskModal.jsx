@@ -14,7 +14,7 @@ const initialTakeTaskDetails = {
 const TakeTaskModal = () => {
 
     const { userID } = useGlobal()
-    const { selectedBuildingID, selectedTaskID, hideModal, takeTask } = useData()
+    const { selectedBuilding, selectedTaskID, hideModal, takeTask } = useData()
 
     const [data, setData] = useState(initialTakeTaskDetails)
     
@@ -25,7 +25,7 @@ const TakeTaskModal = () => {
         variant="yesNO"
         modalTitle="Antag uppgift"
         content={<TakeTaskForm data={data} setData={setData}/>}
-        acceptFunc={() => takeTask({user_id: userID, building_id: selectedBuildingID, task_id: selectedTaskID, ...data})}
+        acceptFunc={() => takeTask({user_id: userID, building_id: selectedBuilding.building_id, task_id: selectedTaskID, ...data})}
         cancelFunc={() => hideModal()}
     />   
   );

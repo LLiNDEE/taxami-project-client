@@ -24,6 +24,11 @@ import useAddTask from '../api/useAddTask'
 import useBoolean from '../hooks/useBoolean'
 import { useGlobal } from './GlobalProvider';
 
+const selectedBuildingInitialValues = {
+    building_id: undefined,
+    building_name: undefined,
+}
+
 const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
@@ -50,7 +55,8 @@ const DataProvider = ({ children }) => {
     const [isDataLoading, { set: setIsDataLoading }] = useBoolean(false)
 
     const [selectedTaskID, setSelectedTaskID] = useState(undefined)
-    const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
+    // const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
+    const [selectedBuilding, setSelectedBuilding] = useState(selectedBuildingInitialValues)
 
     
 
@@ -150,7 +156,7 @@ const DataProvider = ({ children }) => {
     },[createBuildingSuccess])
 
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuildingID, selectedBuildingID, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding }}>
           <Header/>
 
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}

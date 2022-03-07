@@ -19,7 +19,7 @@ import { clsx } from '../../../utils/utils'
 const MemberList = ({ members, tasks, ...props }) => {
 
     const { userID } = useGlobal()
-    const { selectedBuildingID } = useData()
+    const { selectedBuilding } = useData()
 
 
     return (

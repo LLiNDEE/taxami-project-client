@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Chip from '@mui/material/Chip';
 
 import StatsDisplay from '../components/overview/StatsDisplay';
@@ -31,7 +32,7 @@ const Buildings = () => {
   const { execute: getMembers, isSuccess: membersSuccess, data: membersData, isError: membersError } = useGetMembers()
   const { execute: generateInvite, isSuccess: inviteSuccess, data: inviteCodeData, isError: inviteError } = useBuildingGenerateInvite()
 
-  const { buildings, myTasks, setSelectedBuildingID, refreshPage, setRefreshPage, showModalVariant } = useData()
+  const { buildings, myTasks, setSelectedBuilding, refreshPage, setRefreshPage, showModalVariant } = useData()
   const { userID, userRole } = useGlobal()
 
   const [building, setBuilding] = useState(buildings.filter(b => b._id === id)[0])
@@ -84,7 +85,7 @@ const Buildings = () => {
   useEffect(() => {
     if(!building) return
 
-    setSelectedBuildingID(building._id)
+    setSelectedBuilding(v => ({...v, building_id: building._id, building_name: building.building_name}))
 
   }, [building])
 
@@ -125,7 +126,7 @@ const Buildings = () => {
         <h2 className="buildingName">{building.building_name}</h2>  
         {!isOwner && 
           <Flex justify="right">
-            <button className="leaveBuildingButton" onClick={() => showModalVariant('leaveBuilding')}>Lämna byggnad</button>
+            <button className="leaveBuildingButton" onClick={() => showModalVariant('leaveBuilding')}>Lämna byggnad <LogoutIcon className="logoutIcon"/></button>
           </Flex>
         }
 

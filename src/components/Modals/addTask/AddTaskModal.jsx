@@ -21,9 +21,9 @@ const AddTaskModal = () => {
     })
 
     const { userID } = useGlobal()
-    const { selectedBuildingID, addTask, hideModal } = useData()
+    const { selectedBuilding, addTask, hideModal } = useData()
 
-    const addTaskSubmit = data => addTask({user_id: userID, building_id: selectedBuildingID, ...data})
+    const addTaskSubmit = data => addTask({user_id: userID, building_id: selectedBuilding.building_id, ...data})
 
     return (
         <Modal
