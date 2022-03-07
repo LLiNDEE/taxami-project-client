@@ -27,7 +27,7 @@ export const validateToken = () => {
 
 const useAuth = () => {
 
-    const { setAuthStatus, setUserID, setUserRole } = useGlobal()
+    const { setAuthStatus, setUserID, setUserRole, setUserData } = useGlobal()
 
     const methods = useMemo(() => ({
         logInUser: data => {
@@ -36,6 +36,7 @@ const useAuth = () => {
             setAuthStatus(AUTH_STATUSES.loggedIn)
             setUserRole(role)
             setUserID(user_id)
+            setUserData(data)
         },
         logoutUser: () => {
             setAuthStatus(AUTH_STATUSES.idle)
