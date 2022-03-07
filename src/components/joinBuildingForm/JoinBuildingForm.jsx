@@ -9,6 +9,7 @@ import Input from '../core/Input/Input';
 import Flex from '../core/Flex/Flex';
 import Button from '../core/Button/Button'
 import SuccessMessage from '../Alerts/SuccessMessage';
+import InfoMessage from '../Alerts/InfoMessage'
 import ErrorMessage from '../Alerts/ErrorMessage'
 import { useData } from '../../providers/DataProvider';
 import { useGlobal } from '../../providers/GlobalProvider';
@@ -20,7 +21,7 @@ const schema = yup.object().shape({
 
 const JoinBuildingForm = () => {
 
-    const { joinBuilding, joinBuildingSuccess, joinBuildingError } = useData()
+    const { joinBuilding, joinBuildingSuccess, joinBuildingError, joinBuildingErrorType } = useData()
     const { userID } = useGlobal()
 
     const { handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -39,7 +40,7 @@ const JoinBuildingForm = () => {
                 error={errors?.invite_code}
                 render={({ field }) => <Input label="Inbjudningskod" error={!!errors?.invite_code} {...field} ref={null} /> }
             />
-            {(errors?.invite_code || !!joinBuildingError) && <ErrorMessage message="Ogiltig inbjudningskod" />}
+            {(errors?.invite_code || !!joinBuildingError) && (joinBuildingErrorType?.message === 'alreadyMember' ? <InfoMessage message="Du är redan medlem i byggnaden"/> : <ErrorMessage message="Ogiltig inbjudningskod" />)}
             {!!joinBuildingSuccess && <SuccessMessage message="Du gick med i byggnaden!" />}
             <Flex justify="right">
                 <Button className="joinButton">Gå med</Button>
