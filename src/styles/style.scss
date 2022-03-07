@@ -60,6 +60,10 @@ body{
     opacity: 0.4;
 }
 
+.bold{
+    font-weight: bold;
+}
+
 @import './partials/LoginForm.scss';
 @import './partials/LandingPage.scss';
 @import './partials/BuildingPage.scss';
