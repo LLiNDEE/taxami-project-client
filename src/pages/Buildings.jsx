@@ -170,6 +170,7 @@ const Buildings = () => {
           <div className="membersList">
           <h2>Medlemmar</h2>
           <MemberList members={members} tasks={tasks} />
+          {members.length < 1 && <p className="noTasksText">Det finns inga medlemmar</p>}
           </div>
         }
 
