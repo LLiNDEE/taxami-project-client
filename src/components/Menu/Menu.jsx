@@ -55,7 +55,7 @@ const Menu = ({  }) => {
                     {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
                     {modalVariant === 'viewInProgressTask' && <p>Klarmarkera</p>}
                     {modalStatus !== 'SHOWN' && !isBuildingPage && <p>Uppgifter</p>}
-                    {isBuildingPage && modalStatus !== 'SHOWN' && <p>Knapp 2</p>}
+                    {isBuildingPage && modalStatus !== 'SHOWN' && <p>Uppgifter</p>}
               </div>
           </div>
         </div>
