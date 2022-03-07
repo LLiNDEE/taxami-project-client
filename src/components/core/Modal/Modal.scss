@@ -6,7 +6,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: whitesmoke;
-    width: 20rem;
+    max-width: 40rem;
     border-radius: 5px;
     z-index: 5;
     padding: 1rem;
@@ -27,6 +27,7 @@
     }
 
     .acceptIcon{
+        color: yellowgreen;
         &:hover{
             color: lightgreen;
         }
