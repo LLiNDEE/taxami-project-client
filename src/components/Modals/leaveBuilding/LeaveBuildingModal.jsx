@@ -7,17 +7,18 @@ import { useData } from '../../../providers/DataProvider';
 const LeaveBuildingModal = () => {
 
     const { userID } = useGlobal()
-    const {selectedBuildingID, hideModal, leaveBuilding } = useData()
+    const {selectedBuilding, hideModal, leaveBuilding } = useData()
     
 
   return (
     <Modal
         variant="yesNO"
-        modalTitle="Är du säker på att du vill lämna byggnaden?"
+        modalTitle="Lämna"
+        content={<p>Du försöker lämna byggnaden med namnet {selectedBuilding.building_name}</p>}
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
-        acceptFunc={() => leaveBuilding({user_id: userID, building_id: selectedBuildingID, member_id: userID})}
+        acceptFunc={() => leaveBuilding({user_id: userID, building_id: selectedBuilding.building_id, member_id: userID})}
     /> 
   );
 };
