@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.circularProgress{
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    background-color: $primary-light;
+    // border: 3px solid $primary-light;
+    border-radius: 5px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    color: black;
+}
+
+.progress{
+    height: 1rem;
+    width: 1rem;
+}
