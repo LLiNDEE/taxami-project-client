@@ -1,47 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
+import './UpdateCredentialsForm.scss'
+
 import Input from '../core/Input/Input'
+import Button from '../core/Button/Button'
+import ErrorMessage from '../Alerts/ErrorMessage'
+import InfoMessage from '../Alerts/InfoMessage'
+import { useGlobal } from '../../providers/GlobalProvider'
 
 const Schema = yup.object().shape({
-    first_name: yup.string(),
-    last_name: yup.string(),
-    email: yup.string().email(),
+    first_name: yup.string().required(),
+    last_name: yup.string().required(),
+    email: yup.string().email().required(),
 })
 
-const UpdateCredentialsForm = ({ credentials }) => {
+const UpdateCredentialsForm = ({ credentials, execute, success }) => {
 
+    const { userID } = useGlobal()
 
-    const { handleSubmit, control, formState: { errors } } = useForm({
+    const { handleSubmit, control, formState: { errors }, clearErrors, watch } = useForm({
         resolver: yupResolver(Schema)
     })
 
-    const onSubmit = data => console.log(data)
+    const onSubmit = data => execute({...data, user_id: userID})
 
   return (
-    <div>
+    <div className="updateCredentialsContainer">
       <form onSubmit={handleSubmit(onSubmit)} >
           <Controller
               name="first_name"
               defaultValue={credentials.first_name}
               control={control}
-              render={({ field }) => <Input label="Förnamn" {...field} ref={null} />}
+              render={({ field }) => <Input label="Förnamn" {...field} error={!!errors.first_name} ref={null} />}
           />
+          {!!errors.first_name && <ErrorMessage message="Du måste fylla i ett förnamn" />}
           <Controller
             name="last_name"
             defaultValue={credentials.last_name}
             control={control}
-            render={({ field }) => <Input label="Efternamn" {...field} ref={null} />}
+            render={({ field }) => <Input label="Efternamn" error={!!errors.last_name} {...field} ref={null} />}
           />
+          {!!errors.last_name && <ErrorMessage message="Du måste fylla i ett efternamn"/>}
           <Controller
             name="email"
             defaultValue={credentials.email}
             control={control}
-            render={({ field }) => <Input label="Epost"  {...field}  ref={null} />}
+            render={({ field }) => <Input label="Epost" error={!!errors.email}  {...field}  ref={null} />}
           />
-          <button>Spara</button>
+          {!!errors.email && <ErrorMessage message="Du måste fylla i en korrekt e-post" />}
+          {/* {success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />} */}
+          <Button className="submitButton">Spara</Button>
       </form>
     </div>
   )
