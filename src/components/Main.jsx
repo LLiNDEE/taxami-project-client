@@ -58,6 +58,9 @@ const Main = () => {
                         element={<Buildings/>}
                     />
                     <Route
+                        path="/mittkonto"
+                    />
+                    <Route
                         path="*"
                         element={<Navigate to="/oversikt"/>}
                     />
