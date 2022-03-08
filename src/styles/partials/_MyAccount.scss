@@ -1,0 +1,16 @@
+@import '../variables';
+
+.myAccountContainer{
+    padding-top: 3rem;
+    width: 50rem;
+    margin: auto;
+    .myAccountTitle{
+        background-color: $primary;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+}
