@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import Modal from '../../core/Modal/Modal'
+import Input from '../../core/Input/Input';
+import LeaveBuildingForm from '../../LeaveBuildingForm/LeaveBuildingForm';
 import { useGlobal } from '../../../providers/GlobalProvider';
 import { useData } from '../../../providers/DataProvider';
 
@@ -9,15 +11,15 @@ const LeaveBuildingModal = () => {
     const { userID } = useGlobal()
     const {selectedBuilding, hideModal, leaveBuilding } = useData()
     
-    const [disabled, setDisabled] = useState(undefined)
+    const [disabled, setDisabled] = useState(true)
 
   return (
     <Modal
         variant="yesNO"
         modalTitle="Lämna"
-        content={<p>Du försöker lämna byggnaden med namnet <span className="bold">{selectedBuilding.building_name}</span></p>}
+        content={<LeaveBuildingForm buildingName={selectedBuilding.building_name} setDisabled={setDisabled} />}
         yesText="Ja"
-        disabled={true}
+        disabled={disabled}
         acceptDisabledText="Fyll i fältet för att fortsätta"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
