@@ -5,6 +5,7 @@ import LoginPage from '../pages/LoginPage.jsx';
 import OverviewPage from '../pages/OverviewPage'
 import Buildings from '../pages/Buildings.jsx';
 import RegisterPage from '../pages/RegisterPage.jsx';
+import MyAccount from '../pages/MyAccount.jsx';
 import useAuth from '../hooks/useAuth.jsx';
 import DataProvider from '../providers/DataProvider.jsx';
 import RegisterProvider from '../providers/RegisterProvider.jsx';
@@ -59,6 +60,7 @@ const Main = () => {
                     />
                     <Route
                         path="/mittkonto"
+                        element={<MyAccount/>}
                     />
                     <Route
                         path="*"
