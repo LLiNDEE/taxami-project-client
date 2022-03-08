@@ -63,8 +63,11 @@ const useAuth = () => {
         },
         refreshUUID: () => {
             const decodedToken = jwt_decode(getToken())
+            const userData = JSON.parse(getSessionStorage('userData'))
+            // const userData = getSessionStorage('userData')
             setUserID(decodedToken.data.uuid)
             setUserRole(decodedToken.data.role)
+            setUserData(userData)
         }
     }), [])
 
