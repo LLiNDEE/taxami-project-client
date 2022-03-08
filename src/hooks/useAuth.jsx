@@ -10,6 +10,10 @@ const setToken = token => sessionStorage.setItem('token', token)
 const removeToken = () => sessionStorage.removeItem('token')
 const getToken = () => sessionStorage.getItem('token')
 
+const getSessionStorage = (key) => sessionStorage.getItem(key)
+const setSessionStorage = (key, value) => sessionStorage.setItem(key, value)
+const removeSessionStorage = key => sessionStorage.removeItem(key)
+
 export const validateToken = () => {
     const token = getToken()
 
@@ -31,17 +35,26 @@ const useAuth = () => {
 
     const methods = useMemo(() => ({
         logInUser: data => {
-            const { token, user_id, role } = data
+            const { token, user_id, role, first_name, last_name, email } = data
             setToken(token)
             setAuthStatus(AUTH_STATUSES.loggedIn)
             setUserRole(role)
             setUserID(user_id)
             setUserData(data)
+
+            const userInformation = {
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+            }
+
+            setSessionStorage("userData", JSON.stringify(userInformation))
         },
         logoutUser: () => {
             setAuthStatus(AUTH_STATUSES.idle)
             setUserID(undefined)
             removeToken()
+            removeSessionStorage('userData')
         },
         validateSession: () => {
             if(validateToken) return true
