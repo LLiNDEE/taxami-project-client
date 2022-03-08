@@ -39,7 +39,7 @@ const GlobalProvider = ({ children }) => {
     const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, refreshPage, setRefreshPage, setPageLoading, setUserID, userID, setUserRole, userRole, setUserData, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
+        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, refreshPage, setRefreshPage, setPageLoading, setUserID, userID, setUserRole, userRole, setUserData, userData, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
                 
