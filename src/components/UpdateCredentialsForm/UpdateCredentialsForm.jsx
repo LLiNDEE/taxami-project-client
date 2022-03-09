@@ -9,6 +9,7 @@ import Input from '../core/Input/Input'
 import Button from '../core/Button/Button'
 import ErrorMessage from '../Alerts/ErrorMessage'
 import InfoMessage from '../Alerts/InfoMessage'
+import useBreakpoint from '../../hooks/useBreakpoint'
 import { useGlobal } from '../../providers/GlobalProvider'
 
 const Schema = yup.object().shape({
@@ -20,6 +21,7 @@ const Schema = yup.object().shape({
 const UpdateCredentialsForm = ({ credentials, execute, success }) => {
 
     const { userID } = useGlobal()
+    const { sm } = useBreakpoint()
 
     const { handleSubmit, control, formState: { errors }, clearErrors, watch } = useForm({
         resolver: yupResolver(Schema)
@@ -51,7 +53,7 @@ const UpdateCredentialsForm = ({ credentials, execute, success }) => {
               render={({ field }) => <Input label="Epost" error={!!errors.email}  {...field}  ref={null} />}
             />
             {!!errors.email && <ErrorMessage message="Du måste fylla i en korrekt e-post" />}
-            {/* {success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />} */}
+            {sm && success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />}
             <Button className="submitButton">Spara</Button>
         </form>
       </div>
