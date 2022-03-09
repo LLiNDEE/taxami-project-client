@@ -9,6 +9,7 @@ import Submit from './Adornment/Submit'
 import { useGlobal } from '../../providers/GlobalProvider';
 import { STATUS } from '../../hooks/useAsync'
 import { clsx } from '../../utils/utils'
+import { useRegisterProvider } from '../../providers/RegisterProvider';
 
 const contextForm = createContext({})
 
@@ -27,7 +28,9 @@ const resolveFormState = status => (
     : FORM_STATE.IDLE
 )
 
-const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback }) => {
+const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback, type }) => {
+
+    const { setLoginDetails } = useRegisterProvider()
 
     const { handleSubmit, control, reset, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
@@ -48,7 +51,12 @@ const FormProvider = ({ children, submitText, onSubmit, schema, status, feedback
         setPageLoading(formState === FORM_STATE.LOADING)
     },[formState])
 
-    const onSubmitTest = data => onSubmit(data)
+    const onSubmitTest = data => {
+        if(type === 'register'){
+            setLoginDetails(v => ({...v, email: data.email, password: data.password}))
+        }
+        onSubmit(data)
+    }
 
   return (
       <contextForm.Provider value={{ control, errors }}>
