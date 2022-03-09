@@ -17,6 +17,8 @@ export const convertMicroToMilli = micro => {
     return milli
 }
 
+export const getToken = () => sessionStorage.getItem('token')
+
 export const getCSSVariable = key => getComputedStyle(document.documentElement).getPropertyValue(key).trim()
 export const setCSSVariable = (key, value) => document.documentElement.style.setProperty(key, value) 
 
