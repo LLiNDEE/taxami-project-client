@@ -28,7 +28,7 @@ const steps = ['Verifiera kod', 'Registrera uppgifter', 'Registrering klar']
 
 const RegisterPage = () => {
 
-    const { isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus, activeStep, isRegistered } = useRegisterProvider()
+    const { isCodeValid, verifyCode, verifyCodeError, verifyCodeStatus, register, registerError, registerStatus, activeStep, isRegistered, setLoginUser } = useRegisterProvider()
 
     return (
         <div className="registerPage">
@@ -64,15 +64,21 @@ const RegisterPage = () => {
                     submitText="Registrera"
                     onSubmit={register}
                     feedback={SERVER_ERROR_MESSAGES['error']}
+                    type="register"
                 />
-            }
+            } 
 
             {isRegistered && 
-                <div className="registerComplete">
-                    <h3 className="registerCompleteTitle">Registreringen är klar!</h3>
-                    <p className="registerCompleteText">Klicka på <Link className="registerCompleteLink" to="/loggain">Logga in</Link> för att logga in.</p>
+                    <div className="registerComplete">
+                    <p className="registerCompleteText">Vill du logga in direkt?</p>
+                    <div className="registerCompleteButtons">
+                    <Link className="registerCompleteLink" to="/loggain" ><button className="registerComplete--cancelButton">Nej</button></Link>
+                        <button className="registerComplete--acceptButton" onClick={() => setLoginUser(true)}>Ja</button>
+                    </div>
                 </div>
             }
+
+          
   
 
         </div>
