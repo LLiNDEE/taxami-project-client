@@ -39,3 +39,22 @@
         width: 25rem;
     }
 }
+
+.registerComplete{
+    .registerCompleteTitle{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .registerCompleteText{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+    }
+    .registerCompleteLink{
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+    }
+}

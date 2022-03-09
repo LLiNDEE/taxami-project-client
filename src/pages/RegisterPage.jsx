@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import * as yup from 'yup'
 
 import Stepper from '@mui/material/Stepper';
@@ -67,11 +68,12 @@ const RegisterPage = () => {
             }
 
             {isRegistered && 
-                <div>
-                    <h2>Registreringen är klar!</h2>
-                    <p>Logga in</p>
+                <div className="registerComplete">
+                    <h3 className="registerCompleteTitle">Registreringen är klar!</h3>
+                    <p className="registerCompleteText">Klicka på <Link className="registerCompleteLink" to="/loggain">Logga in</Link> för att logga in.</p>
                 </div>
             }
+  
 
         </div>
     )
