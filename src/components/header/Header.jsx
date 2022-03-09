@@ -14,7 +14,7 @@ const Header = () => {
 
     return (
         <header>
-            <h2 className="headerTitle">Taxamiiiiiiii</h2>
+            <h2 className="headerTitle"><Link to="/oversikt">Taxamiiiiiiii</Link></h2>
             <Flex justify="right">
                 <Link to="/mittkonto"><Chip className="myAccountChip" labelText="Mitt konto"/></Link>
             </Flex>
