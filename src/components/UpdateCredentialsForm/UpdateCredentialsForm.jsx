@@ -27,34 +27,34 @@ const UpdateCredentialsForm = ({ credentials, execute, success }) => {
 
     const onSubmit = data => execute({...data, user_id: userID})
 
-  return (
-    <div className="updateCredentialsContainer">
-      <form onSubmit={handleSubmit(onSubmit)} >
-          <Controller
-              name="first_name"
-              defaultValue={credentials.first_name}
+    return (
+      <div className="updateCredentialsContainer">
+        <form onSubmit={handleSubmit(onSubmit)} >
+            <Controller
+                name="first_name"
+                defaultValue={credentials.first_name}
+                control={control}
+                render={({ field }) => <Input label="Förnamn" {...field} error={!!errors.first_name} ref={null} />}
+            />
+            {!!errors.first_name && <ErrorMessage message="Du måste fylla i ett förnamn" />}
+            <Controller
+              name="last_name"
+              defaultValue={credentials.last_name}
               control={control}
-              render={({ field }) => <Input label="Förnamn" {...field} error={!!errors.first_name} ref={null} />}
-          />
-          {!!errors.first_name && <ErrorMessage message="Du måste fylla i ett förnamn" />}
-          <Controller
-            name="last_name"
-            defaultValue={credentials.last_name}
-            control={control}
-            render={({ field }) => <Input label="Efternamn" error={!!errors.last_name} {...field} ref={null} />}
-          />
-          {!!errors.last_name && <ErrorMessage message="Du måste fylla i ett efternamn"/>}
-          <Controller
-            name="email"
-            defaultValue={credentials.email}
-            control={control}
-            render={({ field }) => <Input label="Epost" error={!!errors.email}  {...field}  ref={null} />}
-          />
-          {!!errors.email && <ErrorMessage message="Du måste fylla i en korrekt e-post" />}
-          {/* {success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />} */}
-          <Button className="submitButton">Spara</Button>
-      </form>
-    </div>
+              render={({ field }) => <Input label="Efternamn" error={!!errors.last_name} {...field} ref={null} />}
+            />
+            {!!errors.last_name && <ErrorMessage message="Du måste fylla i ett efternamn"/>}
+            <Controller
+              name="email"
+              defaultValue={credentials.email}
+              control={control}
+              render={({ field }) => <Input label="Epost" error={!!errors.email}  {...field}  ref={null} />}
+            />
+            {!!errors.email && <ErrorMessage message="Du måste fylla i en korrekt e-post" />}
+            {/* {success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />} */}
+            <Button className="submitButton">Spara</Button>
+        </form>
+      </div>
   )
 }
 
