@@ -8,11 +8,13 @@ import Snackbar from '../components/Snackbar/Snackbar'
 
 import CircularProgressWithLabel from '../components/CircularProgressWithLabel/CircularProgressWithLabel';
 
+const updateSessionStorage = values => sessionStorage.setItem('userData', JSON.stringify(values))
+
 const MyAccount = () => {
 
-    const { userData } = useGlobal()
+    const { userData, setUserData } = useGlobal()
 
-    const { execute: updateUser, isSuccess: userUpdateSuccess, isError: userUpdateError, isLoading: userUpdateLoading } = useUserUpdate()
+    const { execute: updateUser, isSuccess: userUpdateSuccess, isError: userUpdateError, isLoading: userUpdateLoading, data: userUpdateData } = useUserUpdate()
 
     const [showSnackbar, setShowSnackbar] = useState(false)
 
@@ -26,7 +28,9 @@ const MyAccount = () => {
             setShowSuccessSnackbar(true)
         },1000)
 
-  
+        const updatedData = userUpdateData.data.updated_data
+        updateSessionStorage(updatedData)
+        setUserData(updatedData)
 
     },[userUpdateSuccess])
 
@@ -40,8 +44,6 @@ const MyAccount = () => {
         <div className="myAccountContainer">
             <h1 className="myAccountTitle">Mitt konto</h1>
             <UpdateCredentialsForm credentials={userData} execute={updateUser} />
-            {/* {showSnackbar && <Snackbar initial={true} message="Uppdaterar uppgifter..." content={<CircularProgress/>} />} */}
-            {/* {showSnackbar && <CustomSnackbar initial={true} message="Uppdaterar uppgifter..." content={<CircularProgress/>} />} */}
             {showSuccessSnackbar && <Snackbar initial={true} message="Dina uppgifter har blivit uppdaterade!"/>}
             {showSnackbar && <CircularProgressWithLabel message="Uppdaterar uppgifter..."/>}
         </div>
