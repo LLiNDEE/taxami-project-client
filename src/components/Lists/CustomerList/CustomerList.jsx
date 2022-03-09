@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import './CustomerList.scss'
 
@@ -61,6 +62,7 @@ const CustomerList = ({ customers, ...props }) => {
                 <div className="buttons">
                     { customer.status === 'active' && <p className="iconText lockAccount" onClick={() => lockAccount({user_id: userID, customer_id: customer._id})} ><LockIcon/> Lås konto</p>}
                     { customer.status === 'locked' && <p className="iconText lockAccount" onClick={() => unlockAccount({user_id: userID, customer_id: customer._id})}> <LockOpenIcon/> Lås upp konto</p> }
+                    <p className="iconText removeUser"><DeleteIcon/> Ta bort användare</p>
                 </div>
             </AccordionDetails>
         </Accordion>

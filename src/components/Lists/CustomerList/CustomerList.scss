@@ -55,3 +55,8 @@
 .customer-status--locked{
     background-color: lightgray;
 }
+
+.removeUser{
+    color: $primary-delete;
+    cursor: pointer;
+}
