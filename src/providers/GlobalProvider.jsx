@@ -48,7 +48,7 @@ const GlobalProvider = ({ children }) => {
                 { modalVariant === 'viewInProgressTask' && <ViewInProgressTask/>}
 
                 {children}
-                {authStatus === AUTH_STATUSES.loggedIn && userID && userData && <Snackbar initial={true} message={`Välkommen, ${userData.first_name}!`} />}
+                {authStatus === AUTH_STATUSES.loggedIn && userID && userData && !sm && <Snackbar initial={true} message={`Välkommen, ${userData.first_name}!`} />}
             </div>
             <MenuProvider>
                 {authStatus !== AUTH_STATUSES.idle && sm && <Menu/>}
