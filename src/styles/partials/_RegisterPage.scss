@@ -51,10 +51,46 @@
         align-items: center;
         justify-content: center;
         gap: 0.4rem;
+        margin-top: 1rem;
     }
-    .registerCompleteLink{
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
+    // .registerCompleteLink{
+    //     text-decoration: none;
+    //     color: black;
+    // }
+    .registerCompleteButtons{
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 0.5rem;
+        .registerComplete--cancelButton{
+            height: 2rem;
+            width: 5rem;
+            background: none;
+            border: 3px solid $primary;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover{
+                background-color: $primary;
+                color: white;
+                a{
+                    color: white;
+                }
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        .registerComplete--acceptButton{
+            height: 2rem;
+            width: 7rem;
+            background-color: yellowgreen;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            &:hover{
+                background-color: darkgreen;
+            }
+        }
     }
 }
