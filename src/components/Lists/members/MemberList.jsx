@@ -42,8 +42,12 @@ const MemberList = ({ members, tasks, ...props }) => {
                 </div>
             </AccordionSummary>
             <AccordionDetails className="memberDetails">
+                <div>
+                    <p>Behörigheter: </p>
+                </div>
                 <div className="buttons">
-                    <p className="iconText denyIcon" ><CancelIcon/> Ta bort från byggnad</p>
+                    <p className="iconText denyIcon deleteColor" ><CancelIcon/> Ta bort från byggnad</p>
+                    <p>Tilldela behörigheter</p>
                 </div>
             </AccordionDetails>
         </Accordion>
