@@ -43,7 +43,7 @@ const MyAccount = () => {
 
     return (
         <div className="myAccountContainer">
-            <h1 className="myAccountTitle">Mitt konto</h1>
+            <h1 className="myAccountTitle">Ändra kontouppgifter</h1>
             <UpdateCredentialsForm credentials={userData} execute={updateUser} success={!!userUpdateSuccess} />
             {!sm && showSuccessSnackbar && <Snackbar initial={true} message="Dina uppgifter har blivit uppdaterade!"/>}
             {!sm && showSnackbar && <CircularProgressWithLabel message="Uppdaterar uppgifter..."/>}
