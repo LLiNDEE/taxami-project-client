@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import SaveIcon from '@mui/icons-material/Save';
 
 import './UpdateCredentialsForm.scss'
 
@@ -54,7 +55,7 @@ const UpdateCredentialsForm = ({ credentials, execute, success }) => {
             />
             {!!errors.email && <ErrorMessage message="Du måste fylla i en korrekt e-post" />}
             {sm && success && <InfoMessage message="Dina uppgifter har blivit uppdaterade!" />}
-            <Button className="submitButton">Spara</Button>
+            <Button className="submitButton"><SaveIcon/>Spara</Button>
         </form>
       </div>
   )
