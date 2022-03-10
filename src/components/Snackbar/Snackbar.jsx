@@ -20,7 +20,7 @@ const Snackbar = ({ initial, message, content }) => {
 
 
   return (
-    <MUISnackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+    <MUISnackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
             {content && content}
             {message}
