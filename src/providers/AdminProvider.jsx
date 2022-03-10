@@ -5,6 +5,7 @@ import useAdminGetStats from '../api/useAdminGetStats'
 import useAdminGetCustomers from '../api/useAdminGetCustomers'
 import useAdminLockAccount from '../api/useAdminLockAccount'
 import useAdminUnlockAccount from '../api/useAdminUnlockAccount'
+import Snackbar from '../components/Snackbar/Snackbar'
 import { useGlobal } from './GlobalProvider'
 
 const adminContext = createContext({})
@@ -36,7 +37,7 @@ const AdminProvider = ({ children }) => {
 
         setIsDataLoading(false)
 
-        setStats(statsData.data.stats)
+        setStats(statsData.data)
 
     },[getStatsSuccess])
 
@@ -66,6 +67,8 @@ const AdminProvider = ({ children }) => {
   return (
     <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers, lockAccount, unlockAccount }}>
         {children}
+        {lockAccountSuccess && <Snackbar initial={true} message="Kontot är nu låst" />}
+        {unlockAccountSuccess && <Snackbar initial={true} message="Kontot är nu upplåst" />}
     </adminContext.Provider>
   )
 }
