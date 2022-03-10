@@ -32,7 +32,7 @@ const AdminOverview = () => {
                 <div className="stats">
                     <StatsDisplay
                         title="Totalt antal byggnader" 
-                        value={stats}
+                        value={stats?.amountOfBuildings}
                     />
                     <StatsDisplay
                         title="Totalt antal kunder"
@@ -40,7 +40,7 @@ const AdminOverview = () => {
                     />
                     <StatsDisplay
                         title="Totalt antal arbetare"
-                        value=""
+                        value={stats?.amountOfWorkers}
                     />
                 </div>
 
