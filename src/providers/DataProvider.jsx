@@ -9,6 +9,7 @@ import AddTaskModal from '../components/Modals/addTask/AddTaskModal';
 import CreateBuildingModal from '../components/Modals/createBuilding/CreateBuildingModal';
 import RemoveTaskModal from '../components/Modals/removeTask/RemoveTaskModal';
 import LeaveBuildingModal from '../components/Modals/leaveBuilding/LeaveBuildingModal'
+import RemoveMember from '../components/Modals/removeMember/RemoveMember';
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useLeaveBuilding from '../api/useLeaveBuilding'
@@ -17,6 +18,7 @@ import useUserTakeTask from '../api/useUserTakeTask';
 import useModal from '../hooks/useModal'
 import useTaskUpdate from '../api/useTaskUpdate';
 import useRemoveTask from '../api/useRemoveTask'
+import useBuildingRemoveMember from '../api/useBuildingRemoveMember'
 import useCreateBuilding from '../api/useCreateBuilding';
 import useUserLeaveTask from '../api/useUserLeaveTask';
 import useJoinBuilding from '../api/useJoinBuilding'
@@ -33,7 +35,7 @@ const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
 
-    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage } = useGlobal()
+    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage, modalData } = useGlobal()
 
     const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
     const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData } = useUserBuildings()
@@ -46,6 +48,7 @@ const DataProvider = ({ children }) => {
     const { execute: joinBuilding, isSuccess: joinBuildingSuccess, isError: joinBuildingError, error: joinBuildingErrorType} = useJoinBuilding()
     const { execute: leaveBuilding, isSuccess: leaveBuildingSuccess } = useLeaveBuilding()
     const { execute: createBuilding, isSuccess: createBuildingSuccess, isError: createBuildingError } = useCreateBuilding()
+    const { execute: removeMember, isSuccess: removeMemberSuccess, isError: removeMemberError } = useBuildingRemoveMember()
 
     // const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
@@ -155,8 +158,15 @@ const DataProvider = ({ children }) => {
 
     },[createBuildingSuccess])
 
+    useEffect(() => {
+        if(!removeMemberSuccess) return
+
+        setRefreshPage(true)
+
+    },[removeMemberSuccess])
+
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding }}>
+      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, modalData, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding, removeMember }}>
           <Header/>
 
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
@@ -168,6 +178,7 @@ const DataProvider = ({ children }) => {
             { modalVariant === 'removeTask' && <RemoveTaskModal/> }
             { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
             { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
+            { modalVariant === 'removeMember' && <RemoveMember/>}
 
             {children}
 
