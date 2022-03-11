@@ -7,3 +7,47 @@
 .deleteColor{
     color: $primary-delete;
 }
+
+.permissionTitle{
+    background-color: $primary-light;
+    width: 16rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.permissionsContainer{
+    display: flex;
+    justify-content: center;
+    width: 16rem;
+    flex-direction: column;
+    .permission{
+        font-size: 14px;
+        padding-left: 0.5rem;
+        display: flex;
+        width: 100%;
+        cursor: default;
+        height: 2rem;
+        align-items: center;
+        &:hover{
+            background-color: whitesmoke;
+        }
+    }
+}
+
+.permission--button{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    color: $primary-delete;
+    cursor: pointer;
+}
+
+
+.border--top{
+    border-top: 1px solid $primary;
+    padding-top: 0.5rem;
+}
