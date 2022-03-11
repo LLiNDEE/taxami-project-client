@@ -40,6 +40,8 @@ const Buildings = () => {
   const [filteredTasks, setFilteredTasks] = useState(undefined)
   const [members, setMembers] = useState(undefined)
 
+  const [permissions, setPermissions] = useState(undefined)
+
   const [isOwner, setIsOwner ] = useState(undefined)
   const [isInviteValid, setInviteValid] = useState(undefined)
   const [isInviteCopied, setInviteCopied] = useState(undefined)
@@ -86,6 +88,10 @@ const Buildings = () => {
     if(!building) return
 
     setSelectedBuilding(v => ({...v, building_id: building._id, building_name: building.building_name}))
+
+    if(building?.permissions){
+      setPermissions(building.permissions)
+    }
 
   }, [building])
 
@@ -170,7 +176,7 @@ const Buildings = () => {
         {isOwner && members && 
           <div className="membersList">
           <h2>Medlemmar</h2>
-          <MemberList members={members} tasks={tasks} />
+          <MemberList members={members} tasks={tasks} permissions={permissions} />
           {members.length < 1 && <p className="noTasksText">Det finns inga medlemmar</p>}
           </div>
         }
