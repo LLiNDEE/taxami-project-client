@@ -56,18 +56,22 @@ const MemberList = ({ members, tasks, permissions, ...props }) => {
                 </div>
             </AccordionSummary>
             <AccordionDetails className="memberDetails">
-                <div>
-                    <p className="permissionTitle">Behörigheter: </p>
-                    <div className="permissionsContainer">
-                        {resolvePermissions(member._id, permissions).map(p => (
-                            <div className="permission" key={p}>
-                                <p className="permission--title">{resolvePermissionLabel(p)}</p>
-                                <p className="permission--button" onClick={() => alert(`Tar bort ${p} från användaren med id ${member._id}`)}><DeleteIcon/>Ta bort</p>
+                {permissions.length > 0 && 
+                                <div>
+                                <p className="permissionTitle">Behörigheter: </p>
+                                <div className="permissionsContainer">
+                                    {resolvePermissions(member._id, permissions)?.map(p => (
+                                        <div className="permission" key={p}>
+                                            <p className="permission--title">{resolvePermissionLabel(p)}</p>
+                                            <p className="permission--button" onClick={() => alert(`Tar bort ${p} från användaren med id ${member._id}`)}><DeleteIcon/>Ta bort</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="buttons border--top">
+                }
+                <div 
+                    className={clsx("buttons", {"border--top": permissions.length > 0})}
+                >
                     <p className="iconText denyIcon deleteColor" onClick={() => showModalVariant('removeMember', member._id)} ><CancelIcon/> Ta bort från byggnad</p>
                     <p>Tilldela behörigheter</p>
                 </div>
