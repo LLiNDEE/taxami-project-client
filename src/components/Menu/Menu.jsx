@@ -29,6 +29,7 @@ const Menu = ({  }) => {
             setPage("byggnad")
         }
         if(path.includes('mittkonto')) setPage("mittkonto")
+        if(path.includes('oversikt')) setPage("oversikt")
 
     }, [path])
 
@@ -38,14 +39,14 @@ const Menu = ({  }) => {
             {isOptionsVisible && 
                 <div className="options">
                      <p className="optionItem" onClick={() => (showModalVariant('joinBuilding'), hideOptions())}>Gå med i byggnad</p>
-                     <p className="optionItem" onClick={() => (hideModal(), hideOptions())}><Link className="link" to="/mittkonto">Mitt konto</Link></p>
+                     {/* <p className="optionItem" onClick={() => (hideModal(), hideOptions())}><Link className="link" to="/mittkonto">Mitt konto</Link></p> */}
                      {userRole === 'customer' && <p className="optionItem" onClick={() => (showModalVariant('createBuilding'), hideOptions())}>Skapa byggnad</p>}
                  </div>
             }
           <div className="innerMenu">
               <div className={clsx("menuButton leftButton", {cancelButton: modalVariant === 'viewTask' || modalVariant === 'viewInProgressTask'})}>
                   
-                  {(page === 'byggnad' || page === 'mittkonto') && (modalStatus !== 'SHOWN' || modalVariant === 'leaveBuilding') && <Link onClick={() => (hideModal(), hideOptions())} to="/oversikt" className="link">Tillbaka</Link>}
+                  {(page === 'byggnad' || page === 'mittkonto' || page === 'oversikt') && (modalStatus !== 'SHOWN' || modalVariant === 'leaveBuilding') && <Link onClick={() => (hideModal(), hideOptions())} to="/oversikt" className="link">Tillbaka</Link>}
                   {modalVariant === 'viewTask' && <p onClick={hideModal}>Avbryt</p>}
                   {modalVariant === 'viewInProgressTask' && <p onClick={() => showModalVariant('leaveTask')}>Lämna uppgift</p>}
               </div>
@@ -57,8 +58,9 @@ const Menu = ({  }) => {
               <div className={clsx("menuButton rightButton", {acceptButton: modalVariant === 'viewTask' || modalVariant === 'viewInProgressTask'})}>
                     {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
                     {modalVariant === 'viewInProgressTask' && <p>Klarmarkera</p>}
-                    {modalStatus !== 'SHOWN' && page !== 'byggnad' && <p>Uppgifter</p>}
-                    {page === 'byggnad' && modalStatus !== 'SHOWN' && <p>Uppgifter</p>}
+                    {/* {modalStatus !== 'SHOWN' && page !== 'byggnad' && <p>Uppgifter</p>} */}
+                    {/* {page === 'byggnad' && modalStatus !== 'SHOWN' && <p>Uppgifter</p>} */}
+                    {modalStatus !== 'SHOWN' && page == 'oversikt' && <Link className="link" to="/mittkonto">Mitt konto</Link>}
               </div>
           </div>
         </div>
