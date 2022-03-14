@@ -147,6 +147,7 @@ const DataProvider = ({ children }) => {
         if(!leaveBuildingSuccess) return
 
         getBuildings({user_id: userID})
+        hideModal()
 
     },[leaveBuildingSuccess])
 
@@ -162,6 +163,7 @@ const DataProvider = ({ children }) => {
         if(!removeMemberSuccess) return
 
         setRefreshPage(true)
+        hideModal()
 
     },[removeMemberSuccess])
 
