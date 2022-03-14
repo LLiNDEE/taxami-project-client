@@ -54,6 +54,7 @@
 
 .grantPermissionsButton{
     cursor: pointer;
+    color: $primary;
 }
 
 .permissionFooter{
@@ -65,4 +66,12 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     cursor: pointer;
+}
+
+.noPermissionsText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 0.5rem;
 }

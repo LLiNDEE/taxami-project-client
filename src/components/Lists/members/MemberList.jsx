@@ -6,6 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ConstructionIcon from '@mui/icons-material/Construction';
 
 import './MembersList.scss'
 
@@ -66,20 +67,26 @@ const MemberList = ({ members, tasks, permissions, ...props }) => {
                                 <div>
                                     <p className="permissionTitle">Behörigheter: </p>
                                     <div className="permissionsContainer">
-                                        {resolvePermissions(member._id, permissions)?.map(p => (
-                                            <div className="permission" key={p}>
-                                                <p className="permission--title">{resolvePermissionLabel(p)}</p>
-                                            </div>
-                                        ))}
+
+                                        {resolvePermissions(member._id, permissions)?.length !== 0 ? 
+                                            <>
+                                                {resolvePermissions(member._id, permissions)?.map(p => (
+                                                    <div className="permission" key={p}>
+                                                        <p className="permission--title">{resolvePermissionLabel(p)}</p>
+                                                    </div>
+                                                ))}
+                                            </>
+                                        : 
+                                            <p className="noPermissionsText">{member.first_name} har inga speciella behörigheter</p>
+                                        }
                                     </div>
-                                    {/* <p className="permissionFooter">Redigera behörigheter</p> */}
                                 </div>
                 }
                 <div 
                     className={clsx("buttons", {"border--top": permissions.length > 0})}
                 >
                     <p className="iconText denyIcon deleteColor" onClick={() => showModalVariant('removeMember', member._id)} ><CancelIcon/> Ta bort från byggnad</p>
-                    <p className="grantPermissionsButton" onClick={() => showModalVariant('buildingPermissions', {member: member, permissions: resolvePermissions(member._id, permissions)})}>Tilldela behörigheter</p>
+                    <p className="grantPermissionsButton iconText" onClick={() => showModalVariant('buildingPermissions', {member: member, permissions: resolvePermissions(member._id, permissions)})}><ConstructionIcon/>Redigera behörigheter</p>
                 </div>
             </AccordionDetails>
         </Accordion>
