@@ -25,10 +25,16 @@ const resolvePermissions = (member_id, permissions) => {
     return permissionArray
 }
 
-const resolvePermissionLabel = perm => {
-    if(perm === 'addTask') return "Lägga till uppgifter"
-    if(perm === 'deleteTask') return "Ta bort uppgifter"
-}
+// const resolvePermissionLabel = perm => {
+//     if(perm === 'addTask') return "Lägga till uppgifter"
+//     if(perm === 'deleteTask') return "Ta bort uppgifter"
+// }
+
+const resolvePermissionLabel = perm => 
+perm === 'addTask' ? 'Lägga till uppgifter'
+: perm === 'removeTask' ? 'Ta bort uppgifter'
+: perm === 'generateInvite' ? 'Generera inbjudningskod'
+: ""
 
 
 const MemberList = ({ members, tasks, permissions, ...props }) => {
@@ -58,22 +64,22 @@ const MemberList = ({ members, tasks, permissions, ...props }) => {
             <AccordionDetails className="memberDetails">
                 {permissions.length > 0 && 
                                 <div>
-                                <p className="permissionTitle">Behörigheter: </p>
-                                <div className="permissionsContainer">
-                                    {resolvePermissions(member._id, permissions)?.map(p => (
-                                        <div className="permission" key={p}>
-                                            <p className="permission--title">{resolvePermissionLabel(p)}</p>
-                                            <p className="permission--button" onClick={() => alert(`Tar bort ${p} från användaren med id ${member._id}`)}><DeleteIcon/>Ta bort</p>
-                                        </div>
-                                    ))}
+                                    <p className="permissionTitle">Behörigheter: </p>
+                                    <div className="permissionsContainer">
+                                        {resolvePermissions(member._id, permissions)?.map(p => (
+                                            <div className="permission" key={p}>
+                                                <p className="permission--title">{resolvePermissionLabel(p)}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {/* <p className="permissionFooter">Redigera behörigheter</p> */}
                                 </div>
-                            </div>
                 }
                 <div 
                     className={clsx("buttons", {"border--top": permissions.length > 0})}
                 >
                     <p className="iconText denyIcon deleteColor" onClick={() => showModalVariant('removeMember', member._id)} ><CancelIcon/> Ta bort från byggnad</p>
-                    <p>Tilldela behörigheter</p>
+                    <p className="grantPermissionsButton" onClick={() => showModalVariant('buildingPermissions', {member: member, permissions: resolvePermissions(member._id, permissions)})}>Tilldela behörigheter</p>
                 </div>
             </AccordionDetails>
         </Accordion>

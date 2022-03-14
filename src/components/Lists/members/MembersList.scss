@@ -51,3 +51,18 @@
     border-top: 1px solid $primary;
     padding-top: 0.5rem;
 }
+
+.grantPermissionsButton{
+    cursor: pointer;
+}
+
+.permissionFooter{
+    background-color: $primary-light;
+    width: 16rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
