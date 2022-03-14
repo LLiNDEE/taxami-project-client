@@ -1,0 +1,23 @@
+@import '../../../styles/variables';
+
+.confirmPermissionsButton{
+    height: 2rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    background-color: yellowgreen;
+    border: 2px solid darkgreen;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.title{
+    background-color: $primary;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -10,6 +10,7 @@ import CreateBuildingModal from '../components/Modals/createBuilding/CreateBuild
 import RemoveTaskModal from '../components/Modals/removeTask/RemoveTaskModal';
 import LeaveBuildingModal from '../components/Modals/leaveBuilding/LeaveBuildingModal'
 import RemoveMember from '../components/Modals/removeMember/RemoveMember';
+import BuildingPermissions from '../components/Modals/BuildingPermissions/BuildingPermissionsModal';
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useLeaveBuilding from '../api/useLeaveBuilding'
@@ -19,10 +20,12 @@ import useModal from '../hooks/useModal'
 import useTaskUpdate from '../api/useTaskUpdate';
 import useRemoveTask from '../api/useRemoveTask'
 import useBuildingRemoveMember from '../api/useBuildingRemoveMember'
+import useAddPermission from '../api/useAddPermission'
 import useCreateBuilding from '../api/useCreateBuilding';
 import useUserLeaveTask from '../api/useUserLeaveTask';
 import useJoinBuilding from '../api/useJoinBuilding'
 import useAddTask from '../api/useAddTask'
+import useAuth from '../hooks/useAuth';
 import useBoolean from '../hooks/useBoolean'
 import { useGlobal } from './GlobalProvider';
 
@@ -37,8 +40,10 @@ const DataProvider = ({ children }) => {
 
     const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage, modalData } = useGlobal()
 
-    const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA } = useUserData()
-    const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData } = useUserBuildings()
+    const auth = useAuth()
+
+    const { execute: getTasks, isSuccess: isTaskSuccess, status, data: tasksDATA, isError: getTasksError, error: getTasksErrorData } = useUserData()
+    const { execute: getBuildings, isSuccess: isBuildingSuccess, data: buildingsData, isError: getBuildingsError, error: getBuildingsErrorData } = useUserBuildings()
     const { execute: markTaskAsComplete, isSuccess: isTaskCompleted, data: taskCompleted, isError: errorMarkingTaskComplete } = useTaskComplete()
     const { execute: leaveTask, isSuccess: leaveTaskSuccess, data: leaveTaskData, isError: leaveTaskError } = useUserLeaveTask()
     const { execute: takeTask, iSuccess: takeTaskSuccess, data: takeTaskData, isError: takeTaskError } = useUserTakeTask()
@@ -49,6 +54,8 @@ const DataProvider = ({ children }) => {
     const { execute: leaveBuilding, isSuccess: leaveBuildingSuccess } = useLeaveBuilding()
     const { execute: createBuilding, isSuccess: createBuildingSuccess, isError: createBuildingError } = useCreateBuilding()
     const { execute: removeMember, isSuccess: removeMemberSuccess, isError: removeMemberError } = useBuildingRemoveMember()
+    
+    const { execute: addPermission, isSuccess: addPermissionSuccess, isError: addPermissionError } = useAddPermission()
 
     // const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
@@ -61,6 +68,12 @@ const DataProvider = ({ children }) => {
     // const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
     const [selectedBuilding, setSelectedBuilding] = useState(selectedBuildingInitialValues)
 
+    useEffect(() => {
+        if(!getTasksError && !getBuildingsError) return
+
+        if(getBuildingsErrorData?.message === 'authorizationError' || getTasksErrorData?.message === 'authorizationError') auth.logoutUser()
+
+    },[getTasksError, getBuildingsError])
     
 
     useEffect(() => {
@@ -167,8 +180,20 @@ const DataProvider = ({ children }) => {
 
     },[removeMemberSuccess])
 
+    useEffect(() => {
+        if(!addPermissionSuccess) return
+        
+        setRefreshPage(true)
+        getBuildings({user_id: userID})
+
+    },[addPermissionSuccess])
+
   return (
-      <contextData.Provider value={{ buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, modalData, joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding, removeMember }}>
+        <contextData.Provider value={{ 
+            buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, 
+            selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, modalData, 
+            joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding, removeMember, addPermission, addPermissionSuccess,
+        }}>
           <Header/>
 
             { modalStatus === 'SHOWN' && <div className="dataProviderPageCover" onClick={hideModal} ></div>}
@@ -181,6 +206,7 @@ const DataProvider = ({ children }) => {
             { modalVariant === 'leaveBuilding' && <LeaveBuildingModal/>}
             { modalVariant === 'createBuilding' && <CreateBuildingModal/> }
             { modalVariant === 'removeMember' && <RemoveMember/>}
+            { modalVariant === 'buildingPermissions' && <BuildingPermissions/> }
 
             {children}
 

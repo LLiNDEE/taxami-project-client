@@ -17,6 +17,7 @@ import Input from '../components/core/Input/Input'
 import TaskCardList from '../components/TaskCardList/TaskCardList';
 import useGetMembers from '../api/useGetMembers';
 import useBuildingGenerateInvite from '../api/useBuildingGenerateInvite';
+import useBuildingGetPermissions from '../api/useBuildingGetPermissions';
 import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
 import useBreakpoint from '../hooks/useBreakpoint';
@@ -31,6 +32,7 @@ const Buildings = () => {
   const { execute, isSuccess, isError, data } = useBuildingTasks()
   const { execute: getMembers, isSuccess: membersSuccess, data: membersData, isError: membersError } = useGetMembers()
   const { execute: generateInvite, isSuccess: inviteSuccess, data: inviteCodeData, isError: inviteError } = useBuildingGenerateInvite()
+  const { execute: getPermissions, isSuccess: getPermissionSuccess, isError: getPermissionsError, data: getPermissionsData } = useBuildingGetPermissions()
 
   const { buildings, myTasks, setSelectedBuilding, refreshPage, setRefreshPage, showModalVariant } = useData()
   const { userID, userRole } = useGlobal()
@@ -60,7 +62,10 @@ const Buildings = () => {
 
     const data = {user_id: userID, building_id: building._id}
     execute(data)
-    if(userRole === 'customer') getMembers({user_id: userID, building_id: building._id})
+    if(userRole === 'customer') {
+      getMembers({user_id: userID, building_id: building._id})
+      getPermissions({user_id: userID, building_id: building._id})
+    }
 
     setRefreshPage(false)
 
@@ -106,6 +111,7 @@ const Buildings = () => {
     if(!membersSuccess) return
 
     setMembers(membersData.data.members)
+    console.log("MEMBERS UPDATED")
 
   },[membersSuccess])
 
@@ -124,6 +130,13 @@ const Buildings = () => {
     }, 1000)
 
   },[isInviteCopied])
+
+  useEffect(() => {
+    if(!getPermissionSuccess) return
+    
+    setPermissions(getPermissionsData.data.permissions)
+
+  },[getPermissionSuccess])
 
   return (
     <div className="buildingPage">
