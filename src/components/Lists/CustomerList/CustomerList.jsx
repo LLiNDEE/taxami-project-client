@@ -20,12 +20,8 @@ status === 'active' ? "Aktiv"
 
 const CustomerList = ({ customers, ...props }) => {
 
-    const { lockAccount, unlockAccount } = useAdmin()
+    const { lockAccount, unlockAccount, removeCustomer } = useAdmin()
     const { userID } = useGlobal()
-
-    useEffect(() => {
-        console.log("CUSTOMERS UPDATED FROM CUSTOMERLIST")
-    },[customers])
 
     return (
         <List
@@ -38,7 +34,7 @@ const CustomerList = ({ customers, ...props }) => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
-            >
+        >
                 <div className="dataAccordion">
                     <p className="dataItem ">{customer.first_name}</p>
                     <p className="dataItem  ">{customer.last_name}</p>
@@ -62,7 +58,7 @@ const CustomerList = ({ customers, ...props }) => {
                 <div className="buttons">
                     { customer.status === 'active' && <p className="iconText lockAccount" onClick={() => lockAccount({user_id: userID, customer_id: customer._id})} ><LockIcon/> Lås konto</p>}
                     { customer.status === 'locked' && <p className="iconText lockAccount" onClick={() => unlockAccount({user_id: userID, customer_id: customer._id})}> <LockOpenIcon/> Lås upp konto</p> }
-                    <p className="iconText removeUser"><DeleteIcon/> Ta bort användare</p>
+                    <p className="iconText removeUser" onClick={() => removeCustomer({user_id: userID, member_id: customer._id})}><DeleteIcon/> Ta bort användare</p>
                 </div>
             </AccordionDetails>
         </Accordion>
