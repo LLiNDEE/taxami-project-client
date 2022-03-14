@@ -5,13 +5,16 @@
     margin-top: 0.5rem;
     border-radius: 5px;
     background-color: yellowgreen;
-    border: 2px solid darkgreen;
+    border: 1px solid darkgreen;
     padding: 0.5rem;
     display: flex;
     align-items: center;
     color: white;
     font-weight: bold;
     cursor: pointer;
+    &:hover{
+        background-color: rgb(113, 150, 39);
+    }
 }
 
 .title{

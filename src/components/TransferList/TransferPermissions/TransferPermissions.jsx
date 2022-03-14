@@ -65,7 +65,7 @@ const TransferPermissions = ({ hideModal, member_id, permissions }) => {
             rightTitle={<p className="title">Kan INTE göra</p>}
         />
         <Flex justify="center">
-            <button className="confirmPermissionsButton" onClick={handleSubmit} >Bekräfta behörigheter</button>
+            <button className="confirmPermissionsButton" onClick={handleSubmit} >Spara behörigheter</button>
         </Flex>
       </>
   )
