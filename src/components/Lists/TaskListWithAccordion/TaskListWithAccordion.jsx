@@ -48,6 +48,7 @@ const TaskListWithAccordion = ({
     withDenyIcon,
     withAssignIcon,
     members,
+    permissions,
     ...props 
   }) => {
 
@@ -109,7 +110,7 @@ const TaskListWithAccordion = ({
                             <p className="iconText acceptIcon" onClick={() => (showModalVariant('completeTask'), setSelectedTaskID(task._id))}><CheckCircleIcon/> Markera som klar</p>
                         </>
                     }
-                    {(userID === task.user_id && task.status === 'idle') && <p className="iconText removeTaskIcon" onClick={() => (showModalVariant('removeTask'), setSelectedTaskID(task._id))} ><DeleteForeverIcon/> Ta bort uppgift</p>}
+                    {((userID === task.user_id && task.status === 'idle') || permissions?.permissions.includes('removeTask')) && <p className="iconText removeTaskIcon" onClick={() => (showModalVariant('removeTask'), setSelectedTaskID(task._id))} ><DeleteForeverIcon/> Ta bort uppgift</p>}
                     {(withAssignIcon || task.status === 'idle') && <p className="iconText assignIcon" onClick={() => (showModalVariant("takeTask"), setSelectedTaskID(task._id))}><AssignmentIcon/> Antag uppgift </p> }
                     { userID === task.user_id && (withDenyIcon || task.status === 'completed') && <p className="denyIcon iconText" onClick={() => (showModalVariant('removeCompletedTask'), setSelectedTaskID(task._id))} ><CancelIcon/> Ta bort klar markering</p>}
                 </div>

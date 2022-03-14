@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom'
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -22,6 +22,8 @@ import { useData } from '../providers/DataProvider'
 import { useGlobal } from '../providers/GlobalProvider';
 import useBreakpoint from '../hooks/useBreakpoint';
 import { clsx } from '../utils/utils'
+
+const filterPermissions = (id, permissions) => permissions ? permissions.filter(p => p.member_id === id) : []
 
 const Buildings = () => {
 
@@ -50,6 +52,13 @@ const Buildings = () => {
 
   const [tabIndex, setTabIndex] = useState("one")
 
+
+  const userPermissions = useMemo(() => filterPermissions(userID, permissions), [permissions])
+
+
+  useEffect(() => {
+    console.log("USER PERMISSIONS --->", userPermissions)
+  },[userPermissions])
 
   useEffect(() => {
     if(!building) return
@@ -175,7 +184,7 @@ const Buildings = () => {
           </Tabs>
         </div>
 
-        {tabIndex === "one" && !sm ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon /> : ""}
+        {tabIndex === "one" && !sm ? tasks.filter(t => t.status === 'idle').length < 1 ? <p className="noTasksText">Det finns inga tillgängliga uppgifter</p> : <TaskListWithAccordion permissions={userPermissions[0]} myTasks={tasks.filter(t => t.status === 'idle')} variant="list--clean" withAssignIcon /> : ""}
         {tabIndex === "two" && !sm ? filteredTasks.filter(t => t.status === 'inProgress').length < 1 ? <p className="noTasksText">Det finns inga pågående uppgifter</p> : <TaskListWithAccordion members={members} myTasks={tasks.filter(t => t.status === 'inProgress')}  variant="list--clean" withAcceptDenyIcons  /> : ""}
         {tabIndex === "three" && !sm ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskListWithAccordion myTasks={tasks.filter(t => t.status === 'completed')} variant="list--clean" withDenyIcon wihEye /> : ""}
         
@@ -184,7 +193,7 @@ const Buildings = () => {
         {tabIndex === "three" && sm ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskCardList tasks={tasks.filter(t => t.status === 'completed')} /> : ""}
 
 
-        {isOwner && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
+        {(isOwner || userPermissions[0]?.permissions?.includes('addTask')) && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
 
         {isOwner && members && 
           <div className="membersList">
