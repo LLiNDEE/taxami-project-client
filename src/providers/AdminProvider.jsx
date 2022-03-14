@@ -4,6 +4,7 @@ import useAdminGenerateCode from '../api/useAdminGenerateCode'
 import useAdminGetStats from '../api/useAdminGetStats'
 import useAdminGetCustomers from '../api/useAdminGetCustomers'
 import useAdminLockAccount from '../api/useAdminLockAccount'
+import useAdminRemoveCustomer from '../api/useAdminRemoveCustomer'
 import useAdminUnlockAccount from '../api/useAdminUnlockAccount'
 import Snackbar from '../components/Snackbar/Snackbar'
 import { useGlobal } from './GlobalProvider'
@@ -20,6 +21,8 @@ const AdminProvider = ({ children }) => {
 
     const { execute: lockAccount, isSuccess: lockAccountSuccess, data: lockAccountData } = useAdminLockAccount()
     const { execute: unlockAccount, isSuccess: unlockAccountSuccess, data: unlockAccountData } = useAdminUnlockAccount()
+
+    const { execute: removeCustomer, isSuccess: removeCustomerSuccess, isError: removeCustomerError } = useAdminRemoveCustomer()
     
     const [isDataLoading, setIsDataLoading] = useState(undefined)
     const [stats, setStats] = useState(undefined)
@@ -64,11 +67,20 @@ const AdminProvider = ({ children }) => {
 
     },[lockAccountSuccess, unlockAccountSuccess])
 
+    useEffect(() => {
+      if(!removeCustomerSuccess) return
+
+      getStats({user_id: userID})
+      getCustomers({user_id: userID})
+
+    },[removeCustomerSuccess])
+
   return (
-    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers, lockAccount, unlockAccount }}>
+    <adminContext.Provider value={{ stats, isDataLoading, subscriptionCode, generateCode, customers, lockAccount, unlockAccount, removeCustomer }}>
         {children}
         {lockAccountSuccess && <Snackbar initial={true} message="Kontot är nu låst" />}
         {unlockAccountSuccess && <Snackbar initial={true} message="Kontot är nu upplåst" />}
+        {removeCustomerSuccess && <Snackbar initial={true} message="Användaren är borttagen"/>}
     </adminContext.Provider>
   )
 }
