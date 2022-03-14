@@ -21,7 +21,7 @@ const RemoveMember = () => {
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
-        acceptFunc={() => RemoveMember({user_id: userID, member_id: modalData, building_id: selectedBuilding.building_id})}
+        acceptFunc={() => removeMember({user_id: userID, member_id: modalData, building_id: selectedBuilding.building_id})}
     /> 
   );
 };
