@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from 'react'
 import { useParams } from 'react-router-dom'
 
 import useUserTakeTask from '../api/useUserTakeTask'
+import useAddTask from '../api/useAddTask'
 import { useGlobal } from './GlobalProvider'
 
 const contextMenu = createContext({})
@@ -9,14 +10,10 @@ const contextMenu = createContext({})
 const MenuProvider = ({ children }) => {
 
 
-    const { setRefreshPage } = useGlobal()
-
-    /**
-     * Lägg till api-hooks här
-     * Eventuellt göra en provider som håller all api-hooks
-     */
+    const { setRefreshPage, setModalData, modalData } = useGlobal()
 
     const { execute: executeTakeTask, isSuccess: takeTaskSuccess, isError: takeTaskError } = useUserTakeTask()
+    const { execute: executeAddTask, isSuccess: addTaskSuccess, isError: addTaskError } = useAddTask()
 
     useEffect(() => {
         if(!takeTaskSuccess) return
@@ -26,8 +23,15 @@ const MenuProvider = ({ children }) => {
 
     },[takeTaskSuccess])
 
+    useEffect(() => {
+        if(!addTaskSuccess) return
+
+        setRefreshPage(true)
+
+    },[addTaskSuccess])
+
     return (
-        <contextMenu.Provider value={{ executeTakeTask }}>
+        <contextMenu.Provider value={{ executeTakeTask, setModalData, modalData, executeAddTask }}>
             {children}
         </contextMenu.Provider>
     )
