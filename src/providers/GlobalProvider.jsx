@@ -4,6 +4,7 @@ import Menu from '../components/Menu/Menu'
 import ViewTaskModal from '../components/Modals/ViewTask/ViewTaskModal'
 import ViewInProgressTask from '../components/Modals/ViewInProgressTask/ViewInProgressTask'
 import JoinBuildingModal from '../components/Modals/JoinBuilding/JoinBuildingModal'
+import ViewMember from '../components/Modals/viewMember/ViewMember'
 import Snackbar from '../components/Snackbar/Snackbar'
 import useBoolean from '../hooks/useBoolean'
 import useModal from '../hooks/useModal'
@@ -46,6 +47,7 @@ const GlobalProvider = ({ children }) => {
                 { modalVariant === 'joinBuilding' && <JoinBuildingModal/> }
                 { modalVariant === 'viewTask' && <ViewTaskModal/>}
                 { modalVariant === 'viewInProgressTask' && <ViewInProgressTask/>}
+                { modalVariant === 'viewMember' && <ViewMember/> }
 
                 {children}
                 {authStatus === AUTH_STATUSES.loggedIn && userID && userData && !sm && <Snackbar initial={true} message={`Välkommen, ${userData.first_name}!`} />}
