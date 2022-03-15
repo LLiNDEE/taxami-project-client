@@ -24,3 +24,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.rotate{
+    // transform: rotate(90deg);
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+}

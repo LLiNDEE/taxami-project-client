@@ -104,7 +104,7 @@ export default function TransferList({ leftItems, rightItems, setLeftItems, setR
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item>{customList(left, "left")}</Grid>
       <Grid item>
-        <Grid container direction="column" alignItems="center">
+        <Grid className="rotate" container direction="column" alignItems="center">
           <Button
             sx={{ my: 0.5 }}
             variant="outlined"
