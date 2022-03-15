@@ -14,6 +14,7 @@ variant === 'viewTask' ? true
 : variant === 'addTask' ? true
 : variant === 'leaveTask' ? true
 : variant === 'viewInProgressTask' ? true
+: variant === 'viewMember' ? true
 : false
 
 const Menu = ({  }) => {
@@ -21,7 +22,7 @@ const Menu = ({  }) => {
     const location = useLocation()
     const path = location.pathname
     
-    const { executeTakeTask, modalData, executeAddTask } = useMenu()
+    const { executeTakeTask, modalData, executeAddTask, executeLeaveTask } = useMenu()
 
     const { showModalVariant, modalStatus, modalVariant, hideModal, userRole, userID, takeTaskDetails, setTakeTaskDetails } = useGlobal()
 
@@ -59,7 +60,7 @@ const Menu = ({  }) => {
                   
                   {(page === 'byggnad' || page === 'mittkonto' || page === 'oversikt') && (modalStatus !== 'SHOWN' || modalVariant === 'leaveBuilding') && <Link onClick={() => (hideModal(), hideOptions())} to="/oversikt" className="link">Tillbaka</Link>}
                   {modalVariant === 'viewInProgressTask' && <p onClick={() => showModalVariant('leaveTask')}>Lämna uppgift</p>}
-                  {modalVariant === 'viewTask' || modalVariant === 'addTask' || modalVariant === 'leaveTask' && 
+                  {resolveButtonColor(modalVariant) && modalVariant !== 'viewInProgressTask' && 
                         <p onClick={hideModal}>Avbryt</p>
                   }
               </div>
@@ -72,8 +73,9 @@ const Menu = ({  }) => {
                     {modalVariant === 'viewTask' && <p onClick={() => (executeTakeTask({...takeTaskDetails, user_id: userID}), hideModal())}>Antag</p>}
                     {modalVariant === 'viewInProgressTask' && <p>Klarmarkera</p>}
                     {modalVariant === 'addTask' && <p onClick={() => (executeAddTask(modalData), hideModal())}>Lägg till</p>}
-                    {modalStatus !== 'SHOWN' && page == 'oversikt' && <Link className="link" to="/mittkonto">Mitt konto</Link>}
-                    {modalVariant === 'leaveTask' && <p style={{fontSize: "1.2rem"}} onClick={() => console.log(modalData)}>Ja</p>}
+                    {modalStatus !== 'SHOWN' && (page == 'oversikt' || page === 'byggnad') && <Link className="link" to="/mittkonto">Mitt konto</Link>}
+                    {modalVariant === 'leaveTask' && <p style={{fontSize: "1.2rem"}} onClick={() => (executeLeaveTask({...modalData, user_id: userID}), hideModal())}>Ja</p>}
+                    { modalVariant === 'viewMember' && <p onClick={() => (showModalVariant('removeMember'), hideOptions())}>Ta bort </p> }
               </div>
           </div>
         </div>
