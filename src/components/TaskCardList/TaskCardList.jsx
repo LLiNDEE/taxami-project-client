@@ -5,6 +5,7 @@ import './TaskCardList.scss'
 
 import CardList from '../Lists/CardList/CardList'
 import { useGlobal } from '../../providers/GlobalProvider';
+import { useData } from '../../providers/DataProvider';
 
 const PRIORITIES = {
     low: 'low',
@@ -31,6 +32,7 @@ const PRIORITIES = {
 const TaskCardList = ({ tasks }) => {
 
   const { showModalVariant } = useGlobal()
+  const { setSelectedTaskID } = useData()
 
   return (
     <CardList>
@@ -40,7 +42,7 @@ const TaskCardList = ({ tasks }) => {
                 <p className="cardData">Prioritet: {resolvePriority(task.priority)}</p>
                 <p className="cardData">Status: <span className={`taskCardStatus status--${task.status}`}>{resolveStatus(task.status)}</span></p>
                 {task.status === 'idle' && <button className="cardButton" onClick={() => showModalVariant('viewTask', task)}><RemoveRedEyeIcon/>Välj</button>}
-                {task.status === 'inProgress' && <button className="cardButton" onClick={() => showModalVariant('viewInProgressTask', task)} ><RemoveRedEyeIcon/>Välj</button>}
+                {task.status === 'inProgress' && <button className="cardButton" onClick={() => (showModalVariant('viewInProgressTask', task), setSelectedTaskID(task._id))} ><RemoveRedEyeIcon/>Välj</button>}
             </div>
         ))}
     </CardList>
