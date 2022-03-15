@@ -8,6 +8,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 
+import useBreakpoint from '../../hooks/useBreakpoint';
+
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
 }
@@ -17,6 +19,9 @@ function intersection(a, b) {
 }
 
 export default function TransferList({ leftItems, rightItems, setLeftItems, setRightItems, leftTitle, rightTitle }) {
+
+  const { sm } = useBreakpoint()
+
     const [checked, setChecked] = useState([]);
 //   const [left, setLeft] = useState([0, 1, 2, 3]);
 //   const [right, setRight] = useState([4, 5, 6, 7]);
@@ -104,48 +109,52 @@ export default function TransferList({ leftItems, rightItems, setLeftItems, setR
     <Grid container spacing={2} justifyContent="center" alignItems="center">
       <Grid item>{customList(left, "left")}</Grid>
       <Grid item>
-        <Grid className="rotate" container direction="column" alignItems="center">
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleAllRight}
-            disabled={left.length === 0}
-            aria-label="move all right"
-          >
-            ≫
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
-          <Button
-            sx={{ my: 0.5 }}
-            variant="outlined"
-            size="small"
-            onClick={handleAllLeft}
-            disabled={right.length === 0}
-            aria-label="move all left"
-          >
-            ≪
-          </Button>
-        </Grid>
+        {!sm ? 
+                <Grid className="rotate" container direction="column" alignItems="center">
+                <Button
+                  sx={{ my: 0.5 }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleAllRight}
+                  disabled={left.length === 0}
+                  aria-label="move all right"
+                >
+                  ≫
+                </Button>
+                <Button
+                  sx={{ my: 0.5 }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleCheckedRight}
+                  disabled={leftChecked.length === 0}
+                  aria-label="move selected right"
+                >
+                  &gt;
+                </Button>
+                <Button
+                  sx={{ my: 0.5 }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleCheckedLeft}
+                  disabled={rightChecked.length === 0}
+                  aria-label="move selected left"
+                >
+                  &lt;
+                </Button>
+                <Button
+                  sx={{ my: 0.5 }}
+                  variant="outlined"
+                  size="small"
+                  onClick={handleAllLeft}
+                  disabled={right.length === 0}
+                  aria-label="move all left"
+                >
+                  ≪
+                </Button>
+              </Grid>  
+              :
+              <></>
+              }
       </Grid>
       <Grid item>{customList(right, "right")}</Grid>
     </Grid>
