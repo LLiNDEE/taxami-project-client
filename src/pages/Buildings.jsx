@@ -56,11 +56,6 @@ const Buildings = () => {
 
   const userPermissions = useMemo(() => filterPermissions(userID, permissions), [permissions])
 
-
-  useEffect(() => {
-    console.log("USER PERMISSIONS --->", userPermissions)
-  },[userPermissions])
-
   useEffect(() => {
     if(!building) return
     const data = {user_id: userID, building_id: building._id}
@@ -121,7 +116,6 @@ const Buildings = () => {
     if(!membersSuccess) return
 
     setMembers(membersData.data.members)
-    console.log("MEMBERS UPDATED")
 
   },[membersSuccess])
 
@@ -206,7 +200,7 @@ const Buildings = () => {
 
         {isOwner && members && sm && 
           <>
-            <h3>Medlemmar</h3>
+            <h3 className="memberTitle--sm">Medlemmar</h3>
             <MemberCardList members={members} tasks={tasks} permissions={permissions} />
           </>
         }

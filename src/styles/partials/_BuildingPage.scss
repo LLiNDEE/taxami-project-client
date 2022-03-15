@@ -139,10 +139,25 @@
     }
     .generateInviteContainer{
         width: 100%;
+        padding-top: 1rem;
         align-items: center;
         .input{
             flex: 2;
             margin-left: 1rem;
         }
+    }
+    .memberTitle--sm{
+        // margin: auto;
+        margin-top: 1rem;
+        background-color: $primary;
+        margin-bottom: 0.5rem;
+        // width: 90%;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        border-radius: 5px;
     }
 }
