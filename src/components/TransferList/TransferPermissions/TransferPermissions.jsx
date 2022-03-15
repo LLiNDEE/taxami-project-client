@@ -22,6 +22,9 @@ perm === 'addTask' ? "Lägg till uppgifter"
 : ""
 
 const formatPermissions = permissions => {
+
+    if(!permissions) return []
+
     const permissionArray = []
     permissions.forEach(p => {
         permissionArray.push(resolvePermission(p))
@@ -30,6 +33,9 @@ const formatPermissions = permissions => {
 }
 
 const getFormatLabels = permissions => {
+
+    if(!permissions) return []
+
     const permissionArray = []
     permissions.forEach(p => {
         permissionArray.push(resolvePermissionLabel(p))
@@ -43,7 +49,7 @@ const TransferPermissions = ({ hideModal, member_id, permissions }) => {
     const { addPermission, selectedBuilding } = useData()
 
     // const [right, setRight] = useState(initialRight) 
-    const [right, setRight] = useState(allPermissions.filter(p => !permissions.includes(resolvePermission(p))))
+    const [right, setRight] = useState(permissions ? allPermissions.filter(p => !permissions.includes(resolvePermission(p))) : allPermissions)
     const [left, setLeft] = useState(getFormatLabels(permissions))
 
     const handleSubmit = () => {
