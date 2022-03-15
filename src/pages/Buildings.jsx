@@ -15,6 +15,7 @@ import MemberList from '../components/Lists/members/MemberList';
 import Flex from '../components/core/Flex/Flex'
 import Input from '../components/core/Input/Input'
 import TaskCardList from '../components/TaskCardList/TaskCardList';
+import MemberCardList from '../components/MemberCardList/MemberCardList';
 import useGetMembers from '../api/useGetMembers';
 import useBuildingGenerateInvite from '../api/useBuildingGenerateInvite';
 import useBuildingGetPermissions from '../api/useBuildingGetPermissions';
@@ -206,10 +207,11 @@ const Buildings = () => {
         {isOwner && members && sm && 
           <>
             <h3>Medlemmar</h3>
+            <MemberCardList members={members} tasks={tasks} permissions={permissions} />
           </>
         }
 
-        {isOwner &&
+        {(isOwner || userPermissions[0]?.permissions?.includes('generateInvite')) &&
         <>
           <div className="generateInviteContainer">
             <Input label="Inbjudningskod" id="outlined-read-only-input" value={isInviteValid ? inviteCodeData?.data.invite_code : "Inbjudningskod"} readOnly/>
