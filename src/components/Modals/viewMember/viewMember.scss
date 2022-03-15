@@ -1,0 +1,32 @@
+@import '../../../styles/variables';
+
+.permissionsContainer{
+    .permissionsTitle{
+        background-color: $primary;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .permission{
+        font-size: 1rem;
+        padding-left: 1rem;
+    }
+}
+
+.updatePermissionsButton{
+    height: 2rem;
+}
+
+.iconText{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    background: none;
+    padding: 0.2rem;
+    border: 1px solid $primary;
+    border-radius: 5px;
+    font-size: 1rem;
+}

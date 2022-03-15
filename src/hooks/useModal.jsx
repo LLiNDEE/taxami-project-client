@@ -19,6 +19,7 @@ const VARIANTS = {
     viewInProgressTask: 'viewInProgressTask',
     removeMember: 'removeMember',
     buildingPermissions: 'buildingPermissions',
+    viewMember: 'viewMember',
 }
 
 const useModal = () => {
