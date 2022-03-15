@@ -5,6 +5,7 @@ import useUserTakeTask from '../api/useUserTakeTask'
 import useAddTask from '../api/useAddTask'
 import useUserLeaveTask from '../api/useUserLeaveTask'
 import { useGlobal } from './GlobalProvider'
+import useAddPermission from '../api/useAddPermission'
 
 const contextMenu = createContext({})
 
@@ -16,6 +17,7 @@ const MenuProvider = ({ children }) => {
     const { execute: executeTakeTask, isSuccess: takeTaskSuccess, isError: takeTaskError } = useUserTakeTask()
     const { execute: executeAddTask, isSuccess: addTaskSuccess, isError: addTaskError } = useAddTask()
     const { execute: executeLeaveTask, isSuccess: leaveTaskSuccess, isError: leaveTaskError } = useUserLeaveTask()
+    const { execute: executeAddPermission, isSucess: addPermissionSuccess, isError: addPermissionError } = useAddPermission()
 
     useEffect(() => {
         if(!takeTaskSuccess) return
@@ -39,8 +41,15 @@ const MenuProvider = ({ children }) => {
 
     },[leaveTaskSuccess])
 
+    useEffect(() => {
+        if(!addPermissionSuccess) return
+
+        setRefreshPage(true)
+
+    },[addPermissionSuccess])
+
     return (
-        <contextMenu.Provider value={{ executeTakeTask, setModalData, modalData, executeAddTask, executeLeaveTask }}>
+        <contextMenu.Provider value={{ executeTakeTask, setModalData, modalData, executeAddTask, executeLeaveTask, executeAddPermission }}>
             {children}
         </contextMenu.Provider>
     )

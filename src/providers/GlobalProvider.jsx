@@ -35,12 +35,18 @@ const GlobalProvider = ({ children }) => {
 
     const [takeTaskDetails, setTakeTaskDetails] = useState(initialTakeTaskDetails)
 
+    const [selectedUserPermissions, setSelectedUserPermissions] = useState(undefined)
+
     const [userID, setUserID] = useState(undefined)
     const [userData, setUserData] = useState(undefined)
     const [userRole, setUserRole] = useState(undefined)
 
     return (
-        <contextGlobal.Provider value={{ setAuthStatus, authStatus, isPageLoading, refreshPage, setRefreshPage, setPageLoading, setUserID, userID, setUserRole, userRole, setUserData, userData, showModalVariant, hideModal, modalVariant, modalStatus, setModalData, modalData, setTakeTaskDetails, takeTaskDetails }}>
+        <contextGlobal.Provider value={{ 
+            setAuthStatus, authStatus, isPageLoading, refreshPage, setRefreshPage, setPageLoading, setUserID, userID, 
+            setUserRole, userRole, setUserData, userData, showModalVariant, hideModal, modalVariant, modalStatus, 
+            setModalData, modalData, setTakeTaskDetails, takeTaskDetails, setSelectedUserPermissions, selectedUserPermissions
+        }}>
             <div className="page">
                 {isPageLoading && <div className="pageCoverDiv"></div>}
                 
