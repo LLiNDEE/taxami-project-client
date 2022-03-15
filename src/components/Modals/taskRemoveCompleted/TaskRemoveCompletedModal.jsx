@@ -14,7 +14,7 @@ const TaskRemoveCompletedModal = () => {
   return (
     <Modal
         variant="yesNO"
-        modalTitle="Är du säker på att du vill ta bort klarmarkeringen?"
+        modalTitle="Ta bort klarmarkeringen"
         content={<p>Genom att ta bort klarmarkeringen kommer statusen att ändras till Pågående.</p>}
         yesText="Ta bort klarmarkering"
         noText="Avbryt"
