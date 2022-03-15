@@ -23,7 +23,6 @@ const Main = () => {
         if(auth.validateSession()){
             auth.refreshUUID()
             setAuthStatus(AUTH_STATUSES.loggedIn)
-            console.log("Hello world")
             return
         }else{
             auth.logoutUser()  
