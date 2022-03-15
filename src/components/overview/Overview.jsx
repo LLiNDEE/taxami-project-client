@@ -24,7 +24,6 @@ const Overview = () => {
     const { buildings, myTasks, isDataLoading, showModalVariant } = useData()
 
     const { sm } = useBreakpoint()
-    console.log("SM --> ", sm)
 
   return (
     <div className="overview">
