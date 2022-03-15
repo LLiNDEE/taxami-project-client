@@ -137,4 +137,12 @@
             flex: 1;
         }
     }
+    .generateInviteContainer{
+        width: 100%;
+        align-items: center;
+        .input{
+            flex: 2;
+            margin-left: 1rem;
+        }
+    }
 }
