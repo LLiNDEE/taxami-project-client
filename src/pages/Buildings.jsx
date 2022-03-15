@@ -193,14 +193,20 @@ const Buildings = () => {
         {tabIndex === "three" && sm ? filteredTasks.filter(t => t.status === 'completed').length < 1 ? <p className="noTasksText">Det finns inga avklarade uppgifter</p> : <TaskCardList tasks={tasks.filter(t => t.status === 'completed')} /> : ""}
 
 
-        {(isOwner || userPermissions[0]?.permissions?.includes('addTask')) && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
+        {(isOwner || userPermissions[0]?.permissions?.includes('addTask')) && !sm && <Flex justify="left"> <button className="addTaskButton" onClick={() => showModalVariant('addTask')} ><AddCircleIcon className="addIcon"/> Lägg till uppgift</button></Flex>}
 
-        {isOwner && members && 
+        {isOwner && members && !sm && 
           <div className="membersList">
           <h2>Medlemmar</h2>
           <MemberList members={members} tasks={tasks} permissions={permissions} />
           {members.length < 1 && <p className="noTasksText">Det finns inga medlemmar</p>}
           </div>
+        }
+
+        {isOwner && members && sm && 
+          <>
+            <h3>Medlemmar</h3>
+          </>
         }
 
         {isOwner &&
