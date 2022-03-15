@@ -8,8 +8,11 @@ import './AddTaskForm.scss'
 
 import Select from '../core/select/Select';
 import Input from '../core/Input/Input'
+import useBreakpoint from '../../hooks/useBreakpoint';
 
 const AddTaskForm = ({ control, errors, onSubmitFunc, cancelFunc }) => {
+
+  const { sm } = useBreakpoint()
 
   const [priorities, setPriorities] = useState(undefined)
 
@@ -41,11 +44,13 @@ const AddTaskForm = ({ control, errors, onSubmitFunc, cancelFunc }) => {
             defaultValue=""
             render={({ field }) =>  <Input label="Beskrivning" error={!!errors.description} multiline {...field} ref={null} />}
         />
-        
-       <div className="formButtons">
-            <p className="iconWithText cancelIcon" onClick={cancelFunc}><CancelIcon/>Avbryt</p>
-            <button className="iconWithText submitButton" > <CheckCircleIcon/> Lägg till</button>
-       </div>
+        {!sm && 
+          <div className="formButtons">
+              <p className="iconWithText cancelIcon" onClick={cancelFunc}><CancelIcon/>Avbryt</p>
+              <button className="iconWithText submitButton" > <CheckCircleIcon/> Lägg till</button>
+          </div>
+        }
+
        
     </form>
   )
