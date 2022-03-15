@@ -15,6 +15,7 @@ variant === 'viewTask' ? true
 : variant === 'leaveTask' ? true
 : variant === 'viewInProgressTask' ? true
 : variant === 'viewMember' ? true
+: variant === 'buildingPermissions' ? true
 : false
 
 const Menu = ({  }) => {
@@ -22,9 +23,9 @@ const Menu = ({  }) => {
     const location = useLocation()
     const path = location.pathname
     
-    const { executeTakeTask, modalData, executeAddTask, executeLeaveTask } = useMenu()
+    const { executeTakeTask, modalData, executeAddTask, executeLeaveTask, executeAddPermission } = useMenu()
 
-    const { showModalVariant, modalStatus, modalVariant, hideModal, userRole, userID, takeTaskDetails, setTakeTaskDetails } = useGlobal()
+    const { showModalVariant, modalStatus, modalVariant, hideModal, userRole, userID, takeTaskDetails, setTakeTaskDetails, selectedUserPermissions } = useGlobal()
 
     const [page, setPage] = useState(undefined)
 
@@ -75,7 +76,8 @@ const Menu = ({  }) => {
                     {modalVariant === 'addTask' && <p onClick={() => (executeAddTask(modalData), hideModal())}>Lägg till</p>}
                     {modalStatus !== 'SHOWN' && (page == 'oversikt' || page === 'byggnad') && <Link className="link" to="/mittkonto">Mitt konto</Link>}
                     {modalVariant === 'leaveTask' && <p style={{fontSize: "1.2rem"}} onClick={() => (executeLeaveTask({...modalData, user_id: userID}), hideModal())}>Ja</p>}
-                    { modalVariant === 'viewMember' && <p onClick={() => (showModalVariant('removeMember'), hideOptions())}>Ta bort </p> }
+                    {modalVariant === 'viewMember' && <p onClick={() => (showModalVariant('removeMember'), hideOptions())}>Ta bort </p> }
+                    {modalVariant === 'buildingPermissions' && <p onClick={() => (executeAddPermission(selectedUserPermissions), hideModal())}>Spara</p>}
               </div>
           </div>
         </div>
