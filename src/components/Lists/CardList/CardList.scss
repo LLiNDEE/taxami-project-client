@@ -7,13 +7,14 @@
     gap: 3%;
     overflow-x: auto;
     .card{
-        // background-color: $primary-lightest;
         background-color: whitesmoke;
         flex: 1;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         min-width: 12rem;
         min-height: fit-content;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
     }
 }
 
