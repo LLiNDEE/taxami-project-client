@@ -11,6 +11,7 @@ import RemoveTaskModal from '../components/Modals/removeTask/RemoveTaskModal';
 import LeaveBuildingModal from '../components/Modals/leaveBuilding/LeaveBuildingModal'
 import RemoveMember from '../components/Modals/removeMember/RemoveMember';
 import BuildingPermissions from '../components/Modals/BuildingPermissions/BuildingPermissionsModal';
+import Snackbar from '../components/Snackbar/Snackbar';
 import useUserData from '../api/useUserData'
 import useUserBuildings from '../api/useUserBuildings';
 import useLeaveBuilding from '../api/useLeaveBuilding'
@@ -38,7 +39,7 @@ const contextData = createContext({})
 
 const DataProvider = ({ children }) => {
 
-    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage, modalData } = useGlobal()
+    const { userID, userRole, showModalVariant, hideModal, modalVariant, modalStatus, refreshPage, setRefreshPage, modalData, setModalData } = useGlobal()
 
     const auth = useAuth()
 
@@ -55,7 +56,7 @@ const DataProvider = ({ children }) => {
     const { execute: createBuilding, isSuccess: createBuildingSuccess, isError: createBuildingError } = useCreateBuilding()
     const { execute: removeMember, isSuccess: removeMemberSuccess, isError: removeMemberError } = useBuildingRemoveMember()
     
-    const { execute: addPermission, isSuccess: addPermissionSuccess, isError: addPermissionError } = useAddPermission()
+    const { execute: addPermission, isSuccess: addPermissionSuccess, isError: addPermissionError, isLoading: isAddPermissionsLoading } = useAddPermission()
 
     // const { showVariant: showModalVariant, hideVariant: hideModal, variant: modalVariant, status: modalStatus } = useModal()
 
@@ -65,7 +66,6 @@ const DataProvider = ({ children }) => {
     const [isDataLoading, { set: setIsDataLoading }] = useBoolean(false)
 
     const [selectedTaskID, setSelectedTaskID] = useState(undefined)
-    // const [selectedBuildingID, setSelectedBuildingID] = useState(undefined)
     const [selectedBuilding, setSelectedBuilding] = useState(selectedBuildingInitialValues)
 
     useEffect(() => {
@@ -193,6 +193,7 @@ const DataProvider = ({ children }) => {
             buildings, setBuildings, myTasks, setMyTasks, isDataLoading, markTaskAsComplete, setSelectedTaskID, setSelectedBuilding, selectedBuilding, 
             selectedTaskID, setRefreshPage, refreshPage, hideModal, showModalVariant, leaveTask, takeTask, updateTask, addTask, removeTask, modalData, 
             joinBuilding, joinBuildingSuccess, leaveBuilding, joinBuildingError, joinBuildingErrorType, createBuilding, removeMember, addPermission, addPermissionSuccess,
+            setModalData
         }}>
           <Header/>
 
@@ -209,6 +210,8 @@ const DataProvider = ({ children }) => {
             { modalVariant === 'buildingPermissions' && <BuildingPermissions/> }
 
             {children}
+
+            {addPermissionSuccess && <Snackbar initial={true} message="Behörigheterna har blivit uppdaterade" />}
 
       </contextData.Provider>
   );
