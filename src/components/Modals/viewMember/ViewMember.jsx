@@ -42,7 +42,7 @@ const ViewMember = () => {
                         {permissions.length !== 0 ?
                             <>
                                 {resolvePermissions(member._id, permissions)?.map(p => (
-                                    <p className="permission">{resolvePermissionLabel(p)}</p>
+                                    <p className="permission" key={p}>{resolvePermissionLabel(p)}</p>
                                 ))}
                             </>
                         :
