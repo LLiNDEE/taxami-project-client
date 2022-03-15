@@ -14,7 +14,10 @@ const RemoveTaskModal = () => {
   return (
     <Modal
         variant="yesNO"
-        modalTitle="Är du säker på att du vill ta bort den här uppgiften?"
+        modalTitle="Ta bort"
+        content={
+          <p>Är du säker på att du vill ta bort den här uppgifen?</p>
+        }
         yesText="Ja"
         noText="Avbryt"
         cancelFunc={() => hideModal()}
