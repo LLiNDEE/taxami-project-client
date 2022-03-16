@@ -20,13 +20,15 @@
     height: 2rem;
 }
 
-.iconText{
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    background: none;
-    padding: 0.2rem;
-    border: 1px solid $primary;
-    border-radius: 5px;
-    font-size: 1rem;
+@media only screen and (max-width: 600px){
+    .iconText{
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        background: none;
+        padding: 0.2rem;
+        border: 1px solid $primary;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
 }
