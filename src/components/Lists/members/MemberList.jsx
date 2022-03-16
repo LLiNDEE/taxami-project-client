@@ -26,11 +26,6 @@ const resolvePermissions = (member_id, permissions) => {
     return permissionArray
 }
 
-// const resolvePermissionLabel = perm => {
-//     if(perm === 'addTask') return "Lägga till uppgifter"
-//     if(perm === 'deleteTask') return "Ta bort uppgifter"
-// }
-
 const resolvePermissionLabel = perm => 
 perm === 'addTask' ? 'Lägga till uppgifter'
 : perm === 'removeTask' ? 'Ta bort uppgifter'
